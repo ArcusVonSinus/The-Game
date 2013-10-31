@@ -1,0 +1,4 @@
+Ondra
+------------------
+-XNA animace, vykresleni obrazku/pozadi
+-pribeh
