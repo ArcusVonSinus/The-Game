@@ -7,7 +7,9 @@ http://www.youtube.com/watch?v=FR7crO2xq8A
 Naprosto skvely tutorial na XNA 3.1 ve VS2008
 http://www.youtube.com/watch?v=hIbUxSpQToo&list=PL667AC2BF84D85779
 
-
+Dalsi dva zajimave tutorialy na XNA
+http://rbwhitaker.wikidot.com/2d-tutorials
+http://www.xnadevelopment.com/tutorials.shtml
 
 Andrew Wiles car. http://fc00.deviantart.net/fs12/i/2006/274/0/7/Andrew_Wiles___a_portrait_by_Metamorphine.jpg
 Sierpinski http://users.wfu.edu/kuz/Stamps/PolishSchool/sierpinski.jpg
