@@ -17,9 +17,9 @@ namespace WindowsGame3
         SpriteBatch spriteBatch;
         private Texture2D background;
         private Texture2D fox;
-        private SpriteFont arabic;
+        private SpriteFont arabicfont;
         private int score = 0;
-
+        private AnimatedSprite postavicka;
 
 
 
@@ -41,8 +41,8 @@ namespace WindowsGame3
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("bckgrnd");
             fox = Content.Load<Texture2D>("fox");
-
-            font = Content.Load<SpriteFont>("arabic"); 
+            postavicka = new AnimatedSprite(Content.Load<Texture2D>("forward"), 2, 7);
+            arabicfont = Content.Load<SpriteFont>("arabic"); 
         }
 
        
@@ -58,7 +58,8 @@ namespace WindowsGame3
                 this.Exit();
 
             // TODO: Add your update logic here
-
+            score++;
+            postavicka.Update();
             base.Update(gameTime);
         }
 
@@ -71,15 +72,17 @@ namespace WindowsGame3
             spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
             //spriteBatch.Draw(fox, new Vector2(10, 10), Color.White);
             spriteBatch.Draw(fox, new Rectangle(10, 10,90,150), Color.White);
-
             
-            spriteBatch.DrawString(arabic, "Score", new Vector2(100, 100), Color.Black);
+            
+            spriteBatch.DrawString(arabicfont, "Score " + score, new Vector2(200, 50), Color.Black);
 
 
 
 
 
             spriteBatch.End();
+            postavicka.Draw(spriteBatch, new Vector2(100, 100),100);
+
 
             base.Draw(gameTime);
         }
