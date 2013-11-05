@@ -18,7 +18,8 @@ namespace The_Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Postavicka me;
-        Texture2D vzhledMe;
+        Texture2D[] textury;
+        private SpriteFont font;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -29,14 +30,18 @@ namespace The_Game
         {
             
             base.Initialize();
+           
 
         }
 
         protected override void LoadContent()
         {
            spriteBatch = new SpriteBatch(GraphicsDevice);
-           vzhledMe = Content.Load<Texture2D>("forward");
-           me = new Postavicka(new AnimatedSprite(vzhledMe, 2, 7), 10, 10, 50, 100);
+           textury = new Texture2D[2];
+           textury[0] = Content.Load<Texture2D>("forward");
+           textury[1] = Content.Load<Texture2D>("backward");
+           font = Content.Load<SpriteFont>("font"); 
+           me = new Postavicka(textury,0, 10, 10, 100, 50, new Speed(0, 0));
         }
 
         protected override void UnloadContent()
@@ -59,6 +64,7 @@ namespace The_Game
             spriteBatch.Begin();
 
             me.draw(spriteBatch);
+            //spriteBatch.DrawString(font," " + me.rychlost.x, new Vector2(300, 300), Color.Black);
 
 
 

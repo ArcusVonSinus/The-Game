@@ -14,7 +14,11 @@ namespace The_Game
         public int Columns { get; set; }
         private int currentFrame;
         private int totalFrames;
-
+        public void stop()
+        {
+            currentFrame = 0;
+            return;
+        }
         public AnimatedSprite(Texture2D texture, int rows, int columns)
         {
             Texture = texture;
