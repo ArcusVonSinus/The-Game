@@ -20,7 +20,7 @@ namespace The_Game
         private double mass;  //hmotnost
         int width;//sirka v pixelech
         bool onLand;
-        public Speed rychlost;
+        Speed rychlost;
 
         public Postavicka(Texture2D[] textury,int typ, int X, int Y, int Width, double Mass, Speed speed)
         {
@@ -30,13 +30,15 @@ namespace The_Game
                 vzhled[0] = new AnimatedSprite(textury[0], 2, 7);
                 vzhled[1] = new AnimatedSprite(textury[1], 2, 7);
             }
-            x = X;
-            y = Y;
-            mass = Mass;
             width = Width;
+            x = X;
+            y = Y - height()-120;
+            mass = Mass;
+            
             rychlost = speed;
             onLand = true;
         }
+
         public void update()
         {
             
@@ -64,22 +66,28 @@ namespace The_Game
             {
                 vzhledNo = 1;
             }
-            else if (rychlost.x >= 0)
+            else if (rychlost.x > 0)
             {
                 vzhledNo = 0;
             }
+
             if (Math.Abs(rychlost.x) >= 0.1)
             {
                 vzhled[vzhledNo].Update();
             }
             else
-            {
-                vzhledNo = 0;
-                vzhled[0].stop();
+            {                
+                vzhled[vzhledNo].stop();
             }
 
 
 
+        }
+        public int height()
+        {
+            int h;
+            h = (width * vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
+            return h;
         }
         public void draw(SpriteBatch spriteBatch)
         {

@@ -20,9 +20,25 @@ namespace The_Game
         Postavicka me;
         Texture2D[] textury;
         private SpriteFont font;
+
+        int blockSize; //rozmer bloku
+        int blockNumber; //pocet bloku (vyska)
+        int width;      
+        int height;
+
+
+
+
+
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            blockNumber = 7;
+            blockSize = 100;
+            width = 1400;
+            height = blockNumber * blockSize;
+            graphics = new GraphicsDeviceManager(this);            
+            graphics.PreferredBackBufferHeight = height;
+            graphics.PreferredBackBufferWidth = width;
             Content.RootDirectory = "Content";
         }
 
@@ -41,7 +57,8 @@ namespace The_Game
            textury[0] = Content.Load<Texture2D>("forward");
            textury[1] = Content.Load<Texture2D>("backward");
            font = Content.Load<SpriteFont>("font"); 
-           me = new Postavicka(textury,0, 10, 10, 100, 50, new Speed(0, 0));
+           me = new Postavicka(textury,0, 10, height, 100, 50, new Speed(0, 0));
+            
         }
 
         protected override void UnloadContent()
@@ -64,7 +81,8 @@ namespace The_Game
             spriteBatch.Begin();
 
             me.draw(spriteBatch);
-            //spriteBatch.DrawString(font," " + me.rychlost.x, new Vector2(300, 300), Color.Black);
+            //Background1 b = new Background1();
+            //spriteBatch.DrawString(font," " + b.barva(0), new Vector2(300, 300), Color.Black);
 
 
 
