@@ -14,24 +14,25 @@ namespace The_Game
         int b;
         int [,] level1;
         
-        public Background1()
+        public Background1(int radku)
         {
-            string[] level;
-            level = new string[7];
-            level[0] = "..............................";
-            level[1] = "..............................";
-            level[2] = "..............................";
-            level[3] = "..............................";
-            level[4] = "..............................";
-            level[5] = "..............................";
-            level[6] = "..............................";
-            level[7] = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-           // for(int x = 0;x<=
+            System.IO.StreamReader lvlreader = new System.IO.StreamReader(@"Content/l1.txt");
+            string levelline=lvlreader.ReadLine();
+            int sirka=levelline.Length;
+            level1=new int [sirka,radku];
+            for (int j=0;j<radku;j++)
+            {
+                for (int i = 0; i < sirka; i++)
+                {
+                    level1[i, j] = levelline[i];
+
+                }
+                if(j!=radku-1)
+                    levelline = lvlreader.ReadLine();
+
+            }
+            int u = 7;
         }
-       /* public int barva(int h)
-        {
-           // return (image1.GetPixel(0, h)).R;
-        }
-        */
+
     }
 }

@@ -11,10 +11,8 @@ using Microsoft.Xna.Framework.Media;
 
 namespace The_Game
 {
-
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Scrolling scrolling1;
@@ -67,6 +65,8 @@ namespace The_Game
             scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\images2"), new Rectangle(800, 0, 800, 500));
 
 
+            Background1 b = new Background1(8);
+
         }
 
         protected override void UnloadContent()
@@ -99,7 +99,7 @@ namespace The_Game
             spriteBatch.Begin();
 
             
-            //Background1 b = new Background1();
+            //
             System.IO.StreamReader s = new System.IO.StreamReader(@"Content/l1.txt");
             spriteBatch.DrawString(font," " + s.ReadLine(), new Vector2(300, 300), Color.Black);
             scrolling1.Draw(spriteBatch);
