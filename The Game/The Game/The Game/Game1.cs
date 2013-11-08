@@ -17,8 +17,7 @@ namespace The_Game
         SpriteBatch spriteBatch;
         Scrolling scrolling1;
         Scrolling scrolling2;
-        Postavicka me;
-        Postavicka alterego;
+        Postavicka me;        
         Texture2D[] textury;
         private SpriteFont font;
 
@@ -27,8 +26,7 @@ namespace The_Game
         int width;
         int height;
 
-
-
+        Camera camera;
 
 
         public Game1()
@@ -45,6 +43,7 @@ namespace The_Game
 
         protected override void Initialize()
         {
+            camera = new Camera(GraphicsDevice.Viewport);
 
             base.Initialize();
 
@@ -85,16 +84,18 @@ namespace The_Game
             if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
                 scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
 
-            scrolling1.Update();
-            scrolling2.Update();
-            
+            //scrolling1.Update();
+            //scrolling2.Update();
+
+            camera.Update(gameTime, me);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
 
             
             //

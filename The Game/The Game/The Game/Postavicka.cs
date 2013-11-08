@@ -21,9 +21,9 @@ namespace The_Game
         // Promenne
         private AnimatedSprite[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
         private int vzhledNo;
-        Vector2 pozice; //souradnice    
+        public Vector2 pozice; //souradnice    
         Vector2 pohyb; //smer pohybu
-        int width;//sirka v pixelech
+        public int width;//sirka v pixelech
         bool onLand;
         double mass;
         Speed rychlost;
