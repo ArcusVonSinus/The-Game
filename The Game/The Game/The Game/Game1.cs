@@ -60,8 +60,8 @@ namespace The_Game
             font = Content.Load<SpriteFont>("font");
             me = new Postavicka(textury, 0, 10, height, 100, 50, new Speed(0, 0));
             
-            scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\images"), new Rectangle(0, 0, 800, 500));
-            scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\images2"), new Rectangle(800, 0, 800, 500));
+            scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
+            scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
 
 
             Background1 b = new Background1(8);
