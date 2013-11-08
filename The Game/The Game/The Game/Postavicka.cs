@@ -14,14 +14,21 @@ namespace The_Game
 {
     class Postavicka
     {        
+        //Konstany
+        const float gravitacniZrychleniNaZemi = 9.81f;
+        const float gravitacniZrychleniNaMesici = 1.62f;
+        
+        // Promenne
         private AnimatedSprite[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
         private int vzhledNo;
-        private int x, y; //souradnice
-        private double mass;  //hmotnost
+        Vector2 pozice; //souradnice    
+        Vector2 pohyb; //smer pohybu
         int width;//sirka v pixelech
         bool onLand;
+        double mass;
         Speed rychlost;
-
+                
+        // Konstruktor
         public Postavicka(Texture2D[] textury,int typ, int X, int Y, int Width, double Mass, Speed speed)
         {
             if (typ == 0) //Me
@@ -31,67 +38,74 @@ namespace The_Game
                 vzhled[1] = new AnimatedSprite(textury[1], 2, 7);
             }
             width = Width;
-            x = X;
-            y = Y - height()-120;
+            pozice.X = X;
+            pozice.Y = Y - height()-120;
             mass = Mass;
             
             rychlost = speed;
             onLand = true;
         }
 
-        public void update()
+        // Metody
+        public void update(GameTime gameTime)
         {
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {                
-                rychlost.x = 10;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            pozice += pohyb;
+
+            if (onLand)
             {
-                rychlost.x = -10;
+                if (Keyboard.GetState().IsKeyDown(Keys.Right)) pohyb.X = 10f;
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left)) pohyb.X = -10f;
+                else pohyb.X = 0f;
+
+                if (pohyb.X < 0) vzhledNo = 1;
+                if (pohyb.X > 0) vzhledNo = 0;
+
+                pohyb.Y = 0f;
             }
-            else
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && onLand)
             {
-                rychlost.x = 0;
+                pozice.Y -= 20f;
+                pohyb.Y = -8f;
+                onLand = false;
             }
-            x = Convert.ToInt32(x + rychlost.x);
-            y = Convert.ToInt32(y + rychlost.y);
 
 
             if (!onLand)
-            {
-                vzhledNo = 2;
-            }
-            else if (rychlost.x < 0)
-            {
-                vzhledNo = 1;
-            }
-            else if (rychlost.x > 0)
-            {
-                vzhledNo = 0;
-            }
-
-            if (Math.Abs(rychlost.x) >= 0.1)
-            {
-                vzhled[vzhledNo].Update();
-            }
-            else
             {                
-                vzhled[vzhledNo].stop();
+                float i = gravitacniZrychleniNaZemi;
+                pohyb.Y += 0.03f * i;
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    pohyb.X += 0.3f;
+                    vzhledNo = 0;
+                }
+                if (pohyb.X >= 10f) pohyb.X = 10f;
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    pohyb.X -= 0.3f;
+                    vzhledNo = 1;
+                }
+                if (pohyb.X <= -10f) pohyb.X = -10f; 
             }
+            
+            if (Math.Abs(pohyb.X) >= 0.1) vzhled[vzhledNo].Update();
+            else vzhled[vzhledNo].stop();
 
-
-
+            if (pozice.Y >= 520)
+                onLand = true;                        
         }
+
         public int height()
         {
             int h;
             h = (width * vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
             return h;
         }
+
         public void draw(SpriteBatch spriteBatch)
         {
-            vzhled[vzhledNo].Draw(spriteBatch, new Vector2(x, y), width);
+            vzhled[vzhledNo].Draw(spriteBatch, pozice, width);
         }
 
     }

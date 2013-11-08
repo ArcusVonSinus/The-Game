@@ -59,8 +59,7 @@ namespace The_Game
             textury[1] = Content.Load<Texture2D>("backward");
             font = Content.Load<SpriteFont>("font");
             me = new Postavicka(textury, 0, 10, height, 100, 50, new Speed(0, 0));
-            alterego = new Postavicka(textury, 0, 10, 200, 100, 50, new Speed(0, 0));
-
+            
             scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\images"), new Rectangle(0, 0, 800, 500));
             scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\images2"), new Rectangle(800, 0, 800, 500));
 
@@ -78,8 +77,7 @@ namespace The_Game
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            me.update();
-            alterego.update();
+            me.update(gameTime);            
             
             // Scrolling Backgrounds
             if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
@@ -105,8 +103,7 @@ namespace The_Game
             scrolling1.Draw(spriteBatch);
             scrolling2.Draw(spriteBatch);
             me.draw(spriteBatch);
-            alterego.draw(spriteBatch);
-
+            
             spriteBatch.End();
             base.Draw(gameTime);
 
