@@ -31,7 +31,7 @@ namespace The_Game
                     levelline = lvlreader.ReadLine();
 
             }
-            int u = 7;
+            //int u = 7; ???na co to tu je???
         }
 
     }

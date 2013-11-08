@@ -12,13 +12,19 @@ namespace The_Game
         public Texture2D texture;
         public Rectangle rectangle;
 
+        public Backgrounds() { }
+        public Backgrounds(Texture2D newTexture, Rectangle newRectangle)
+        {
+            texture = newTexture;
+            rectangle = newRectangle;
+        }
         public void Draw(SpriteBatch spritebatch)
         {
             spritebatch.Draw(texture, rectangle, Color.White);
         }
     }
     class Scrolling : Backgrounds
-    {
+    {        
         public Scrolling(Texture2D newTexture, Rectangle newRectangle)
         {
             texture = newTexture;
@@ -28,5 +34,5 @@ namespace The_Game
         {
             rectangle.X -= 3;
         }
-    }
+    }    
 }

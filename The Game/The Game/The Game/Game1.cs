@@ -13,10 +13,15 @@ namespace The_Game
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        /// <summary>
+        /// Promenne
+        /// </summary>
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Scrolling scrolling1;
         Scrolling scrolling2;
+        Backgrounds[] backgrounds;
         Postavicka me;        
         Texture2D[] textury;
         private SpriteFont font;
@@ -28,6 +33,9 @@ namespace The_Game
 
         Camera camera;
 
+        /// <summary>
+        /// Konstruktory
+        /// </summary>
 
         public Game1()
         {
@@ -41,13 +49,16 @@ namespace The_Game
             Content.RootDirectory = "Content";
         }
 
+        /// <summary>
+        /// Metody
+        /// </summary>
+
         protected override void Initialize()
         {
             camera = new Camera(GraphicsDevice.Viewport);
-
+            backgrounds = new Backgrounds[3];
+            
             base.Initialize();
-
-
         }
 
         protected override void LoadContent()
@@ -59,12 +70,14 @@ namespace The_Game
             font = Content.Load<SpriteFont>("font");
             me = new Postavicka(textury, 0, 10, height, 100, 50, new Speed(0, 0));
             
-            scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
-            scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
-
+            //scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
+            //scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
+                        
+            backgrounds[0] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(-1400, 0, 1400, 700));
+            backgrounds[1] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
+            backgrounds[2] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
 
             Background1 b = new Background1(8);
-
         }
 
         protected override void UnloadContent()
@@ -79,13 +92,23 @@ namespace The_Game
             me.update(gameTime);            
             
             // Scrolling Backgrounds
-            if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
-                scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
-            if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
-                scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
-
+            //if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
+            //    scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
+            //if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
+            //    scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
             //scrolling1.Update();
-            //scrolling2.Update();
+            //scrolling2.Update(); 
+
+            if (camera.centre.X <= backgrounds[1].rectangle.X)
+            {
+                backgrounds[2].rectangle.X -= 4200;
+                VycentrujLevy(backgrounds);
+            }
+            if (camera.centre.X > backgrounds[2].rectangle.X)
+            {
+                backgrounds[0].rectangle.X += 4200;
+                VycentrujPravy(backgrounds);
+            }
 
             camera.Update(gameTime, me);
 
@@ -95,20 +118,42 @@ namespace The_Game
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
 
-            
-            //
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
+                        
             System.IO.StreamReader s = new System.IO.StreamReader(@"Content/l1.txt");
             spriteBatch.DrawString(font," " + s.ReadLine(), new Vector2(300, 300), Color.Black);
-            scrolling1.Draw(spriteBatch);
-            scrolling2.Draw(spriteBatch);
+            //scrolling1.Draw(spriteBatch);
+            //scrolling2.Draw(spriteBatch);
+            for (int i = 0; i < 3; i++)
+            {
+                backgrounds[i].Draw(spriteBatch);
+            }
             me.draw(spriteBatch);
             
             spriteBatch.End();
-            base.Draw(gameTime);
+            base.Draw(gameTime);            
+        }
 
-            
+        public void VycentrujLevy<T>(T[] policko)
+        {
+            if (policko.Length == 3)
+            {
+                T pom = policko[0];
+                policko[0] = policko[2];
+                policko[2] = policko[1];
+                policko[1] = pom;
+            }
+        }
+        public void VycentrujPravy<T>(T[] policko)
+        {
+            if (policko.Length == 3)
+            {
+                T pom = policko[0];
+                policko[0] = policko[1];
+                policko[1] = policko[2];
+                policko[2] = pom;
+            }
         }
     }
 }
