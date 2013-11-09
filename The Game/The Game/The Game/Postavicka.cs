@@ -65,8 +65,8 @@ namespace The_Game
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && onLand)
             {
-                pozice.Y -= 20f;
-                pohyb.Y = -8f;
+                pozice.Y -= 25f;
+                pohyb.Y = -15f;
                 onLand = false;
             }
 
@@ -74,7 +74,7 @@ namespace The_Game
             if (!onLand)
             {                
                 float i = gravitacniZrychleniNaZemi;
-                pohyb.Y += 0.03f * i;
+                pohyb.Y += 0.08f * i;
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
                     pohyb.X += 0.3f;
