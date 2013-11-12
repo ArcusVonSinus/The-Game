@@ -27,9 +27,9 @@ namespace The_Game
         bool onLand;
         double mass;
         Speed rychlost;
-                
+        Background1 b;       
         // Konstruktor
-        public Postavicka(Texture2D[] textury,int typ, int X, int Y, int Width, double Mass, Speed speed)
+        public Postavicka(Texture2D[] textury,int typ, int X, int Y, int Width, double Mass, Speed speed,Background1 b)
         {
             if (typ == 0) //Me
             {
@@ -44,11 +44,13 @@ namespace The_Game
             
             rychlost = speed;
             onLand = true;
+            this.b = b;
         }
 
         // Metody
         public void update(GameTime gameTime)
         {
+            b.move(5);
             pozice += pohyb;
             float move;
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))

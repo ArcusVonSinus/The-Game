@@ -40,8 +40,8 @@ namespace The_Game
 
         public Game1()
         {
-            height = 800;
-            width = 1400;
+            height = 804;
+            width = 1474;
 
             blockNumber = 6;
             blockSize = height/blockNumber;  
@@ -71,7 +71,6 @@ namespace The_Game
             textury[0] = Content.Load<Texture2D>("forward");
             textury[1] = Content.Load<Texture2D>("backward");
             font = Content.Load<SpriteFont>("font");
-            me = new Postavicka(textury, 0, 10, 550, 70, 50, new Speed(0, 0));
             
             Texture2D[][] pozadi = new Texture2D[3][];
             {
@@ -86,7 +85,9 @@ namespace The_Game
                     }
                 }
             }
-            b = new Background1(pozadi, blockNumber);
+            b = new Background1(pozadi, blockNumber,300*(width/blockSize));
+
+            me = new Postavicka(textury, 0, 10, 550, 70, 50, new Speed(0, 0),b);
             //scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
             //scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
 
@@ -139,17 +140,17 @@ namespace The_Game
             //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
             spriteBatch.Begin();          
            // System.IO.StreamReader s = new System.IO.StreamReader(@"Content/l1.txt");
-           // spriteBatch.DrawString(font," " + s.ReadLine(), new Vector2(300, 300), Color.Black);
+           
             //scrolling1.Draw(spriteBatch);
             //scrolling2.Draw(spriteBatch);
           /*  for (int i = 0; i < 3; i++)
             {
                 backgrounds[i].Draw(spriteBatch);
             }*/
-
-            b.draw(width, height, spriteBatch);
+            int temp;
+            temp=b.draw(width, height, spriteBatch);
             me.draw(spriteBatch);
-            
+            spriteBatch.DrawString(font, " " + temp, new Vector2(300, 300), Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);            
         }

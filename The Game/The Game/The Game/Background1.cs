@@ -24,9 +24,23 @@ namespace The_Game
         int sirka; //pocet dlazdic na sirce levelu;
         int vyska;
         Texture2D[][] pozadi;
-        public Background1(Texture2D[][] pozadi,int radku)
+        public void move(int okolik)
         {
-            a = 0; b = 4200;
+            int tempb = b;
+            int tempa = a;
+            b += okolik;
+            a += okolik;
+            if (b >= sirka * 300-300)
+            {
+                b = sirka * 300-301;
+                a = tempa + b - tempb;
+                return;
+            }
+        }
+        public Background1(Texture2D[][] pozadi,int radku,int b)
+        {
+            a = 0; 
+            this.b = b;
             this.pozadi = pozadi;
             System.IO.StreamReader lvlreader = new System.IO.StreamReader(@"Content/l1.txt");
             string levelline=lvlreader.ReadLine();
@@ -70,22 +84,24 @@ namespace The_Game
             }
 
         }
-        public void draw(int w,int h,SpriteBatch spriteBatch)
+        public int draw(int w,int h,SpriteBatch spriteBatch)
         {
             int a1 = a/300;
             int b1 = b/300;
             b1++;
-            int posunL = 300-(a%300);
-            int sirkabunky = h/vyska;
+            int posunL = a%300;
+            int sirkabunky = h / vyska;
+            posunL *= sirkabunky;
+            posunL /= 300;            
             for (int r = 0; r < vyska; r++)
             {
-                for (int s = 0; s < b1 - a1+2; s++)
+                for (int s = a1; s <= b1; s++)
                 {
-                    spriteBatch.Draw(pozadi[level1[a1 + s, r].typ][level1[a1 + s, r].verze], new Rectangle(sirkabunky * s - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
+                    spriteBatch.Draw(pozadi[level1[s, r].typ][level1[s, r].verze], new Rectangle((s-a1)*sirkabunky - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
                 }
             }
+            return b;
         }
-
-
+        
     }
 }
