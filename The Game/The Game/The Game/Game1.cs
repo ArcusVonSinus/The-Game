@@ -71,12 +71,15 @@ namespace The_Game
             textury[0] = Content.Load<Texture2D>("forward");
             textury[1] = Content.Load<Texture2D>("backward");
             font = Content.Load<SpriteFont>("font");
-            
-            Texture2D[][] pozadi = new Texture2D[3][];
+            int druhukachlicek = 14;                
+            Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
             {
+                for (int i = 0; i < druhukachlicek; i++)
+                {
+                    pozadi[i] = new Texture2D[1];
+                }
                 pozadi[0] = new Texture2D[3];
-                pozadi[1] = new Texture2D[2];
-                pozadi[2] = new Texture2D[1];
+                pozadi[1] = new Texture2D[2];                
                 for (int i = 0; i < pozadi.Length; i++)
                 {
                     for (int j = 0; j < pozadi[i].Length; j++)

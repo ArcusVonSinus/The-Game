@@ -61,24 +61,27 @@ namespace The_Game
 
             }
             lvlreader.Close();
+            string Dily;
+            Dily = ".XxLlvRrAaBbCc";
+            int verzi = 0;
             for (int j = 0; j < vyska; j++)
             {
                 for (int i = 0; i < sirka; i++)
                 {
-                    if (level1[i, j].typ == 'X') 
+                    for (int k = 0; k < Dily.Length; k++)
                     {
-                        level1[i, j].typ = 1;
-                        level1[i,j].verze = rnd.Next(0,pozadi[1].Length);
-                    }
-                    if (level1[i, j].typ == 'x') 
-                    {
-                        level1[i, j].typ = 2;
-                        level1[i,j].verze = rnd.Next(0,pozadi[2].Length);
-                    }
-                    if (level1[i, j].typ == '.')
-                    {
-                        level1[i, j].typ = 0;
-                        level1[i,j].verze = rnd.Next(0,pozadi[0].Length);
+                        if (level1[i, j].typ == Dily[k])
+                        {
+                            level1[i, j].typ = k;
+                            if (k == 0)
+                                verzi = 3;
+                            else if (k == 1)
+                                verzi = 2;
+                            else
+                                verzi = 1;
+                            level1[i, j].verze = rnd.Next(0, verzi);
+                        }
+
                     }
                 }
             }
