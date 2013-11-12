@@ -34,9 +34,11 @@ namespace The_Game
         {
             if (typ == 0) //Me
             {
-                vzhled = new AnimatedSprite[2];
+                vzhled = new AnimatedSprite[4];
                 vzhled[0] = new AnimatedSprite(textury[0], 2, 7);
                 vzhled[1] = new AnimatedSprite(textury[1], 2, 7);
+                vzhled[2] = new AnimatedSprite(textury[2], 2, 7);
+                vzhled[3] = new AnimatedSprite(textury[3], 2, 7);
             }
             width = Width;
             pozice.X = X;
@@ -65,9 +67,18 @@ namespace The_Game
             
             if (onLand)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Right)) pohyb.X = move;
-                else if (Keyboard.GetState().IsKeyDown(Keys.Left)) pohyb.X = -move;
-                else pohyb.X = 0f;
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    pohyb.X = move;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    pohyb.X = -move;
+                }
+                else
+                {
+                    pohyb.X = 0f;  
+                }
 
                 if (pohyb.X < 0) vzhledNo = 1;
                 if (pohyb.X > 0) vzhledNo = 0;
@@ -80,32 +91,57 @@ namespace The_Game
                 pozice.Y -= 25f*step;
                 pohyb.Y = -15f*step;
                 onLand = false;
+                if (pohyb.X < 0) vzhledNo = 2;
+                if (pohyb.X > 0) vzhledNo = 3;
+                if (pohyb.X == 0) vzhledNo += 2;
             }
 
 
             if (!onLand)
-            {                
+            {
+                if (pohyb.X < 0) vzhledNo = 2;
+                if (pohyb.X > 0) vzhledNo = 3;
                 float i = gravitacniZrychleniNaZemi;
                 pohyb.Y += 0.08f * i * step;
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
                     pohyb.X += 0.3f*step;
-                    vzhledNo = 0;
+                    vzhledNo = 2;
                 }
                 if (pohyb.X >= move) pohyb.X = move;
                 if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 {
                     pohyb.X -= 0.3f*step;
-                    vzhledNo = 1;
+                    vzhledNo = 3;
                 }
                 if (pohyb.X <= -move) pohyb.X = -move; 
             }
-            
-            if (Math.Abs(pohyb.X) >= 0.1) vzhled[vzhledNo].Update();
-            else vzhled[vzhledNo].stop();
+
+            if (onLand && Math.Abs(pohyb.X) >= 0.1)
+            {
+                vzhled[vzhledNo].Update();
+            }
+            else if (onLand)
+            {
+                vzhled[vzhledNo].stop();
+            }
+
+            if (!onLand)
+            {
+                vzhled[vzhledNo].Update();
+            }
 
             if (pozice.Y >= 550)
-                onLand = true;                        
+            {
+                if (!onLand && pohyb.X == 0)
+                {
+                    vzhledNo -= 2;
+                }
+                onLand = true;
+                if (pohyb.X < 0) vzhledNo = 1;
+                if (pohyb.X > 0) vzhledNo = 0;
+
+            }
         }
 
         public int height()

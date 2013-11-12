@@ -67,9 +67,11 @@ namespace The_Game
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textury = new Texture2D[2];
+            textury = new Texture2D[4];
             textury[0] = Content.Load<Texture2D>("forward");
             textury[1] = Content.Load<Texture2D>("backward");
+            textury[2] = Content.Load<Texture2D>("Air forw.");
+            textury[3] = Content.Load<Texture2D>("Air back.");
             font = Content.Load<SpriteFont>("font");
             int druhukachlicek = 14;                
             Texture2D[][] pozadi = new Texture2D[druhukachlicek][];

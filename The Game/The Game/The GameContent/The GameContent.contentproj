@@ -165,6 +165,16 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Air back..png">
+      <Name>Air back.</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Air forw..png">
+      <Name>Air forw.</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="l1.txt">
       <Name>l1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
