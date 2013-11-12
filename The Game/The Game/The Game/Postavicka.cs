@@ -50,11 +50,16 @@ namespace The_Game
         public void update(GameTime gameTime)
         {
             pozice += pohyb;
-
+            float move;
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                move = 15f;
+            else
+                move = 10f;
+            
             if (onLand)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Right)) pohyb.X = 10f;
-                else if (Keyboard.GetState().IsKeyDown(Keys.Left)) pohyb.X = -10f;
+                if (Keyboard.GetState().IsKeyDown(Keys.Right)) pohyb.X = move;
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left)) pohyb.X = -move;
                 else pohyb.X = 0f;
 
                 if (pohyb.X < 0) vzhledNo = 1;
@@ -80,19 +85,19 @@ namespace The_Game
                     pohyb.X += 0.3f;
                     vzhledNo = 0;
                 }
-                if (pohyb.X >= 10f) pohyb.X = 10f;
+                if (pohyb.X >= move) pohyb.X = move;
                 if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 {
                     pohyb.X -= 0.3f;
                     vzhledNo = 1;
                 }
-                if (pohyb.X <= -10f) pohyb.X = -10f; 
+                if (pohyb.X <= -move) pohyb.X = -move; 
             }
             
             if (Math.Abs(pohyb.X) >= 0.1) vzhled[vzhledNo].Update();
             else vzhled[vzhledNo].stop();
 
-            if (pozice.Y >= 520)
+            if (pozice.Y >= 550)
                 onLand = true;                        
         }
 
