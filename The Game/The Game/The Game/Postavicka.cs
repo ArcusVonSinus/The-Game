@@ -39,7 +39,7 @@ namespace The_Game
             }
             width = Width;
             pozice.X = X;
-            pozice.Y = Y - height()-120;
+            pozice.Y = Y;
             mass = Mass;
             
             rychlost = speed;

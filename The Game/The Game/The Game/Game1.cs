@@ -19,9 +19,10 @@ namespace The_Game
         
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Scrolling scrolling1;
-        Scrolling scrolling2;
-        Backgrounds[] backgrounds;
+        /*Scrolling scrolling1;
+        Scrolling scrolling2;*/
+        //Backgrounds[] backgrounds;
+        Background1 b;
         Postavicka me;        
         Texture2D[] textury;
         private SpriteFont font;
@@ -39,10 +40,12 @@ namespace The_Game
 
         public Game1()
         {
-            blockNumber = 7;
-            blockSize = 100;
+            height = 800;
             width = 1400;
-            height = blockNumber * blockSize;
+
+            blockNumber = 7;
+            blockSize = height/blockNumber;  
+
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
@@ -56,7 +59,7 @@ namespace The_Game
         protected override void Initialize()
         {
             camera = new Camera(GraphicsDevice.Viewport);
-            backgrounds = new Backgrounds[3];
+           // backgrounds = new Backgrounds[blockNumber];
             
             base.Initialize();
         }
@@ -68,16 +71,30 @@ namespace The_Game
             textury[0] = Content.Load<Texture2D>("forward");
             textury[1] = Content.Load<Texture2D>("backward");
             font = Content.Load<SpriteFont>("font");
-            me = new Postavicka(textury, 0, 10, height, 100, 50, new Speed(0, 0));
+            me = new Postavicka(textury, 0, 10, 570, 70, 50, new Speed(0, 0));
             
+            Texture2D[][] pozadi = new Texture2D[3][];
+            {
+                pozadi[0] = new Texture2D[1];
+                pozadi[1] = new Texture2D[1];
+                pozadi[2] = new Texture2D[1];
+                for (int i = 0; i < pozadi.Length; i++)
+                {
+                    for (int j = 0; j < pozadi[i].Length; j++)
+                    {
+                        pozadi[i][j] = Content.Load<Texture2D>("Bck1\\" + i + "-" + j);
+                    }
+                }
+            }
+            b = new Background1(pozadi, blockNumber);
             //scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
             //scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
-                        
-            backgrounds[0] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(-1400, 0, 1400, 700));
-            backgrounds[1] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
-            backgrounds[2] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
 
-            Background1 b = new Background1(8);
+           // backgrounds[0] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(-1400, 0, 1400, 700));
+           // backgrounds[1] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
+           // backgrounds[2] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
+
+            //Background1 b = new Background1(8);
         }
 
         protected override void UnloadContent()
@@ -99,7 +116,7 @@ namespace The_Game
             //scrolling1.Update();
             //scrolling2.Update(); 
 
-            if (camera.centre.X <= backgrounds[1].rectangle.X)
+           /* if (camera.centre.X <= backgrounds[1].rectangle.X)
             {
                 backgrounds[2].rectangle.X -= 4200;
                 VycentrujLevy(backgrounds);
@@ -110,7 +127,7 @@ namespace The_Game
                 VycentrujPravy(backgrounds);
             }
 
-            camera.Update(gameTime, me);
+            camera.Update(gameTime, me);*/
 
             base.Update(gameTime);
         }
@@ -119,23 +136,25 @@ namespace The_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
-                        
-            System.IO.StreamReader s = new System.IO.StreamReader(@"Content/l1.txt");
-            spriteBatch.DrawString(font," " + s.ReadLine(), new Vector2(300, 300), Color.Black);
+            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
+            spriteBatch.Begin();          
+           // System.IO.StreamReader s = new System.IO.StreamReader(@"Content/l1.txt");
+           // spriteBatch.DrawString(font," " + s.ReadLine(), new Vector2(300, 300), Color.Black);
             //scrolling1.Draw(spriteBatch);
             //scrolling2.Draw(spriteBatch);
-            for (int i = 0; i < 3; i++)
+          /*  for (int i = 0; i < 3; i++)
             {
                 backgrounds[i].Draw(spriteBatch);
-            }
+            }*/
+
+            b.draw(width, height, spriteBatch);
             me.draw(spriteBatch);
             
             spriteBatch.End();
             base.Draw(gameTime);            
         }
 
-        public void VycentrujLevy<T>(T[] policko)
+       /* public void VycentrujLevy<T>(T[] policko)
         {
             if (policko.Length == 3)
             {
@@ -154,7 +173,7 @@ namespace The_Game
                 policko[1] = policko[2];
                 policko[2] = pom;
             }
-        }
+        }*/
     }
 }
 

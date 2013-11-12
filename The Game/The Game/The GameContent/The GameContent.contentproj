@@ -80,6 +80,21 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Bck1\1-0.png">
+      <Name>1-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Bck1\2-0.png">
+      <Name>2-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Bck1\0-0.jpg">
+      <Name>0-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="l1.txt">
       <Name>l1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
