@@ -43,7 +43,7 @@ namespace The_Game
             height = 800;
             width = 1400;
 
-            blockNumber = 7;
+            blockNumber = 6;
             blockSize = height/blockNumber;  
 
             graphics = new GraphicsDeviceManager(this);
@@ -71,12 +71,12 @@ namespace The_Game
             textury[0] = Content.Load<Texture2D>("forward");
             textury[1] = Content.Load<Texture2D>("backward");
             font = Content.Load<SpriteFont>("font");
-            me = new Postavicka(textury, 0, 10, 570, 70, 50, new Speed(0, 0));
+            me = new Postavicka(textury, 0, 10, 550, 70, 50, new Speed(0, 0));
             
             Texture2D[][] pozadi = new Texture2D[3][];
             {
-                pozadi[0] = new Texture2D[1];
-                pozadi[1] = new Texture2D[1];
+                pozadi[0] = new Texture2D[3];
+                pozadi[1] = new Texture2D[2];
                 pozadi[2] = new Texture2D[1];
                 for (int i = 0; i < pozadi.Length; i++)
                 {

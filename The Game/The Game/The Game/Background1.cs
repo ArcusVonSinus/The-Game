@@ -10,12 +10,17 @@ namespace The_Game
 
     class Background1
     {
+        struct Tile
+        {
+            public int typ;
+            public int verze;
+        }
         /// <summary>
         /// Tile je z definice 300x300, a souradnice a a b jsou v tomhle meritku, pak se prepocitaji
         /// </summary>
         int a; //je zobrazeno pozadí od a do b;
         int b;
-        int [,] level1;
+        Tile [,] level1;
         int sirka; //pocet dlazdic na sirce levelu;
         int vyska;
         Texture2D[][] pozadi;
@@ -27,12 +32,14 @@ namespace The_Game
             string levelline=lvlreader.ReadLine();
             sirka=levelline.Length;
             vyska = radku;
-            level1=new int [sirka,radku];
+            level1=new Tile [sirka,radku];
+            Random rnd = new Random();
             for (int j=0;j<radku;j++)
             {
                 for (int i = 0; i < sirka; i++)
                 {
-                    level1[i, j] = levelline[i];
+                    level1[i, j].typ = levelline[i];
+                    
 
                 }
                 if(j!=radku-1)
@@ -44,12 +51,21 @@ namespace The_Game
             {
                 for (int i = 0; i < sirka; i++)
                 {
-                    if (level1[i, j] == 'X') 
-                        level1[i, j] = 1;
-                    if (level1[i, j] == 'x') 
-                        level1[i, j] = 2;
-                    if (level1[i, j] == '.')
-                        level1[i, j] = 0;
+                    if (level1[i, j].typ == 'X') 
+                    {
+                        level1[i, j].typ = 1;
+                        level1[i,j].verze = rnd.Next(0,pozadi[1].Length);
+                    }
+                    if (level1[i, j].typ == 'x') 
+                    {
+                        level1[i, j].typ = 2;
+                        level1[i,j].verze = rnd.Next(0,pozadi[2].Length);
+                    }
+                    if (level1[i, j].typ == '.')
+                    {
+                        level1[i, j].typ = 0;
+                        level1[i,j].verze = rnd.Next(0,pozadi[0].Length);
+                    }
                 }
             }
 
@@ -65,7 +81,7 @@ namespace The_Game
             {
                 for (int s = 0; s < b1 - a1+2; s++)
                 {
-                    spriteBatch.Draw(pozadi[level1[a1 + s,r]][0], new Rectangle(sirkabunky * s - posunL, sirkabunky*r, sirkabunky, sirkabunky), Color.White);
+                    spriteBatch.Draw(pozadi[level1[a1 + s, r].typ][level1[a1 + s, r].verze], new Rectangle(sirkabunky * s - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
                 }
             }
         }
