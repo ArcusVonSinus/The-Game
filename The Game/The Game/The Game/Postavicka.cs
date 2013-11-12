@@ -27,7 +27,8 @@ namespace The_Game
         bool onLand;
         double mass;
         Speed rychlost;
-        Background1 b;       
+        Background1 b;
+        long elapsedTime = 0;
         // Konstruktor
         public Postavicka(Texture2D[] textury,int typ, int X, int Y, int Width, double Mass, Speed speed,Background1 b)
         {
@@ -50,13 +51,17 @@ namespace The_Game
         // Metody
         public void update(GameTime gameTime)
         {
-            b.move(5);
+            /*v ms*/ long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
+            elapsedTime+=timediff;
+            int step=(int) timediff/13;         
+            b.move(5*step);
+
             pozice += pohyb;
             float move;
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                move = 15f;
+                move = 15f*step;
             else
-                move = 10f;
+                move = 10f*step;
             
             if (onLand)
             {
@@ -72,8 +77,8 @@ namespace The_Game
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && onLand)
             {
-                pozice.Y -= 25f;
-                pohyb.Y = -15f;
+                pozice.Y -= 25f*step;
+                pohyb.Y = -15f*step;
                 onLand = false;
             }
 
@@ -81,16 +86,16 @@ namespace The_Game
             if (!onLand)
             {                
                 float i = gravitacniZrychleniNaZemi;
-                pohyb.Y += 0.08f * i;
+                pohyb.Y += 0.08f * i * step;
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
-                    pohyb.X += 0.3f;
+                    pohyb.X += 0.3f*step;
                     vzhledNo = 0;
                 }
                 if (pohyb.X >= move) pohyb.X = move;
                 if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 {
-                    pohyb.X -= 0.3f;
+                    pohyb.X -= 0.3f*step;
                     vzhledNo = 1;
                 }
                 if (pohyb.X <= -move) pohyb.X = -move; 

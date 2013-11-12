@@ -147,10 +147,9 @@ namespace The_Game
             {
                 backgrounds[i].Draw(spriteBatch);
             }*/
-            int temp;
-            temp=b.draw(width, height, spriteBatch);
+            b.draw(width, height, spriteBatch);
             me.draw(spriteBatch);
-            spriteBatch.DrawString(font, " " + temp, new Vector2(300, 300), Color.Black);
+            //spriteBatch.DrawString(font," " + gameTime.TotalGameTime.Milliseconds, new Vector2(300, 300), Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);            
         }

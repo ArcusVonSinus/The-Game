@@ -60,7 +60,7 @@ namespace The_Game
                     levelline = lvlreader.ReadLine();
 
             }
-
+            lvlreader.Close();
             for (int j = 0; j < vyska; j++)
             {
                 for (int i = 0; i < sirka; i++)
@@ -84,7 +84,7 @@ namespace The_Game
             }
 
         }
-        public int draw(int w,int h,SpriteBatch spriteBatch)
+        public void draw(int w,int h,SpriteBatch spriteBatch)
         {
             int a1 = a/300;
             int b1 = b/300;
@@ -100,7 +100,6 @@ namespace The_Game
                     spriteBatch.Draw(pozadi[level1[s, r].typ][level1[s, r].verze], new Rectangle((s-a1)*sirkabunky - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
                 }
             }
-            return b;
         }
         
     }
