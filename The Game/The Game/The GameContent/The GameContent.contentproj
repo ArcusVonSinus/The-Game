@@ -80,18 +80,18 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Air back..png">
+      <Name>Air back.</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Air forw..png">
+      <Name>Air forw.</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Bck1\0-0.jpg">
       <Name>0-0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Bck1\1-0.jpg">
-      <Name>1-0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Bck1\2-0.png">
-      <Name>2-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -105,42 +105,42 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\1-1.jpg">
-      <Name>1-1</Name>
+    <Compile Include="Bck1\1-0.png">
+      <Name>1-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\10-0.jpg">
+    <Compile Include="Bck1\10-0.png">
       <Name>10-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\11-0.jpg">
+    <Compile Include="Bck1\11-0.png">
       <Name>11-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\12-0.jpg">
-      <Name>12-0</Name>
+    <Compile Include="Bck1\2-0.png">
+      <Name>2-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\13-0.jpg">
-      <Name>13-0</Name>
+    <Compile Include="Bck1\2-1.png">
+      <Name>2-1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\3-0.jpg">
+    <Compile Include="Bck1\3-0.png">
       <Name>3-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\4-0.jpg">
+    <Compile Include="Bck1\4-0.png">
       <Name>4-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\5-0.jpg">
+    <Compile Include="Bck1\5-0.png">
       <Name>5-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -150,28 +150,28 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\7-0.jpg">
+    <Compile Include="Bck1\7-0.png">
       <Name>7-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\8-0.jpg">
+    <Compile Include="Bck1\8-0.png">
       <Name>8-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Bck1\9-0.jpg">
+    <Compile Include="Bck1\9-0.png">
       <Name>9-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Air back..png">
-      <Name>Air back.</Name>
+    <Compile Include="Bck1\12-0.png">
+      <Name>12-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Air forw..png">
-      <Name>Air forw.</Name>
+    <Compile Include="Bck1\13-0.png">
+      <Name>13-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -180,6 +180,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
