@@ -18,7 +18,7 @@ namespace The_Game
         /// <summary>
         /// Tile je z definice 300x300, a souradnice a a b jsou v tomhle meritku, pak se prepocitaji
         /// </summary>
-        int a; //je zobrazeno pozadí od a do b;
+        public int a; //je zobrazeno pozadí od a do b;
         int b;
         Tile [,] level1;
         Tile[,] obloha1;
@@ -38,6 +38,8 @@ namespace The_Game
                 return;
             }
         }
+        public void move(float okolik)
+        { move((int)okolik); return; }
         public Background1(Texture2D[][] pozadi,int radku,int b)
         {
             a = 0; 

@@ -14,6 +14,14 @@ namespace The_Game
         public int Columns { get; set; }
         private int currentFrame;
         private int totalFrames;
+        public int width
+        {
+            get { return Texture.Width / Columns; }
+        }
+        public int height
+        {
+            get { return Texture.Height / Rows; }
+        }
         public void stop()
         {
             currentFrame = 0;

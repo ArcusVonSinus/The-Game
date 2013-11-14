@@ -21,9 +21,9 @@ namespace The_Game
         // Promenne
         private AnimatedSprite[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
         private int vzhledNo;
-        public Vector2 pozice; //souradnice    
+        public Vector2 pozice, prevpozice; //souradnice    
         Vector2 pohyb; //smer pohybu
-        public int width;//sirka v pixelech
+        public int width;//sirka v pixelech, prepocitana
         bool onLand;
         double mass;
         Speed rychlost;
@@ -43,8 +43,8 @@ namespace The_Game
             width = Width;
             pozice.X = X;
             pozice.Y = Y;
-            mass = Mass;
-            
+            prevpozice = pozice;
+            mass = Mass;            
             rychlost = speed;
             onLand = true;
             this.b = b;
@@ -53,19 +53,26 @@ namespace The_Game
         // Metody
         public void update(GameTime gameTime)
         {
+
+            prevpozice = pozice;
+
             /*v ms*/ long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime+=timediff;
-            int step=(int) timediff/13;         
-            b.move(5*step);
-
-            pozice += pohyb;
+            int step = 1;
             float move;
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                move = 15f*step;
+                move = 1.15f*timediff;
             else
-                move = 10f*step;
+                move = 0.77f*timediff;
             
-            if (onLand)
+
+
+            b.move(1+0*timediff);
+
+            pozice += pohyb;
+            
+            
+            if (onLand) 
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
@@ -83,6 +90,7 @@ namespace The_Game
                 if (pohyb.X < 0) vzhledNo = 1;
                 if (pohyb.X > 0) vzhledNo = 0;
 
+                
                 pohyb.Y = 0f;
             }
 
@@ -144,16 +152,25 @@ namespace The_Game
             }
         }
 
-        public int height()
+        public int height
         {
-            int h;
-            h = (width * vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
-            return h;
+            get
+            {                
+                return (width * vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
+            }
+            set { }
         }
 
         public void draw(SpriteBatch spriteBatch)
         {
-            vzhled[vzhledNo].Draw(spriteBatch, pozice, width);
+            Vector2 temp = new Vector2();
+            temp = pozice;
+            temp.X -= b.a;
+            temp.Y -= 261;
+            temp.Y += 13;
+            temp.X *= (width / 150f);
+            temp.Y *= (width / 150f);
+            vzhled[vzhledNo].Draw(spriteBatch, temp, width);
         }
 
     }

@@ -73,7 +73,7 @@ namespace The_Game
             textury[2] = Content.Load<Texture2D>("Air forw.");
             textury[3] = Content.Load<Texture2D>("Air back.");
             font = Content.Load<SpriteFont>("font");
-            int druhukachlicek = 14;                
+            int druhukachlicek = 14;
             Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
             {
                 for (int i = 0; i < druhukachlicek; i++)
@@ -92,7 +92,7 @@ namespace The_Game
             }
             b = new Background1(pozadi, blockNumber,300*(width/blockSize));
 
-            me = new Postavicka(textury, 0, 10, 550, 70, 50, new Speed(0, 0),b);
+            me = new Postavicka(textury, 0 /*typ*/ , 150 /*x*/ , 300*(blockNumber-1) /*y*/ , blockSize / 2 /*width*/ , 50 /*mass*/ , new Speed(0, 0),b);
             //scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
             //scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
 
