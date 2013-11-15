@@ -9,7 +9,7 @@ namespace The_Game
 {
     class Background1
     {
-        struct Tile
+        public struct Tile
         {
             public int typ;
             public int verze;
@@ -19,10 +19,10 @@ namespace The_Game
         /// </summary>
         public int a; //je zobrazeno pozadí od a do b;
         public int b;
-        Tile[,] level1;
+        public Tile[,] level1;
         Tile[,] obloha1;
         public int sirka; //pocet dlazdic na sirce levelu;
-        int vyska;
+        public int vyska;
         Texture2D[][] pozadi;
 
         public void move(int okolik)
