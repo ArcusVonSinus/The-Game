@@ -117,7 +117,7 @@ namespace The_Game
             b.draw(width, height, spriteBatch);
             me.draw(spriteBatch);
 
-            // spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(300, 300), Color.Black);
+            spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);
             
             spriteBatch.End();
             base.Draw(gameTime);
