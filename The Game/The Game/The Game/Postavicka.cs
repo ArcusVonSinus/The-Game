@@ -87,23 +87,11 @@ namespace The_Game
                 move = 1.5f * standartniRychlost * timediff;
             else
                 move = standartniRychlost * timediff;
-
-            //if (pozice.X - b.a + 100 < b.b - pozice.X)
-            //{
-            //    b.move(pohyb.X - 15f);
-            //}
-            //else
-            //    if (pozice.X - b.a - 100 > b.b - pozice.X)
-            //    {
-            //        b.move(pohyb.X + 15f);
-            //    }
-            //    else
-            //        b.move(pohyb.X);
+                        
             if (pozice.X <= 0) pozice.X = 0;
             if (pozice.X >= b.sirka * 300 - 301) pozice.X = b.sirka * 300 - 301;
             if ((pozice.X > (b.b - b.a) / 2) &&
                 (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2)) b.move(pohyb.X);
-
 
             pozice += pohyb;
 
