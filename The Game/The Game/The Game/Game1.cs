@@ -16,14 +16,12 @@ namespace The_Game
         /// <summary>
         /// Promenne
         /// </summary>
-        
+
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        /*Scrolling scrolling1;
-        Scrolling scrolling2;*/
+        SpriteBatch spriteBatch;        
         //Backgrounds[] backgrounds;
         Background1 b;
-        Postavicka me;        
+        Postavicka me;
         Texture2D[] textury;
         private SpriteFont font;
 
@@ -40,11 +38,11 @@ namespace The_Game
 
         public Game1()
         {
-            height = 804;
-            width = 1474;
+            height = 900;
+            width = 1600;
 
             blockNumber = 6;
-            blockSize = height/blockNumber;  
+            blockSize = height / blockNumber;
 
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = height;
@@ -59,8 +57,8 @@ namespace The_Game
         protected override void Initialize()
         {
             camera = new Camera(GraphicsDevice.Viewport);
-           // backgrounds = new Backgrounds[blockNumber];
-            
+            // backgrounds = new Backgrounds[blockNumber];
+
             base.Initialize();
         }
 
@@ -81,7 +79,7 @@ namespace The_Game
                     pozadi[i] = new Texture2D[1];
                 }
                 pozadi[0] = new Texture2D[3];
-                pozadi[2] = new Texture2D[2];               
+                pozadi[2] = new Texture2D[2];
                 for (int i = 0; i < pozadi.Length; i++)
                 {
                     for (int j = 0; j < pozadi[i].Length; j++)
@@ -90,17 +88,9 @@ namespace The_Game
                     }
                 }
             }
-            b = new Background1(pozadi, blockNumber,300*(width/blockSize));
+            b = new Background1(pozadi, blockNumber, 300 * (width / blockSize));
 
-            me = new Postavicka(textury, 0 /*typ*/ , 150 /*x*/ , 300*(blockNumber-1) /*y*/ , blockSize / 2 /*width*/ , 50 /*mass*/ , new Speed(0, 0),b);
-            //scrolling1 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
-            //scrolling2 = new Scrolling(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
-
-           // backgrounds[0] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(-1400, 0, 1400, 700));
-           // backgrounds[1] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(0, 0, 1400, 700));
-           // backgrounds[2] = new Backgrounds(Content.Load<Texture2D>(@"Backgrounds\les"), new Rectangle(1400, 0, 1400, 700));
-
-            //Background1 b = new Background1(8);
+            me = new Postavicka(textury, 0 /*typ*/ , 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , blockSize / 2 /*width*/ , 50 /*mass*/ , new Speed(0, 0), b);            
         }
 
         protected override void UnloadContent()
@@ -112,28 +102,8 @@ namespace The_Game
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            me.update(gameTime);            
-            
-            // Scrolling Backgrounds
-            //if (scrolling1.rectangle.X + scrolling1.rectangle.Width <= 0)
-            //    scrolling1.rectangle.X = scrolling2.rectangle.X + scrolling2.rectangle.Width;
-            //if (scrolling2.rectangle.X + scrolling2.rectangle.Width <= 0)
-            //    scrolling2.rectangle.X = scrolling1.rectangle.X + scrolling1.rectangle.Width;
-            //scrolling1.Update();
-            //scrolling2.Update(); 
 
-           /* if (camera.centre.X <= backgrounds[1].rectangle.X)
-            {
-                backgrounds[2].rectangle.X -= 4200;
-                VycentrujLevy(backgrounds);
-            }
-            if (camera.centre.X > backgrounds[2].rectangle.X)
-            {
-                backgrounds[0].rectangle.X += 4200;
-                VycentrujPravy(backgrounds);
-            }
-
-            camera.Update(gameTime, me);*/
+            me.update(gameTime);
 
             base.Update(gameTime);
         }
@@ -142,43 +112,16 @@ namespace The_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend,null,null,null,null,camera.transform);
-            spriteBatch.Begin();          
-           // System.IO.StreamReader s = new System.IO.StreamReader(@"Content/l1.txt");
-           
-            //scrolling1.Draw(spriteBatch);
-            //scrolling2.Draw(spriteBatch);
-          /*  for (int i = 0; i < 3; i++)
-            {
-                backgrounds[i].Draw(spriteBatch);
-            }*/
+            spriteBatch.Begin();
+
             b.draw(width, height, spriteBatch);
             me.draw(spriteBatch);
-            //spriteBatch.DrawString(font," " + gameTime.TotalGameTime.Milliseconds, new Vector2(300, 300), Color.Black);
-            spriteBatch.End();
-            base.Draw(gameTime);            
-        }
 
-       /* public void VycentrujLevy<T>(T[] policko)
-        {
-            if (policko.Length == 3)
-            {
-                T pom = policko[0];
-                policko[0] = policko[2];
-                policko[2] = policko[1];
-                policko[1] = pom;
-            }
+            // spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(300, 300), Color.Black);
+            
+            spriteBatch.End();
+            base.Draw(gameTime);
         }
-        public void VycentrujPravy<T>(T[] policko)
-        {
-            if (policko.Length == 3)
-            {
-                T pom = policko[0];
-                policko[0] = policko[1];
-                policko[1] = policko[2];
-                policko[2] = pom;
-            }
-        }*/
     }
 }
 

@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 
 namespace The_Game
 {
-
     class Background1
     {
         struct Tile
@@ -20,49 +19,51 @@ namespace The_Game
         /// </summary>
         public int a; //je zobrazeno pozadí od a do b;
         int b;
-        Tile [,] level1;
+        Tile[,] level1;
         Tile[,] obloha1;
         int sirka; //pocet dlazdic na sirce levelu;
         int vyska;
         Texture2D[][] pozadi;
+
         public void move(int okolik)
         {
-            int tempb = b;
-            int tempa = a;
+            int tempB = b;
+            int tempA = a;
             b += okolik;
             a += okolik;
-            if (b >= sirka * 300-300)
+            if (b >= sirka * 300 - 300)
             {
-                b = sirka * 300-301;
-                a = tempa + b - tempb;
+                b = sirka * 300 - 301;
+                a = tempA + b - tempB;
                 return;
             }
         }
+
         public void move(float okolik)
         { move((int)okolik); return; }
-        public Background1(Texture2D[][] pozadi,int radku,int b)
+
+        public Background1(Texture2D[][] pozadi, int radku, int b)
         {
-            a = 0; 
+            a = 0;
             this.b = b;
             this.pozadi = pozadi;
-            System.IO.StreamReader lvlreader = new System.IO.StreamReader(@"Content/l1.txt");
-            string levelline=lvlreader.ReadLine();
-            sirka=levelline.Length;
+            System.IO.StreamReader lvlReader = new System.IO.StreamReader(@"Content/l1.txt");
+            string levelLine = lvlReader.ReadLine();
+            sirka = levelLine.Length;
             vyska = radku;
             level1 = new Tile[sirka, radku];
             obloha1 = new Tile[sirka, radku];
             Random rnd = new Random();
-            for (int j=0;j<radku;j++)
+            for (int j = 0; j < radku; j++)
             {
                 for (int i = 0; i < sirka; i++)
                 {
-                    level1[i, j].typ = levelline[i];                    
+                    level1[i, j].typ = levelLine[i];
                 }
-                if(j!=radku-1)
-                    levelline = lvlreader.ReadLine();
-
+                if (j != radku - 1)
+                    levelLine = lvlReader.ReadLine();
             }
-            lvlreader.Close();
+            lvlReader.Close();
             string Dily;
             Dily = ".?X?L?R?l?x?r?";
             int verzi = 0;
@@ -72,7 +73,7 @@ namespace The_Game
                 {
                     for (int k = 0; k < Dily.Length; k++)
                     {
-                        
+
                         level1[i, j].verze = rnd.Next(0, verzi);
                         if (j == vyska - 1)
                         {
@@ -84,7 +85,7 @@ namespace The_Game
                             obloha1[i, j].typ = 0;
                             obloha1[i, j].verze = rnd.Next(0, 3);
                         }
-                        
+
                         if (level1[i, j].typ == Dily[k])
                         {
                             level1[i, j].typ = k;
@@ -94,39 +95,36 @@ namespace The_Game
                                 verzi = 2;
                             else
                                 verzi = 1;
-                            
                         }
-
                     }
                 }
             }
-
         }
-        public void draw(int w,int h,SpriteBatch spriteBatch)
+
+        public void draw(int w, int h, SpriteBatch spriteBatch)
         {
-            int a1 = a/300;
-            int b1 = b/300;
+            int a1 = a / 300;
+            int b1 = b / 300;
             b1++;
             int posunL = a%300;
             int sirkabunky = h / vyska;
             posunL *= sirkabunky;
-            posunL /= 300;            
+            posunL /= 300;
             for (int r = 0; r < vyska; r++)
             {
                 for (int s = a1; s <= b1; s++)
                 {
                     spriteBatch.Draw(pozadi[obloha1[s, r].typ][obloha1[s, r].verze], new Rectangle((s - a1) * sirkabunky - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
-                    if(level1[s, r].typ!=0)
+                    if (level1[s, r].typ != 0)
                     {
-                        spriteBatch.Draw(pozadi[level1[s, r].typ][level1[s, r].verze], new Rectangle((s-a1)*sirkabunky - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
+                        spriteBatch.Draw(pozadi[level1[s, r].typ][level1[s, r].verze], new Rectangle((s - a1) * sirkabunky - posunL, sirkabunky * r, sirkabunky, sirkabunky), Color.White);
                     }
                     if (level1[s, r].typ <= 12 && level1[s, r].typ >= 2 && level1[s, r].typ % 2 == 0 && r != 0)
-                    {                        
-                        spriteBatch.Draw(pozadi[level1[s, r].typ+1][0], new Rectangle((s - a1) * sirkabunky - posunL, sirkabunky * (r-1), sirkabunky, sirkabunky), Color.White);
+                    {
+                        spriteBatch.Draw(pozadi[level1[s, r].typ + 1][0], new Rectangle((s - a1) * sirkabunky - posunL, sirkabunky * (r - 1), sirkabunky, sirkabunky), Color.White);
                     }
                 }
             }
         }
-        
     }
 }

@@ -13,12 +13,25 @@ using Microsoft.Xna.Framework.Media;
 namespace The_Game
 {
     class Postavicka
-    {        
-        //Konstany
+    {
+        ///
+        /// Konstanty
+        /// 
+
+        // ZDE JSOU NA VYBER RUZNE GRAVITACE
         const float gravitacniZrychleniNaZemi = 9.81f;
         const float gravitacniZrychleniNaMesici = 1.62f;
-        
-        // Promenne
+
+        // ZDE SE MENI RYCHLOST POHYBU PANACKA
+        const float standartniRychlost = 1.35f;
+        const float standartniVyskok = 45f;
+        const float padaciKonstanta = 0.16f;
+        const float horizontalniZmenaPohybu = 1.73f;
+
+        /// 
+        /// Promenne
+        /// 
+
         private AnimatedSprite[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
         private int vzhledNo;
         public Vector2 pozice, prevpozice; //souradnice    
@@ -29,8 +42,13 @@ namespace The_Game
         Speed rychlost;
         Background1 b;
         long elapsedTime = 0;
-        // Konstruktor
-        public Postavicka(Texture2D[] textury,int typ, int X, int Y, int Width, double Mass, Speed speed,Background1 b)
+
+
+        /// 
+        /// Konstruktor
+        /// 
+
+        public Postavicka(Texture2D[] textury, int typ, int X, int Y, int Width, double Mass, Speed speed, Background1 b)
         {
             if (typ == 0) //Me
             {
@@ -44,35 +62,39 @@ namespace The_Game
             pozice.X = X;
             pozice.Y = Y;
             prevpozice = pozice;
-            mass = Mass;            
+            mass = Mass;
             rychlost = speed;
             onLand = true;
             this.b = b;
         }
 
-        // Metody
+
+        /// 
+        /// Metody
+        /// 
+
         public void update(GameTime gameTime)
         {
-
             prevpozice = pozice;
 
-            /*v ms*/ long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
-            elapsedTime+=timediff;
-            int step = 1;
+            /*v milisekundach*/
+            long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
+            elapsedTime += timediff;
             float move;
+
+            // Pri stisknuti leveho shiftu se zvysi rychlost na 1.5 nasobek standartni rychlosti
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                move = 1.15f*timediff;
+                move = 1.5f * standartniRychlost * timediff;
             else
-                move = 0.77f*timediff;
-            
+                move = standartniRychlost * timediff;
 
-
-            b.move(1+0*timediff);
+            // momentalne nastaveno tak, aby se pozadi nehybalo
+            b.move(0); // b.move(1 + 0 * timediff);
 
             pozice += pohyb;
-            
-            
-            if (onLand) 
+
+            // PANACEK JE NA ZEMI
+            if (onLand)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
@@ -84,45 +106,56 @@ namespace The_Game
                 }
                 else
                 {
-                    pohyb.X = 0f;  
+                    pohyb.X = 0f;
                 }
-
                 if (pohyb.X < 0) vzhledNo = 1;
                 if (pohyb.X > 0) vzhledNo = 0;
 
-                
                 pohyb.Y = 0f;
             }
 
+            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && onLand)
             {
-                pozice.Y -= 25f*step;
-                pohyb.Y = -15f*step;
                 onLand = false;
+                pozice.Y -= standartniVyskok * standartniRychlost;
+                pohyb.Y = -3 * standartniVyskok * standartniRychlost / 5;
                 if (pohyb.X < 0) vzhledNo = 2;
                 if (pohyb.X > 0) vzhledNo = 3;
                 if (pohyb.X == 0) vzhledNo += 2;
             }
 
-
+            // PANACEK JE VE SKOKU / PADA (KAZDA SITUACE, KDY NESTOJI NA ZEMI)
             if (!onLand)
             {
+                // nastaveni animace
                 if (pohyb.X < 0) vzhledNo = 2;
                 if (pohyb.X > 0) vzhledNo = 3;
-                float i = gravitacniZrychleniNaZemi;
-                pohyb.Y += 0.08f * i * step;
+
+                // anatomie skoku
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                    pohyb.Y += gravitacniZrychleniNaZemi * padaciKonstanta;
+                else
+                {
+                    if (pohyb.Y < 0) pohyb.Y = 0;
+                    pohyb.Y += gravitacniZrychleniNaZemi * padaciKonstanta;
+                }
+
+                // anatomie pohybu vpravo
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
-                    pohyb.X += 0.3f*step;
+                    pohyb.X += horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 2;
                 }
                 if (pohyb.X >= move) pohyb.X = move;
+
+                // anatomie pohybu vlevo
                 if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 {
-                    pohyb.X -= 0.3f*step;
+                    pohyb.X -= horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 3;
                 }
-                if (pohyb.X <= -move) pohyb.X = -move; 
+                if (pohyb.X <= -move) pohyb.X = -move;
             }
 
             if (onLand && Math.Abs(pohyb.X) >= 0.1)
@@ -139,23 +172,23 @@ namespace The_Game
                 vzhled[vzhledNo].Update();
             }
 
-            if (pozice.Y >= 550)
+            if (pozice.Y >= 1500)
             {
                 if (!onLand && pohyb.X == 0)
                 {
                     vzhledNo -= 2;
                 }
                 onLand = true;
+                pozice.Y = 1500;
                 if (pohyb.X < 0) vzhledNo = 1;
                 if (pohyb.X > 0) vzhledNo = 0;
-
             }
         }
 
         public int height
         {
             get
-            {                
+            {
                 return (width * vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
             }
             set { }
@@ -172,6 +205,5 @@ namespace The_Game
             temp.Y *= (width / 150f);
             vzhled[vzhledNo].Draw(spriteBatch, temp, width);
         }
-
     }
 }
