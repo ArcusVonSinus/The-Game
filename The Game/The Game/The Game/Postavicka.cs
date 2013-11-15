@@ -24,9 +24,9 @@ namespace The_Game
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
         const float standartniRychlost =1.6f;
-        const float standartniVyskok = 1.1f;
-        const float padaciKonstanta = 0.004f;
-        const float horizontalniZmenaPohybu = 1.73f;
+        const float standartniVyskok = 2.5f;
+        const float padaciKonstanta = 0.0035f;
+        const float horizontalniZmenaPohybu = 0.5f;
 
         /// 
         /// Promenne
@@ -74,7 +74,7 @@ namespace The_Game
         /// 
         public void death()
         {
-            throw new System.ArgumentException("You died", ":-("); 
+            throw new System.ArgumentException("You died :-(", ":-("); 
 
         }
         public void update(GameTime gameTime)
@@ -127,8 +127,9 @@ namespace The_Game
                 if (!skocil&&Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
                 {
                     skocil = true;
-                    onLand = false;                    
-                    pohyb.Y = -3 * standartniVyskok * standartniRychlost;
+                    onLand = false;
+                    pozice.Y -= 5*standartniVyskok * standartniRychlost/3;
+                    pohyb.Y = - standartniVyskok * standartniRychlost;
                     if (pohyb.X < 0) vzhledNo = 2;
                     if (pohyb.X > 0) vzhledNo = 3;
                     if (pohyb.X == 0 && vzhledNo <= 1) vzhledNo += 2;
@@ -137,13 +138,13 @@ namespace The_Game
             else // PANACEK JE VE SKOKU / PADA (KAZDA SITUACE, KDY NESTOJI NA ZEMI)
             {
                 // nastaveni animace
-                if (pohyb.X < 0) vzhledNo = 2;
-                if (pohyb.X > 0) vzhledNo = 3;
+                if (pohyb.X < 0) vzhledNo = 3;
+                if (pohyb.X > 0) vzhledNo = 2;
 
                 // anatomie skoku
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta - standartniVyskok / 10;
+                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta - standartniVyskok / 8;
                 }
                 else
                 {
@@ -177,12 +178,12 @@ namespace The_Game
                     temppozice+= pohyb;
                     if ((int)temppozice.Y + 5 < b.vyska * 300)
                     {
-                        if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y + 5) / 300].typ == 0) &&
-                            (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y + 5) / 300].typ == 0))
+                        if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y-5) / 300].typ == 0) &&
+                            (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y-5) / 300].typ == 0))
                         {
                             nadKostkou = true;
                         }
-                        else if(pohyb.Y>=0&&nadKostkou)
+                        else if(pohyb.Y>=0&&nadKostkou&&temppozice.Y%300<30)
                         {
                             pozice += pohyb*(time-1);
                             onLand = true;
@@ -225,9 +226,9 @@ namespace The_Game
                 pozice.X = 0;
             if (pozice.X >= b.sirka * 300 - 451)
                 pozice.X = b.sirka * 300 - 451; //jeste sirka panacka
-            if (((int)pozice.X > (b.b - b.a) / 2) && (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2))
+            if (((int)pozice.X > (b.b - b.a) / 4) && (pozice.X < b.sirka * 300 - 301 - 3*(b.b - b.a) / 4))
             {
-                b.move((int)pozice.X - ((b.b + b.a) / 2));
+                b.move((int)pozice.X - b.a-((b.b - b.a) / 4));
             }
             if (pozice.Y - 261 > b.vyska * 300)
             {
