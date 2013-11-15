@@ -23,9 +23,9 @@ namespace The_Game
         const float gravitacniZrychleniNaMesici = 1.62f;
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
-        const float standartniRychlost = 0.1f;
-        const float standartniVyskok = 45f;
-        const float padaciKonstanta = 0.005f;
+        const float standartniRychlost =1.6f;
+        const float standartniVyskok = 1.2f;
+        const float padaciKonstanta = 0.004f;
         const float horizontalniZmenaPohybu = 1.73f;
 
         /// 
@@ -78,75 +78,55 @@ namespace The_Game
 
         }
         public void update(GameTime gameTime)
-        {
-            prevpozice = pozice;
-
+        {           
             /*v milisekundach*/
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff;
-            float move;
-
+            float rychlostChuze;
             // Pri stisknuti leveho shiftu se zvysi rychlost na 1.5 nasobek standartni rychlosti
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                move = 1.5f * standartniRychlost * timediff;
+                rychlostChuze = 1.5f * standartniRychlost;
             else
-                move = standartniRychlost * timediff;
-                        
-            if (pozice.X <= 0) 
-                pozice.X = 0;
-            if (pozice.X >= b.sirka * 300 - 451) 
-                pozice.X = b.sirka * 300 - 451; //jeste sirka panacka
-            if ((pozice.X > (b.b - b.a) / 2) && (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2)) 
-                b.move(pohyb.X);
-            if (pozice.Y-261 > b.vyska*300)
-            {
-                death();
-            }
+                rychlostChuze = standartniRychlost;
+                                   
 
             // PANACEK JE NA ZEMI
             if (onLand)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 {
-                    pohyb.X = move;
+                    pohyb.X = rychlostChuze;
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 {
-                    pohyb.X = -move;
+                    pohyb.X = -rychlostChuze;
                 }
                 else
                 {
                     pohyb.X = 0f;
                 }
+
                 if (pohyb.X < 0) vzhledNo = 1;
                 if (pohyb.X > 0) vzhledNo = 0;
 
-                if (b.level1[(int)(pozice.X + 5) / 300, ((int)pozice.Y + 5) / 300].typ == 0)
+                if (b.level1[(int)(pozice.X + 5) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
                 {
-                    if (b.level1[(int)(pozice.X + 145) / 300, ((int)pozice.Y + 5) / 300].typ == 0)
+                    if (b.level1[(int)(pozice.X + 145) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
                     {
                         onLand = false;
                         vzhledNo += 2;
-                        vzhled[vzhledNo].Update();
                     }
                 }
-                pohyb.Y = 0f;
-
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
+                {
+                    onLand = false;                    
+                    pohyb.Y = -3 * standartniVyskok * standartniRychlost;
+                    if (pohyb.X < 0) vzhledNo = 2;
+                    if (pohyb.X > 0) vzhledNo = 3;
+                    if (pohyb.X == 0) vzhledNo += 2;
+                }
             }
-
-            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && onLand)
-            {
-                onLand = false;
-                pozice.Y -= standartniVyskok * standartniRychlost;
-                pohyb.Y = -3 * standartniVyskok * standartniRychlost / 5;
-                if (pohyb.X < 0) vzhledNo = 2;
-                if (pohyb.X > 0) vzhledNo = 3;
-                if (pohyb.X == 0) vzhledNo += 2;
-            }
-
-            // PANACEK JE VE SKOKU / PADA (KAZDA SITUACE, KDY NESTOJI NA ZEMI)
-            if (!onLand)
+            else // PANACEK JE VE SKOKU / PADA (KAZDA SITUACE, KDY NESTOJI NA ZEMI)
             {
                 // nastaveni animace
                 if (pohyb.X < 0) vzhledNo = 2;
@@ -154,48 +134,58 @@ namespace The_Game
 
                 // anatomie skoku
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                    pohyb.Y += gravitacniZrychleniNaZemi * padaciKonstanta;
+                {
+                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta - standartniVyskok / 10;
+                }
                 else
                 {
-                    if (pohyb.Y < 0) 
-                        pohyb.Y = 0;
                     pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
                 }
 
-                // anatomie pohybu vpravo
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))   // anatomie pohybu vpravo
                 {
                     pohyb.X += timediff * horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 2;
                 }
-                if (pohyb.X >= move) 
-                    pohyb.X = move;
-
-                // anatomie pohybu vlevo
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                if (pohyb.X >= rychlostChuze)
+                {
+                    pohyb.X = rychlostChuze;
+                }                
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))    // anatomie pohybu vlevo
                 {
                     pohyb.X -= timediff * horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 3;
                 }
-                if (pohyb.X <= -move) 
-                    pohyb.X = -move;
+                if (pohyb.X <= -rychlostChuze)
+                {
+                    pohyb.X = -rychlostChuze;
+                }
 
                 Vector2 temppozice = new Vector2();
-                temppozice = pozice + pohyb;
-                if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)pozice.Y + 5) / 300].typ == 0) &&
-                    (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y + 5) / 300].typ == 0))
+                temppozice=pozice;
+                for(int time = 1;time<=timediff;time++)
                 {
+                    temppozice+= pohyb;
+                    if ((int)temppozice.Y + 5 < b.vyska * 300)
+                    {
+                        if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y + 5) / 300].typ == 0) &&
+                            (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y + 5) / 300].typ == 0))
+                        {
 
-                }
-                else
-                {
-                    onLand = true;
-                    vzhledNo -= 2;
-                    pohyb.Y = 0;
-                    pohyb.X = 0;
+                        }
+                        else
+                        {
+                            pozice += pohyb*(time-1);
+                            onLand = true;
+                            vzhledNo -= 2;
+                            pohyb.Y = 0;
+                            pohyb.X = 0;
+                            break;
+                        }
+                    }
                 }
                 
-
 
             }
 
@@ -213,19 +203,25 @@ namespace The_Game
                 vzhled[vzhledNo].Update();
             }
 
-            /*if (pozice.Y >= 1500)
-            {
-                if (!onLand && pohyb.X == 0)
-                {
-                    vzhledNo -= 2;
-                }
-                onLand = true;
-                pozice.Y = 1500;
-                if (pohyb.X < 0) vzhledNo = 1;
-                if (pohyb.X > 0) vzhledNo = 0;
-            }*/
+        
 
+            /*zmena polohy*/
             pozice += pohyb*timediff;
+            if (pozice.X <= 0)
+                pozice.X = 0;
+            if (pozice.X >= b.sirka * 300 - 451)
+                pozice.X = b.sirka * 300 - 451; //jeste sirka panacka
+            if ((pozice.X > (b.b - b.a) / 2) && (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2))
+                /* b.move((int)pozice.X - ((b.b - b.a) / 2));
+                 pol*/
+                b.move(10);
+            if (pozice.Y - 261 > b.vyska * 300)
+            {
+                death();
+            }
+
+
+
         }
 
         public int height
