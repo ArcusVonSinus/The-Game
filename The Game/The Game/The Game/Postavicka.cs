@@ -24,7 +24,7 @@ namespace The_Game
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
         const float standartniRychlost =1.6f;
-        const float standartniVyskok = 1.2f;
+        const float standartniVyskok = 1.1f;
         const float padaciKonstanta = 0.004f;
         const float horizontalniZmenaPohybu = 1.73f;
 
@@ -42,8 +42,8 @@ namespace The_Game
         Speed rychlost;
         Background1 b;
         long elapsedTime = 0;
-
-
+        bool skocil = false;
+        bool nadKostkou;
         /// 
         /// Konstruktor
         /// 
@@ -88,7 +88,11 @@ namespace The_Game
                 rychlostChuze = 1.5f * standartniRychlost;
             else
                 rychlostChuze = standartniRychlost;
-                                   
+            if (!Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                skocil = false;
+
+            }
 
             // PANACEK JE NA ZEMI
             if (onLand)
@@ -114,16 +118,20 @@ namespace The_Game
                     if (b.level1[(int)(pozice.X + 145) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
                     {
                         onLand = false;
-                        vzhledNo += 2;
+                        if (vzhledNo <= 1)
+                        {
+                            vzhledNo += 2;
+                        }
                     }
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
+                if (!skocil&&Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
                 {
+                    skocil = true;
                     onLand = false;                    
                     pohyb.Y = -3 * standartniVyskok * standartniRychlost;
                     if (pohyb.X < 0) vzhledNo = 2;
                     if (pohyb.X > 0) vzhledNo = 3;
-                    if (pohyb.X == 0) vzhledNo += 2;
+                    if (pohyb.X == 0 && vzhledNo <= 1) vzhledNo += 2;
                 }
             }
             else // PANACEK JE VE SKOKU / PADA (KAZDA SITUACE, KDY NESTOJI NA ZEMI)
@@ -165,16 +173,16 @@ namespace The_Game
                 Vector2 temppozice = new Vector2();
                 temppozice=pozice;
                 for(int time = 1;time<=timediff;time++)
-                {
+                {                    
                     temppozice+= pohyb;
                     if ((int)temppozice.Y + 5 < b.vyska * 300)
                     {
                         if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y + 5) / 300].typ == 0) &&
                             (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y + 5) / 300].typ == 0))
                         {
-
+                            nadKostkou = true;
                         }
-                        else
+                        else if(pohyb.Y>=0&&nadKostkou)
                         {
                             pozice += pohyb*(time-1);
                             onLand = true;
@@ -183,7 +191,13 @@ namespace The_Game
                             pohyb.X = 0;
                             break;
                         }
+                        else
+                        {
+                            nadKostkou = false;
+                        }
+
                     }
+                    
                 }
                 
 
@@ -211,10 +225,10 @@ namespace The_Game
                 pozice.X = 0;
             if (pozice.X >= b.sirka * 300 - 451)
                 pozice.X = b.sirka * 300 - 451; //jeste sirka panacka
-            if ((pozice.X > (b.b - b.a) / 2) && (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2))
-                /* b.move((int)pozice.X - ((b.b - b.a) / 2));
-                 pol*/
-                b.move(10);
+            if (((int)pozice.X > (b.b - b.a) / 2) && (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2))
+            {
+                b.move((int)pozice.X - ((b.b + b.a) / 2));
+            }
             if (pozice.Y - 261 > b.vyska * 300)
             {
                 death();
