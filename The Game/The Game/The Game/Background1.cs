@@ -18,10 +18,10 @@ namespace The_Game
         /// Tile je z definice 300x300, a souradnice a a b jsou v tomhle meritku, pak se prepocitaji
         /// </summary>
         public int a; //je zobrazeno pozadí od a do b;
-        int b;
+        public int b;
         Tile[,] level1;
         Tile[,] obloha1;
-        int sirka; //pocet dlazdic na sirce levelu;
+        public int sirka; //pocet dlazdic na sirce levelu;
         int vyska;
         Texture2D[][] pozadi;
 
@@ -36,6 +36,11 @@ namespace The_Game
                 b = sirka * 300 - 301;
                 a = tempA + b - tempB;
                 return;
+            }
+            if (a <= 1)
+            {
+                a = tempA;
+                b = tempB;
             }
         }
 

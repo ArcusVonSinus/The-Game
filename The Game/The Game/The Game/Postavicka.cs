@@ -88,8 +88,22 @@ namespace The_Game
             else
                 move = standartniRychlost * timediff;
 
-            // momentalne nastaveno tak, aby se pozadi nehybalo
-            b.move(0); // b.move(1 + 0 * timediff);
+            //if (pozice.X - b.a + 100 < b.b - pozice.X)
+            //{
+            //    b.move(pohyb.X - 15f);
+            //}
+            //else
+            //    if (pozice.X - b.a - 100 > b.b - pozice.X)
+            //    {
+            //        b.move(pohyb.X + 15f);
+            //    }
+            //    else
+            //        b.move(pohyb.X);
+            if (pozice.X <= 0) pozice.X = 0;
+            if (pozice.X >= b.sirka * 300 - 301) pozice.X = b.sirka * 300 - 301;
+            if ((pozice.X > (b.b - b.a) / 2) &&
+                (pozice.X < b.sirka * 300 - 301 - (b.b - b.a) / 2)) b.move(pohyb.X);
+
 
             pozice += pohyb;
 
