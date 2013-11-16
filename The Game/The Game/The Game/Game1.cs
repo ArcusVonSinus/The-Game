@@ -17,7 +17,7 @@ namespace The_Game
         /// Promenne
         /// </summary>
 
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;        
         Background b;
         Postavicka me;
@@ -25,37 +25,67 @@ namespace The_Game
 
         private SpriteFont font;
 
-        int blockSize; //rozmer bloku
+        public int blockSize; //rozmer bloku
         int blockNumber; //pocet bloku (vyska)
+        int WidthNoFS;
+        int HeightNoFS;
         public int width; //rozmery okna v pixelech
         public int height;
 
         public bool InGame;
         public bool InMenu;
         public int level=1;
-        Menu m;
+        public Menu m;
         /// <summary>
         /// Konstruktory
         /// </summary>
 
         public Game1()
         {
-            height = 900;
-            width = 1600;
+            WidthNoFS = 1000;
+            HeightNoFS = 600;
+            width=WidthNoFS; //rozmery okna v pixelech
+            height=HeightNoFS;
 
             blockNumber = 6;
             blockSize = height / blockNumber;
 
             graphics = new GraphicsDeviceManager(this);
+            
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
+
+
             Content.RootDirectory = "Content";
         }
 
         /// <summary>
         /// Metody
-        /// </summary>
+        /// </summary>       
+        bool fullscreen = false;
+        public void ToggleFS()
+        {
+            if (!fullscreen) //(!graphics.IsFullScreen)
+            {
 
+                height = graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                width = graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                blockSize = height / blockNumber;
+                graphics.ToggleFullScreen();
+                fullscreen = true;
+            }
+            else
+            {
+                 graphics.ToggleFullScreen();
+                 graphics.PreferredBackBufferHeight = HeightNoFS;
+                 graphics.PreferredBackBufferWidth = WidthNoFS;
+                 graphics.ApplyChanges();
+                 height = HeightNoFS;
+                 width =  WidthNoFS;
+                 blockSize = height / blockNumber;
+                 fullscreen = false;
+            }
+        }
         protected override void Initialize()
         {
             //camera = new Camera(GraphicsDevice.Viewport);
@@ -119,7 +149,7 @@ namespace The_Game
                     }
                 }
                 b = new Background(pozadi, blockNumber, 300 * (width / blockSize));
-                me = new Postavicka(texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , blockSize / 2 /*width*/ , new Speed(0, 0), b);
+                me = new Postavicka(this,texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , new Speed(0, 0), b);
             }
         }
 
@@ -130,8 +160,9 @@ namespace The_Game
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (InGame && Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
+                m.ktereMenu = KtereMenu.mainInGame;
                 InMenu = true;
             }
             if (InMenu)

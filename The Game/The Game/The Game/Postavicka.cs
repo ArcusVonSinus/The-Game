@@ -43,12 +43,14 @@ namespace The_Game
         long elapsedTime = 0;
         bool skocil = false;
         bool nadKostkou;
+        Game1 game;
         /// 
         /// Konstruktor
         /// 
 
-        public Postavicka(Texture2D[][] textury, int X, int Y, int Width, Speed speed, Background b)
+        public Postavicka(Game1 game,Texture2D[][] textury, int X, int Y, Speed speed, Background b)
         {
+            this.game = game;
             vzhled = new AnimatedSpriteHead[4];
             Vector3 pozicehlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
             vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, pozicehlavy1);
@@ -57,8 +59,6 @@ namespace The_Game
             pozicehlavy1.Y = 0.15f;
             vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, pozicehlavy1);
             vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, pozicehlavy1);
-
-            width = Width;
             pozice.X = X;
             pozice.Y = Y;
             prevpozice = pozice;
@@ -73,11 +73,14 @@ namespace The_Game
         /// 
         public void death()
         {
-            throw new System.ArgumentException("You died :-(", ":-(");
-
+            game.InGame = false;
+            game.InMenu = true;
+            game.m.ktereMenu = KtereMenu.main;
+            
         }
         public void update(GameTime gameTime)
         {
+            width = game.blockSize / 2;
             /*v milisekundach*/
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff;
@@ -87,7 +90,7 @@ namespace The_Game
                 rychlostChuze = 1.5f * standartniRychlost;
             else
                 rychlostChuze = standartniRychlost;
-            if (!Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (!(Keyboard.GetState().IsKeyDown(Keys.Space)||Keyboard.GetState().IsKeyDown(Keys.Up)))
             {
                 skocil = false;
 
@@ -123,7 +126,7 @@ namespace The_Game
                         }
                     }
                 }
-                if (!skocil && Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
+                if (!skocil && (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
                 {
                     skocil = true;
                     onLand = false;
@@ -141,7 +144,7 @@ namespace The_Game
                 if (pohyb.X > 0) vzhledNo = 2;
 
                 // anatomie skoku
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if ((Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))
                 {
                     pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta - standartniVyskok / 8;
                 }
