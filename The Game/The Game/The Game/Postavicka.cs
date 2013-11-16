@@ -32,7 +32,7 @@ namespace The_Game
         /// Promenne
         /// 
 
-        private AnimatedSprite[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
+        private AnimatedSpriteHead[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
         private int vzhledNo;
         public Vector2 pozice, prevpozice; //souradnice    
         Vector2 pohyb; //smer pohybu
@@ -47,16 +47,19 @@ namespace The_Game
         /// 
         /// Konstruktor
         /// 
-
-        public Postavicka(Texture2D[] textury, int typ, int X, int Y, int Width, double Mass, Speed speed, Background1 b)
+        
+        public Postavicka(Texture2D[][] textury, int typ, int X, int Y, int Width, double Mass, Speed speed, Background1 b)
         {
             if (typ == 0) //Me
             {
-                vzhled    = new AnimatedSprite[4];
-                vzhled[0] = new AnimatedSprite(textury[0], 2, 7);
-                vzhled[1] = new AnimatedSprite(textury[1], 2, 7);
-                vzhled[2] = new AnimatedSprite(textury[2], 2, 7);
-                vzhled[3] = new AnimatedSprite(textury[3], 2, 7);
+                vzhled    = new AnimatedSpriteHead[4];
+                Vector3 pozicehlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
+                vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, pozicehlavy1);                
+                vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, pozicehlavy1);
+
+                pozicehlavy1.Y = 0.15f;
+                vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, pozicehlavy1);
+                vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, pozicehlavy1);
             }
             width = Width;
             pozice.X = X;
@@ -217,6 +220,7 @@ namespace The_Game
             {
                 vzhled[vzhledNo].Update();
             }
+            vzhled[vzhledNo].UpdateHead();
 
         
 

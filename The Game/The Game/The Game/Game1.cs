@@ -22,7 +22,7 @@ namespace The_Game
         //Backgrounds[] backgrounds;
         Background1 b;
         Postavicka me;
-        Texture2D[] textury;
+        Texture2D[][] textury;
         private SpriteFont font;
 
         int blockSize; //rozmer bloku
@@ -65,11 +65,22 @@ namespace The_Game
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textury = new Texture2D[4];
-            textury[0] = Content.Load<Texture2D>("forward");
-            textury[1] = Content.Load<Texture2D>("backward");
-            textury[2] = Content.Load<Texture2D>("Air forw.");
-            textury[3] = Content.Load<Texture2D>("Air back.");
+            textury = new Texture2D[4][];
+            textury[0] = new Texture2D[2];
+            textury[1] = new Texture2D[2];
+            textury[2] = new Texture2D[3];
+            textury[3] = new Texture2D[3];
+
+            textury[0][0] = Content.Load<Texture2D>("forward1");
+            textury[1][0] = Content.Load<Texture2D>("backward1");
+            textury[2][0] = Content.Load<Texture2D>("AirFor");
+            textury[2][2] = Content.Load<Texture2D>("AirForHand");
+            textury[3][0] = Content.Load<Texture2D>("AirBack");
+            textury[3][2] = Content.Load<Texture2D>("AirBackHand");
+            for (int i = 0; i < 4; i++)
+            {
+                textury[i][1] = Content.Load<Texture2D>("Head1");
+            }
             font = Content.Load<SpriteFont>("font");
             int druhukachlicek = 14;
             Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
