@@ -21,7 +21,6 @@ namespace The_Game
         SpriteBatch spriteBatch;        
         Background b;
         Postavicka me;
-        Texture2D[][] texturyMe; 
 
 
         private SpriteFont font;
@@ -33,7 +32,8 @@ namespace The_Game
 
         public bool InGame;
         public bool InMenu;
-        public int level;
+        public int level=1;
+        Menu m;
         /// <summary>
         /// Konstruktory
         /// </summary>
@@ -68,52 +68,59 @@ namespace The_Game
 
         }
 
+        public void newgame()
+        {
+            LoadContent();
+        }
         protected override void LoadContent()
         {
-            level = 1;
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            texturyMe = new Texture2D[4][];
-            texturyMe[0] = new Texture2D[2];
-            texturyMe[1] = new Texture2D[2];
-            texturyMe[2] = new Texture2D[3];
-            texturyMe[3] = new Texture2D[3];
 
-            texturyMe[0][0] = Content.Load<Texture2D>("Level " + level + "/forward1");
-            texturyMe[1][0] = Content.Load<Texture2D>("Level " + level + "/backward1");
-            texturyMe[2][0] = Content.Load<Texture2D>("Level " + level + "/AirFor");
-            texturyMe[2][2] = Content.Load<Texture2D>("Level " + level + "/AirForHand");
-            texturyMe[3][0] = Content.Load<Texture2D>("Level " + level + "/AirBack");
-            texturyMe[3][2] = Content.Load<Texture2D>("Level " + level + "/AirBackHand");
-            for (int i = 0; i < 4; i++)
+            m = new Menu(this);
+
+            if (!InMenu)
             {
-                texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
-            }
+                spriteBatch = new SpriteBatch(GraphicsDevice);
 
+                Texture2D[][] texturyMe;
+                texturyMe = new Texture2D[4][];
+                texturyMe[0] = new Texture2D[2];
+                texturyMe[1] = new Texture2D[2];
+                texturyMe[2] = new Texture2D[3];
+                texturyMe[3] = new Texture2D[3];
 
-
-
-            font = Content.Load<SpriteFont>("font");
-
-            int druhukachlicek = 14;
-            Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
-            {
-                for (int i = 0; i < druhukachlicek; i++)
+                texturyMe[0][0] = Content.Load<Texture2D>("Level " + level + "/forward1");
+                texturyMe[1][0] = Content.Load<Texture2D>("Level " + level + "/backward1");
+                texturyMe[2][0] = Content.Load<Texture2D>("Level " + level + "/AirFor");
+                texturyMe[2][2] = Content.Load<Texture2D>("Level " + level + "/AirForHand");
+                texturyMe[3][0] = Content.Load<Texture2D>("Level " + level + "/AirBack");
+                texturyMe[3][2] = Content.Load<Texture2D>("Level " + level + "/AirBackHand");
+                for (int i = 0; i < 4; i++)
                 {
-                    pozadi[i] = new Texture2D[1];
+                    texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
                 }
-                pozadi[0] = new Texture2D[3];
-                pozadi[2] = new Texture2D[2];
-                for (int i = 0; i < pozadi.Length; i++)
+                font = Content.Load<SpriteFont>("font");
+
+                int druhukachlicek = 14;
+                Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
                 {
-                    for (int j = 0; j < pozadi[i].Length; j++)
+                    for (int i = 0; i < druhukachlicek; i++)
                     {
-                        pozadi[i][j] = Content.Load<Texture2D>("Level " + level + "/Bck1\\" + i + "-" + j);
+                        pozadi[i] = new Texture2D[1];
+                    }
+                    pozadi[0] = new Texture2D[3];
+                    pozadi[2] = new Texture2D[2];
+                    for (int i = 0; i < pozadi.Length; i++)
+                    {
+                        for (int j = 0; j < pozadi[i].Length; j++)
+                        {
+                            pozadi[i][j] = Content.Load<Texture2D>("Level " + level + "/Bck1\\" + i + "-" + j);
+                        }
                     }
                 }
+                b = new Background(pozadi, blockNumber, 300 * (width / blockSize));
+                me = new Postavicka(texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , blockSize / 2 /*width*/ , new Speed(0, 0), b);
             }
-            b = new Background(pozadi, blockNumber, 300 * (width / blockSize));
-            me = new Postavicka(texturyMe,  150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , blockSize / 2 /*width*/ , new Speed(0, 0), b);            
         }
 
         protected override void UnloadContent()
@@ -127,8 +134,14 @@ namespace The_Game
             {
                 InMenu = true;
             }
-
-            me.update(gameTime);
+            if (InMenu)
+            {
+                m.update();
+            }
+            if (InGame && !InMenu)
+            {
+                me.update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -138,6 +151,10 @@ namespace The_Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            if (InMenu)
+            {
+                m.Draw(spriteBatch);
+            }
             if (!InMenu && InGame)
             {
                 b.draw(width, height, spriteBatch);
