@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace The_Game
 {
-    class Background1
+    class Background
     {
         public struct Tile
         {
@@ -47,12 +47,12 @@ namespace The_Game
         public void move(float okolik)
         { move((int)okolik); return; }
 
-        public Background1(Texture2D[][] pozadi, int radku, int b)
+        public Background(Texture2D[][] pozadi, int radku, int b)
         {
             a = 0;
             this.b = b;
             this.pozadi = pozadi;
-            System.IO.StreamReader lvlReader = new System.IO.StreamReader(@"Content/l1.txt");
+            System.IO.StreamReader lvlReader = new System.IO.StreamReader(@"Content/Level 1/l1.txt");
             string levelLine = lvlReader.ReadLine();
             sirka = levelLine.Length;
             vyska = radku;

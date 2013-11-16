@@ -19,19 +19,21 @@ namespace The_Game
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;        
-        //Backgrounds[] backgrounds;
-        Background1 b;
+        Background b;
         Postavicka me;
-        Texture2D[][] textury;
+        Texture2D[][] texturyMe; 
+
+
         private SpriteFont font;
 
         int blockSize; //rozmer bloku
         int blockNumber; //pocet bloku (vyska)
-        int width;
-        int height;
+        public int width; //rozmery okna v pixelech
+        public int height;
 
-        Camera camera;
-
+        public bool InGame;
+        public bool InMenu;
+        public int level;
         /// <summary>
         /// Konstruktory
         /// </summary>
@@ -56,32 +58,43 @@ namespace The_Game
 
         protected override void Initialize()
         {
-            camera = new Camera(GraphicsDevice.Viewport);
+            //camera = new Camera(GraphicsDevice.Viewport);
             // backgrounds = new Backgrounds[blockNumber];
 
             base.Initialize();
+            IsMouseVisible = true;
+            InMenu = true;
+            InGame = false;
+
         }
 
         protected override void LoadContent()
         {
+            level = 1;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textury = new Texture2D[4][];
-            textury[0] = new Texture2D[2];
-            textury[1] = new Texture2D[2];
-            textury[2] = new Texture2D[3];
-            textury[3] = new Texture2D[3];
 
-            textury[0][0] = Content.Load<Texture2D>("forward1");
-            textury[1][0] = Content.Load<Texture2D>("backward1");
-            textury[2][0] = Content.Load<Texture2D>("AirFor");
-            textury[2][2] = Content.Load<Texture2D>("AirForHand");
-            textury[3][0] = Content.Load<Texture2D>("AirBack");
-            textury[3][2] = Content.Load<Texture2D>("AirBackHand");
+            texturyMe = new Texture2D[4][];
+            texturyMe[0] = new Texture2D[2];
+            texturyMe[1] = new Texture2D[2];
+            texturyMe[2] = new Texture2D[3];
+            texturyMe[3] = new Texture2D[3];
+
+            texturyMe[0][0] = Content.Load<Texture2D>("Level " + level + "/forward1");
+            texturyMe[1][0] = Content.Load<Texture2D>("Level " + level + "/backward1");
+            texturyMe[2][0] = Content.Load<Texture2D>("Level " + level + "/AirFor");
+            texturyMe[2][2] = Content.Load<Texture2D>("Level " + level + "/AirForHand");
+            texturyMe[3][0] = Content.Load<Texture2D>("Level " + level + "/AirBack");
+            texturyMe[3][2] = Content.Load<Texture2D>("Level " + level + "/AirBackHand");
             for (int i = 0; i < 4; i++)
             {
-                textury[i][1] = Content.Load<Texture2D>("Head1");
+                texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
             }
+
+
+
+
             font = Content.Load<SpriteFont>("font");
+
             int druhukachlicek = 14;
             Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
             {
@@ -95,13 +108,12 @@ namespace The_Game
                 {
                     for (int j = 0; j < pozadi[i].Length; j++)
                     {
-                        pozadi[i][j] = Content.Load<Texture2D>("Bck1\\" + i + "-" + j);
+                        pozadi[i][j] = Content.Load<Texture2D>("Level " + level + "/Bck1\\" + i + "-" + j);
                     }
                 }
             }
-            b = new Background1(pozadi, blockNumber, 300 * (width / blockSize));
-
-            me = new Postavicka(textury, 0 /*typ*/ , 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , blockSize / 2 /*width*/ , 50 /*mass*/ , new Speed(0, 0), b);            
+            b = new Background(pozadi, blockNumber, 300 * (width / blockSize));
+            me = new Postavicka(texturyMe,  150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , blockSize / 2 /*width*/ , new Speed(0, 0), b);            
         }
 
         protected override void UnloadContent()
@@ -112,7 +124,9 @@ namespace The_Game
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
+            {
+                InMenu = true;
+            }
 
             me.update(gameTime);
 
@@ -124,11 +138,13 @@ namespace The_Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            if (!InMenu && InGame)
+            {
+                b.draw(width, height, spriteBatch);
+                me.draw(spriteBatch);
+            }
 
-            b.draw(width, height, spriteBatch);
-            me.draw(spriteBatch);
-
-            spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);
+            //spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);
             
             spriteBatch.End();
             base.Draw(gameTime);

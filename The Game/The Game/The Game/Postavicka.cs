@@ -19,11 +19,11 @@ namespace The_Game
         /// 
 
         // ZDE JSOU NA VYBER RUZNE GRAVITACE
-        const float gravitacniZrychleniNaZemi =  9.81373f;
+        const float gravitacniZrychleniNaZemi = 9.81373f;
         const float gravitacniZrychleniNaMesici = 1.62f;
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
-        const float standartniRychlost =1.6f;
+        const float standartniRychlost = 1.6f;
         const float standartniVyskok = 2.5f;
         const float padaciKonstanta = 0.0035f;
         const float horizontalniZmenaPohybu = 0.5f;
@@ -36,36 +36,32 @@ namespace The_Game
         private int vzhledNo;
         public Vector2 pozice, prevpozice; //souradnice    
         Vector2 pohyb; //smer pohybu
-        public int width;//sirka v pixelech, prepocitana
+        public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         bool onLand;
-        double mass;
         Speed rychlost;
-        Background1 b;
+        Background b;
         long elapsedTime = 0;
         bool skocil = false;
         bool nadKostkou;
         /// 
         /// Konstruktor
         /// 
-        
-        public Postavicka(Texture2D[][] textury, int typ, int X, int Y, int Width, double Mass, Speed speed, Background1 b)
-        {
-            if (typ == 0) //Me
-            {
-                vzhled    = new AnimatedSpriteHead[4];
-                Vector3 pozicehlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
-                vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, pozicehlavy1);                
-                vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, pozicehlavy1);
 
-                pozicehlavy1.Y = 0.15f;
-                vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, pozicehlavy1);
-                vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, pozicehlavy1);
-            }
+        public Postavicka(Texture2D[][] textury, int X, int Y, int Width, Speed speed, Background b)
+        {
+            vzhled = new AnimatedSpriteHead[4];
+            Vector3 pozicehlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
+            vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, pozicehlavy1);
+            vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, pozicehlavy1);
+
+            pozicehlavy1.Y = 0.15f;
+            vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, pozicehlavy1);
+            vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, pozicehlavy1);
+
             width = Width;
             pozice.X = X;
             pozice.Y = Y;
             prevpozice = pozice;
-            mass = Mass;
             rychlost = speed;
             onLand = true;
             this.b = b;
@@ -77,11 +73,11 @@ namespace The_Game
         /// 
         public void death()
         {
-            throw new System.ArgumentException("You died :-(", ":-("); 
+            throw new System.ArgumentException("You died :-(", ":-(");
 
         }
         public void update(GameTime gameTime)
-        {           
+        {
             /*v milisekundach*/
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff;
@@ -127,12 +123,12 @@ namespace The_Game
                         }
                     }
                 }
-                if (!skocil&&Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
+                if (!skocil && Keyboard.GetState().IsKeyDown(Keys.Space))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
                 {
                     skocil = true;
                     onLand = false;
-                    pozice.Y -= 5*standartniVyskok * standartniRychlost/3;
-                    pohyb.Y = - standartniVyskok * standartniRychlost;
+                    pozice.Y -= 5 * standartniVyskok * standartniRychlost / 3;
+                    pohyb.Y = -standartniVyskok * standartniRychlost;
                     if (pohyb.X < 0) vzhledNo = 2;
                     if (pohyb.X > 0) vzhledNo = 3;
                     if (pohyb.X == 0 && vzhledNo <= 1) vzhledNo += 2;
@@ -163,7 +159,7 @@ namespace The_Game
                 if (pohyb.X >= rychlostChuze)
                 {
                     pohyb.X = rychlostChuze;
-                }                
+                }
                 if (Keyboard.GetState().IsKeyDown(Keys.Left))    // anatomie pohybu vlevo
                 {
                     pohyb.X -= timediff * horizontalniZmenaPohybu * standartniRychlost;
@@ -175,20 +171,20 @@ namespace The_Game
                 }
 
                 Vector2 temppozice = new Vector2();
-                temppozice=pozice;
-                for(int time = 1;time<=timediff;time++)
-                {                    
-                    temppozice+= pohyb;
+                temppozice = pozice;
+                for (int time = 1; time <= timediff; time++)
+                {
+                    temppozice += pohyb;
                     if ((int)temppozice.Y + 5 < b.vyska * 300)
                     {
-                        if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y-5) / 300].typ == 0) &&
-                            (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y-5) / 300].typ == 0))
+                        if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y - 5) / 300].typ == 0) &&
+                            (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y - 5) / 300].typ == 0))
                         {
                             nadKostkou = true;
                         }
-                        else if(pohyb.Y>=0&&nadKostkou&&temppozice.Y%300<30)
+                        else if (pohyb.Y >= 0 && nadKostkou && temppozice.Y % 300 < 30)
                         {
-                            pozice += pohyb*(time-1);
+                            pozice += pohyb * (time - 1);
                             onLand = true;
                             vzhledNo -= 2;
                             pohyb.Y = 0;
@@ -201,9 +197,9 @@ namespace The_Game
                         }
 
                     }
-                    
+
                 }
-                
+
 
             }
 
@@ -222,17 +218,17 @@ namespace The_Game
             }
             vzhled[vzhledNo].UpdateHead();
 
-        
+
 
             /*zmena polohy*/
-            pozice += pohyb*timediff;
+            pozice += pohyb * timediff;
             if (pozice.X <= 0)
                 pozice.X = 0;
             if (pozice.X >= b.sirka * 300 - 451)
                 pozice.X = b.sirka * 300 - 451; //jeste sirka panacka
-            if (((int)pozice.X > (b.b - b.a) / 4) && (pozice.X < b.sirka * 300 - 301 - 3*(b.b - b.a) / 4))
+            if (((int)pozice.X > (b.b - b.a) / 4) && (pozice.X < b.sirka * 300 - 301 - 3 * (b.b - b.a) / 4))
             {
-                b.move((int)pozice.X - b.a-((b.b - b.a) / 4));
+                b.move((int)pozice.X - b.a - ((b.b - b.a) / 4));
             }
             if (pozice.Y - 261 > b.vyska * 300)
             {
