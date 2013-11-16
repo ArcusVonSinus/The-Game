@@ -174,16 +174,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Menu\pozadiMenu.jpg">
-      <Name>pozadiMenu</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Menu\pozadi.jpg">
-      <Name>pozadi</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Menu\buttNewGame0.bmp">
       <Name>buttNewGame0</Name>
       <Importer>TextureImporter</Importer>
@@ -196,6 +186,16 @@
     </Compile>
     <Compile Include="Menu\buttNewGame2.bmp">
       <Name>buttNewGame2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\pozadi.png">
+      <Name>pozadi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\pozadiMenu.png">
+      <Name>pozadiMenu</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
