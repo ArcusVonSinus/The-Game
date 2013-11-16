@@ -161,6 +161,7 @@ namespace The_Game
         void NewGame(int level)
         {
             game.InMenu = false;
+            game.IsMouseVisible = false;
             game.level = level;
             game.InGame = true;
             game.newgame();
@@ -200,6 +201,7 @@ namespace The_Game
                 if (buttonNo == 0)
                 {
                     game.InMenu = false;
+                    game.IsMouseVisible = false;
                 }
                 if (buttonNo == 1)
                 {

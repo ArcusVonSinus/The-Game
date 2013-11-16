@@ -323,6 +323,26 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Name>Save</Name>
     </None>
+    <Compile Include="Level 1\Enemy\E0.png">
+      <Name>E0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 1\Enemy\E01.png">
+      <Name>E01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 1\Enemy\E1.png">
+      <Name>E1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 1\Enemy\E2.png">
+      <Name>E2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Level 1\l1.txt">
       <Name>l1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

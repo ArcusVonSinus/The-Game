@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace The_Game
 {
-    class Postavicka
+    public class Postavicka
     {
         ///
         /// Konstanty
@@ -38,17 +38,15 @@ namespace The_Game
         Vector2 pohyb; //smer pohybu
         public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         bool onLand;
-        Speed rychlost;
         Background b;
         long elapsedTime = 0;
         bool skocil = false;
-        bool nadKostkou;
         Game1 game;
         /// 
         /// Konstruktor
         /// 
 
-        public Postavicka(Game1 game,Texture2D[][] textury, int X, int Y, Speed speed, Background b)
+        public Postavicka(Game1 game,Texture2D[][] textury, int X, int Y, Background b)
         {
             this.game = game;
             vzhled = new AnimatedSpriteHead[4];
@@ -62,7 +60,6 @@ namespace The_Game
             pozice.X = X;
             pozice.Y = Y;
             prevpozice = pozice;
-            rychlost = speed;
             onLand = true;
             this.b = b;
         }
@@ -75,6 +72,7 @@ namespace The_Game
         {
             game.InGame = false;
             game.InMenu = true;
+            game.IsMouseVisible = true;
             game.m.ktereMenu = KtereMenu.main;
             
         }
@@ -115,9 +113,9 @@ namespace The_Game
                 if (pohyb.X < 0) vzhledNo = 1;
                 if (pohyb.X > 0) vzhledNo = 0;
 
-                if (b.level1[(int)(pozice.X + 5) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
+                if (b.level[(int)(pozice.X + 5) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
                 {
-                    if (b.level1[(int)(pozice.X + 145) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
+                    if (b.level[(int)(pozice.X + 145) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
                     {
                         onLand = false;
                         if (vzhledNo <= 1)
@@ -180,23 +178,20 @@ namespace The_Game
                     temppozice += pohyb;
                     if ((int)temppozice.Y + 5 < b.vyska * 300)
                     {
-                        if ((b.level1[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y - 5) / 300].typ == 0) &&
-                            (b.level1[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y - 5) / 300].typ == 0))
+                        if ((b.level[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y -5) / 300].typ == 0) &&
+                            (b.level[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y -5) / 300].typ == 0))
                         {
-                            nadKostkou = true;
+
                         }
-                        else if (pohyb.Y >= 0 && nadKostkou && temppozice.Y % 300 < 30)
+                        else if (pohyb.Y >= 0   && (int)(temppozice.Y -5) % 300 < 30)
                         {
+
                             pozice += pohyb * (time - 1);
                             onLand = true;
                             vzhledNo -= 2;
                             pohyb.Y = 0;
                             pohyb.X = 0;
                             break;
-                        }
-                        else
-                        {
-                            nadKostkou = false;
                         }
 
                     }

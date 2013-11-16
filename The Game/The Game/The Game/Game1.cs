@@ -19,8 +19,8 @@ namespace The_Game
 
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;        
-        Background b;
-        Postavicka me;
+        public Background b;
+        public Postavicka me;
 
 
         private SpriteFont font;
@@ -36,6 +36,8 @@ namespace The_Game
         public bool InMenu;
         public int level=1;
         public Menu m;
+
+        public Zoo zoo;
         /// <summary>
         /// Konstruktory
         /// </summary>
@@ -148,8 +150,10 @@ namespace The_Game
                         }
                     }
                 }
-                b = new Background(pozadi, blockNumber, 300 * (width / blockSize));
-                me = new Postavicka(this,texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , new Speed(0, 0), b);
+                zoo = new Zoo(this);
+                b = new Background(this,pozadi, blockNumber, 300 * (width / blockSize));
+                me = new Postavicka(this,texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , b);
+                
             }
         }
 
@@ -164,6 +168,7 @@ namespace The_Game
             {
                 m.ktereMenu = KtereMenu.mainInGame;
                 InMenu = true;
+                IsMouseVisible = true;
             }
             if (InMenu)
             {
@@ -172,6 +177,7 @@ namespace The_Game
             if (InGame && !InMenu)
             {
                 me.update(gameTime);
+                zoo.Update();
             }
 
             base.Update(gameTime);
@@ -189,7 +195,9 @@ namespace The_Game
             if (!InMenu && InGame)
             {
                 b.draw(width, height, spriteBatch);
+                zoo.Draw(spriteBatch);
                 me.draw(spriteBatch);
+
             }
 
             //spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);
