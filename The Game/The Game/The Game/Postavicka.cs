@@ -23,10 +23,10 @@ namespace The_Game
         const float gravitacniZrychleniNaMesici = 1.62f;
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
-        const float standartniRychlost = 1.6f;
-        const float standartniVyskok = 2.5f;
-        const float padaciKonstanta = 0.0035f;
-        const float horizontalniZmenaPohybu = 0.5f;
+        const float standartniRychlost = 1.25f;
+        const float standartniVyskok = 3f;
+        const float padaciKonstanta = 0.0011f;
+        const float horizontalniZmenaPohybu = 0.12f;
 
         /// 
         /// Promenne
@@ -63,8 +63,7 @@ namespace The_Game
             onLand = true;
             this.b = b;
         }
-
-
+        
         /// 
         /// Metody
         /// 
@@ -91,7 +90,6 @@ namespace The_Game
             if (!(Keyboard.GetState().IsKeyDown(Keys.Space)||Keyboard.GetState().IsKeyDown(Keys.Up)))
             {
                 skocil = false;
-
             }
 
             // PANACEK JE NA ZEMI
@@ -124,12 +122,13 @@ namespace The_Game
                         }
                     }
                 }
-                if (!skocil && (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))            // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
+                if (!skocil && (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))
+                    // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
                 {
                     skocil = true;
                     onLand = false;
-                    pozice.Y -= 5 * standartniVyskok * standartniRychlost / 3;
-                    pohyb.Y = -standartniVyskok * standartniRychlost;
+                    pozice.Y -= 5 * standartniVyskok / 3;
+                    pohyb.Y = -standartniVyskok;
                     if (pohyb.X < 0) vzhledNo = 2;
                     if (pohyb.X > 0) vzhledNo = 3;
                     if (pohyb.X == 0 && vzhledNo <= 1) vzhledNo += 2;
@@ -144,15 +143,18 @@ namespace The_Game
                 // anatomie skoku
                 if ((Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))
                 {
-                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta - standartniVyskok / 8;
+                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
                 }
                 else
                 {
-                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
+                    if (pohyb.Y < 0)
+                        pohyb.Y = 0;
+                    else
+                        pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
                 }
 
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))   // anatomie pohybu vpravo
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                    // anatomie pohybu vpravo
                 {
                     pohyb.X += timediff * horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 2;
@@ -161,7 +163,8 @@ namespace The_Game
                 {
                     pohyb.X = rychlostChuze;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))    // anatomie pohybu vlevo
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                    // anatomie pohybu vlevo
                 {
                     pohyb.X -= timediff * horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 3;
@@ -228,7 +231,7 @@ namespace The_Game
             {
                 b.move((int)pozice.X - b.a - ((b.b - b.a) / 4));
             }
-            if (pozice.Y - 261 > b.vyska * 300)
+            if ((pozice.Y - 261 > b.vyska * 300)||(pozice.Y < 0))
             {
                 death();
             }

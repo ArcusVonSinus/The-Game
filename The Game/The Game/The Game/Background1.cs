@@ -17,8 +17,7 @@ namespace The_Game
         /// <summary>
         /// Tile je z definice 300x300, a souradnice a a b jsou v tomhle meritku, pak se prepocitaji
         /// </summary>
-        public int a; //je zobrazeno pozadí od a do b;
-        public int b;
+        public int a, b, c, d; //je zobrazeno pozadí od a do b horizontalne od c do d vertikalne;
         public Tile[,] level;
         Tile[,] obloha1;
         public int sirka; //pocet dlazdic na sirce levelu;
@@ -58,6 +57,7 @@ namespace The_Game
             string levelLine = lvlReader.ReadLine();
             sirka = levelLine.Length;
             vyska = radku;
+            c = vyska;
             level = new Tile[sirka, radku];
             obloha1 = new Tile[sirka, radku];
             Random rnd = new Random();
