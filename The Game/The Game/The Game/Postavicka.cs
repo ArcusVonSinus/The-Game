@@ -201,7 +201,6 @@ namespace The_Game
 
                 }
 
-
             }
 
             if (onLand && Math.Abs(pohyb.X) >= 0.1)
@@ -219,8 +218,6 @@ namespace The_Game
             }
             vzhled[vzhledNo].UpdateHead();
 
-
-
             /*zmena polohy*/
             pozice += pohyb * timediff;
             if (pozice.X <= 0)
@@ -235,9 +232,6 @@ namespace The_Game
             {
                 death();
             }
-
-
-
         }
 
         public int height
