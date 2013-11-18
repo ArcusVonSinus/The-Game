@@ -325,6 +325,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Menu\Labels\HighScoreBackground.png">
+      <Name>HighScoreBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <None Include="Save.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Name>Save</Name>

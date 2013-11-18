@@ -11,14 +11,18 @@ namespace The_Game
     public enum KtereMenu { main, mainInGame, chooseLevel, chooseLevelInGame, settings,settingsInGame, highscores }
     class Label
     {
-        Menu menu;
+        protected Menu menu;
         int labelNo;
-        KtereMenu ktereMenu;
+        protected KtereMenu ktereMenu;
         Vector2 vectorPosition;
         Texture2D vzhled;
         Rectangle texturePosition;
         string name;
-        SpriteFont font;    
+        SpriteFont font;
+        public Label()
+        {
+
+        }
         public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string name)
         {
             this.name = name;
@@ -28,20 +32,39 @@ namespace The_Game
             font = menu.game.Content.Load<SpriteFont>("font");
             vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/label");
         }
-        public void Update()
+        public virtual void Update()
         {
             vectorPosition = new Vector2(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
             texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (ktereMenu == menu.ktereMenu)
             {
                 spriteBatch.Draw(vzhled, texturePosition, Color.White);
                 spriteBatch.DrawString(font, name, vectorPosition, Color.Black);                
             }
+        }        
+    }
+    class HighScoreBackground : Label
+    {
+        Texture2D vzhled;
+        Rectangle texturePosition;
+        public HighScoreBackground(Menu parent, KtereMenu ktereMenu)
+        {            
+            this.menu = parent;            
+            this.ktereMenu = ktereMenu;            
+            vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/HighScoreBackground");
         }
-    }    
+        public override void Update()
+        {
+            texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * 0 * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(9 * menu.buttonSizeH * menu.zmenseni));
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(vzhled, texturePosition, Color.White);
+        }
+    }
     class Button
     {
         Menu menu;
@@ -114,7 +137,7 @@ namespace The_Game
     }
     public class Menu //menu je velke 1500x1000, pak se prepocita
     {
-        public KtereMenu ktereMenu;
+        public KtereMenu ktereMenu, temp;
 
         public float zmenseni{
             get
@@ -130,7 +153,8 @@ namespace The_Game
         public int buttonSizeW = 800,buttonSizeH = 100; //1500x1000
         public int buttonsX, buttonsY;
         Button[] tlacitka;
-        Label[] stitky; 
+        Label[] stitky;
+        HighScoreBackground pozadiHS;
         public Game1 game;
         Texture2D pozadi,pozadiMenu;
         public Menu(Game1 game)
@@ -142,9 +166,9 @@ namespace The_Game
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
             tlacitka = new Button[19];
-            stitky = new Label[6];
+            stitky = new Label[6];            
             //-----------------------------------------------------------------
-            KtereMenu temp = KtereMenu.main;
+            temp = KtereMenu.main;
             tlacitka[0] = new Button(this, 0, temp, "NewGame");
             tlacitka[1] = new Button(this, 1, temp, "ChooseLevel");
             tlacitka[2] = new Button(this, 2, temp, "Highscores");
@@ -175,6 +199,7 @@ namespace The_Game
             tlacitka[17] = new Button(this, 1, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.highscores;
+            pozadiHS = new HighScoreBackground(this, temp);
             stitky[0] = new Label(this, 0, temp, "Ja 5000");
             stitky[1] = new Label(this, 1, temp, "Ja 5000");
             stitky[2] = new Label(this, 2, temp, "Ja 5000");
@@ -187,6 +212,7 @@ namespace The_Game
         }
         public void update()
         {
+            if (temp == KtereMenu.highscores) pozadiHS.Update();
             foreach (Button tl in tlacitka)
             {
                 tl.Update();
@@ -329,7 +355,8 @@ namespace The_Game
             buttonsX = 50 + (int)(game.width - zmenseni * 1000 - 100) / 2;
             buttonsX += (int)(zmenseni * (1000 - buttonSizeW)) / 2;
             buttonsY = 50 + (int)(game.height - zmenseni * 1500 - 100) / 2;
-            buttonsY += (int)(zmenseni * 320);            
+            buttonsY += (int)(zmenseni * 320);
+            if (temp == KtereMenu.highscores) pozadiHS.Draw(spriteBatch);
             foreach (Button tl in tlacitka)
             {  
                 tl.Draw(spriteBatch);
