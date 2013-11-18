@@ -8,7 +8,33 @@ using Microsoft.Xna.Framework.Input;
 
 namespace The_Game
 {
-    public enum KtereMenu { main, mainInGame, chooseLevel, chooseLevelInGame, settings,settingsInGame, highscores }    
+    public enum KtereMenu { main, mainInGame, chooseLevel, chooseLevelInGame, settings,settingsInGame, highscores }
+    class Label
+    {
+        Menu menu;
+        int labelNo;
+        KtereMenu ktereMenu;
+        Rectangle position;
+        string name;               
+        public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string name)
+        {
+            this.name = name;
+            this.menu = parent;
+            this.labelNo = labelNo;
+            this.ktereMenu = ktereMenu;            
+        }
+        public void Update()
+        {
+            position = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (ktereMenu == menu.ktereMenu)
+            {
+                // spriteBatch.DrawString(font, name, position, Color.Black); <-- NEFUNGUJE TU TEN FONT
+            }
+        }
+    }    
     class Button
     {
         Menu menu;
@@ -34,12 +60,12 @@ namespace The_Game
             this.buttonNo=buttonNo;
             this.ktereMenu = ktereMenu;
             vzhled = new Texture2D[3];
-            for(int i = 0;i<3;i++)
+            for(int i = 0; i < 3; i++)
             {
                 vzhled[i] = menu.game.Content.Load<Texture2D>("Menu/Buttons/Butt" + name + i);
             }
             vzhledNo = 0;
-        }
+        }        
         public void Update()
         {
             position = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f*buttonNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
@@ -95,12 +121,11 @@ namespace The_Game
                     return a;
             }
             }
-                
-
-       
+        
         public int buttonSizeW = 800,buttonSizeH = 100; //1500x1000
         public int buttonsX, buttonsY;
         Button[] tlacitka;
+        Label[] stitky; 
         public Game1 game;
         Texture2D pozadi,pozadiMenu;
         public Menu(Game1 game)
@@ -112,6 +137,7 @@ namespace The_Game
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
             tlacitka = new Button[19];
+            stitky = new Label[7];
             //-----------------------------------------------------------------
             KtereMenu temp = KtereMenu.main;
             tlacitka[0] = new Button(this, 0, temp, "NewGame");
@@ -143,11 +169,15 @@ namespace The_Game
             tlacitka[16] = new Button(this, 0, temp, "Level1");
             tlacitka[17] = new Button(this, 1, temp, "Back");
             //----------------------------------------------------------------------
-            temp = KtereMenu.highscores;            
-            tlacitka[18] = new Button(this, 0, temp, "Back");
+            temp = KtereMenu.highscores;
+            stitky[1] = new Label(this, 0, temp, "Ja 5000");
+            stitky[1] = new Label(this, 1, temp, "Ja 5000");
+            stitky[2] = new Label(this, 2, temp, "Ja 5000");
+            stitky[3] = new Label(this, 3, temp, "Ja 5000");
+            stitky[4] = new Label(this, 4, temp, "Ja 5000");
+            stitky[5] = new Label(this, 5, temp, "Ja 5000");
+            tlacitka[18] = new Button(this, 6, temp, "Back");        
             //--------------------------------------------------------------------
-
-
 
         }
         public void update()
@@ -248,7 +278,7 @@ namespace The_Game
             if (ktereMenu == KtereMenu.highscores)
             {
                 
-                if (buttonNo == 0)
+                if (buttonNo == 6)
                 {
                     ktereMenu = KtereMenu.main;
                     return;
@@ -292,8 +322,7 @@ namespace The_Game
             buttonsY = 50 + (int)(game.height - zmenseni * 1500 - 100) / 2;
             buttonsY += (int)(zmenseni * 320);            
             foreach (Button tl in tlacitka)
-            {
-               
+            {  
                 tl.Draw(spriteBatch);
             }
                        

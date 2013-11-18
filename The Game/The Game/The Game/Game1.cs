@@ -22,8 +22,7 @@ namespace The_Game
         public Background b;
         public Postavicka me;
 
-
-        private SpriteFont font;
+        public SpriteFont font;
 
         public int blockSize; //rozmer bloku
         int blockNumber; //pocet bloku (vyska)
@@ -106,7 +105,6 @@ namespace The_Game
         }
         protected override void LoadContent()
         {
-
 
             m = new Menu(this);
 
