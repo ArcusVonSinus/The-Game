@@ -14,7 +14,9 @@ namespace The_Game
         Menu menu;
         int labelNo;
         KtereMenu ktereMenu;
-        Vector2 position;
+        Vector2 vectorPosition;
+        Texture2D vzhled;
+        Rectangle texturePosition;
         string name;
         SpriteFont font;    
         public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string name)
@@ -24,16 +26,19 @@ namespace The_Game
             this.labelNo = labelNo;
             this.ktereMenu = ktereMenu;
             font = menu.game.Content.Load<SpriteFont>("font");
+            vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/label");
         }
         public void Update()
         {
-            position = new Vector2(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
+            vectorPosition = new Vector2(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
+            texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if (ktereMenu == menu.ktereMenu)
             {
-                spriteBatch.DrawString(font, name, position, Color.Black);
+                spriteBatch.Draw(vzhled, texturePosition, Color.White);
+                spriteBatch.DrawString(font, name, vectorPosition, Color.Black);                
             }
         }
     }    
