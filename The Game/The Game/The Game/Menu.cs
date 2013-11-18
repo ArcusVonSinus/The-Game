@@ -14,24 +14,26 @@ namespace The_Game
         Menu menu;
         int labelNo;
         KtereMenu ktereMenu;
-        Rectangle position;
-        string name;               
+        Vector2 position;
+        string name;
+        SpriteFont font;    
         public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string name)
         {
             this.name = name;
             this.menu = parent;
             this.labelNo = labelNo;
-            this.ktereMenu = ktereMenu;            
+            this.ktereMenu = ktereMenu;
+            font = menu.game.Content.Load<SpriteFont>("font");
         }
         public void Update()
         {
-            position = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
+            position = new Vector2(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             if (ktereMenu == menu.ktereMenu)
             {
-                // spriteBatch.DrawString(font, name, position, Color.Black); <-- NEFUNGUJE TU TEN FONT
+                spriteBatch.DrawString(font, name, position, Color.Black);
             }
         }
     }    
@@ -57,7 +59,7 @@ namespace The_Game
         {
             this.name = name;
             this.menu = parent;
-            this.buttonNo=buttonNo;
+            this.buttonNo = buttonNo;
             this.ktereMenu = ktereMenu;
             vzhled = new Texture2D[3];
             for(int i = 0; i < 3; i++)
@@ -104,8 +106,6 @@ namespace The_Game
                 spriteBatch.Draw(vzhled[vzhledNo], position, Color.White);
             }
         }
-        
-
     }
     public class Menu //menu je velke 1500x1000, pak se prepocita
     {
@@ -137,7 +137,7 @@ namespace The_Game
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
             tlacitka = new Button[19];
-            stitky = new Label[7];
+            stitky = new Label[6];
             //-----------------------------------------------------------------
             KtereMenu temp = KtereMenu.main;
             tlacitka[0] = new Button(this, 0, temp, "NewGame");
@@ -170,7 +170,7 @@ namespace The_Game
             tlacitka[17] = new Button(this, 1, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.highscores;
-            stitky[1] = new Label(this, 0, temp, "Ja 5000");
+            stitky[0] = new Label(this, 0, temp, "Ja 5000");
             stitky[1] = new Label(this, 1, temp, "Ja 5000");
             stitky[2] = new Label(this, 2, temp, "Ja 5000");
             stitky[3] = new Label(this, 3, temp, "Ja 5000");
@@ -185,6 +185,10 @@ namespace The_Game
             foreach (Button tl in tlacitka)
             {
                 tl.Update();
+            }
+            foreach (Label st in stitky)
+            {
+                st.Update();
             }
         }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -325,7 +329,10 @@ namespace The_Game
             {  
                 tl.Draw(spriteBatch);
             }
-                       
+            foreach (Label st in stitky)
+            {
+                st.Draw(spriteBatch);
+            }
         }
     }
 }
