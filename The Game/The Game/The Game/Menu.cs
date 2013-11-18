@@ -356,7 +356,7 @@ namespace The_Game
             buttonsX += (int)(zmenseni * (1000 - buttonSizeW)) / 2;
             buttonsY = 50 + (int)(game.height - zmenseni * 1500 - 100) / 2;
             buttonsY += (int)(zmenseni * 320);
-            if (temp == KtereMenu.highscores) pozadiHS.Draw(spriteBatch);
+            if (ktereMenu == KtereMenu.highscores) pozadiHS.Draw(spriteBatch);
             foreach (Button tl in tlacitka)
             {  
                 tl.Draw(spriteBatch);
