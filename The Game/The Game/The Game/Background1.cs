@@ -30,7 +30,7 @@ namespace The_Game
             size.X = 5 * size.Y;
             position.X = game.width - size.X - 0.5f * size.Y;
             position.Y = 0.5f * size.Y;
-            spriteBatch.Draw(pozadi,new Rectangle((int)position.X,(int)position.Y,(int)size.X,(int)size.Y),Color.White);
+            spriteBatch.Draw(pozadi, new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y), Color.White);
 
             spriteBatch.DrawString(scoreFont, "" + score.ToString(), position, Color.Black);
         }
@@ -45,7 +45,7 @@ namespace The_Game
         /// <summary>
         /// Tile je z definice 300x300, a souradnice a a b jsou v tomhle meritku, pak se prepocitaji
         /// </summary>
-        public int a, b, c, d; //je zobrazeno pozadí od a do b horizontalne od c do d vertikalne;
+        public int a, b; //je zobrazeno pozadí od a do b (horizontalne)
         public Tile[,] level;
         Tile[,] obloha1;
         public int sirka; //pocet dlazdic na sirce levelu;
@@ -54,7 +54,7 @@ namespace The_Game
         Game1 game;
         public Score score;
 
-        public Background(Game1 game,Texture2D[][] pozadi, int radku, int b)
+        public Background(Game1 game, Texture2D[][] pozadi, int radku, int b)
         {
             this.game = game;
             score = new Score(game);
@@ -65,7 +65,6 @@ namespace The_Game
             string levelLine = lvlReader.ReadLine();
             sirka = levelLine.Length;
             vyska = radku;
-            c = vyska;
             level = new Tile[sirka, radku];
             obloha1 = new Tile[sirka, radku];
             Random rnd = new Random();
@@ -79,8 +78,7 @@ namespace The_Game
                     levelLine = lvlReader.ReadLine();
             }
             lvlReader.Close();
-            string Dily;
-            Dily = ".?X?L?R?l?x?r?";
+            string Dily = ".?X?L?R?l?x?r?";
             int verzi = 0;
             for (int j = 0; j < vyska; j++)
             {
@@ -117,9 +115,9 @@ namespace The_Game
                         game.zoo.add(level[i, j].typ - '0', i * 300, j * 300, this);
                         level[i, j].typ = 0;
                     }
-                    if(level[i, j].typ == '*')
+                    if (level[i, j].typ == '*')
                     {
-                        level[i,j].typ=0;
+                        level[i, j].typ = 0;
                     }
                 }
             }
@@ -150,7 +148,7 @@ namespace The_Game
             int a1 = a / 300;
             int b1 = b / 300;
             b1++;
-            int posunL = a%300;
+            int posunL = a % 300;
             int sirkabunky = h / vyska;
             posunL *= sirkabunky;
             posunL /= 300;

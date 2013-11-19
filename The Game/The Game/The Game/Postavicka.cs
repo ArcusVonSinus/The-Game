@@ -50,7 +50,7 @@ namespace The_Game
         {
 
         }
-        public Postavicka(Game1 game,Texture2D[][] textury, int X, int Y, Background b)
+        public Postavicka(Game1 game, Texture2D[][] textury, int X, int Y, Background b)
         {
             this.game = game;
             vzhled = new AnimatedSpriteHead[4];
@@ -67,7 +67,7 @@ namespace The_Game
             onLand = true;
             this.b = b;
         }
-        
+
         /// 
         /// Metody
         /// 
@@ -77,7 +77,7 @@ namespace The_Game
             game.InMenu = true;
             game.IsMouseVisible = true;
             game.m.ktereMenu = KtereMenu.main;
-            
+
         }
         public virtual void update(GameTime gameTime)
         {
@@ -92,7 +92,7 @@ namespace The_Game
             else
                 rychlostChuze = standartniRychlost;
 
-            if (!(Keyboard.GetState().IsKeyDown(Keys.Space)||Keyboard.GetState().IsKeyDown(Keys.Up)))
+            if (!(Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))
             {
                 skocil = false;
             }
@@ -128,7 +128,7 @@ namespace The_Game
                     }
                 }
                 if (!skocil && (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))
-                    // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
+                // ZMACKL JSEM MEZERNIK, ALE PANACEK JE JESTE NA ZEMI --> ZACINA SKOK
                 {
                     skocil = true;
                     onLand = false;
@@ -179,8 +179,9 @@ namespace The_Game
                             pohyb.X = -rychlostChuze;
                         }
                     }
-                    else pohyb.X *= 0.75f;                
+                    else pohyb.X *= 0.75f;
 
+                // CO DELA TOHLETO??
                 Vector2 temppozice = new Vector2();
                 temppozice = pozice;
                 for (int time = 1; time <= timediff; time++)
@@ -188,12 +189,12 @@ namespace The_Game
                     temppozice += pohyb;
                     if ((int)temppozice.Y + 5 < b.vyska * 300)
                     {
-                        if ((b.level[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y -5) / 300].typ == 0) &&
-                            (b.level[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y -5) / 300].typ == 0))
+                        if ((b.level[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y - 5) / 300].typ == 0) &&
+                            (b.level[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y - 5) / 300].typ == 0))
                         {
                             // CO PATRI SEM???
                         }
-                        else if (pohyb.Y >= 0   && (int)(temppozice.Y -5) % 300 < 30)
+                        else if (pohyb.Y >= 0 && (int)(temppozice.Y - 5) % 300 < 30)
                         {
                             pozice += pohyb * (time - 1);
                             onLand = true;
@@ -209,7 +210,7 @@ namespace The_Game
 
             }
 
-            if (onLand && Math.Abs(pohyb.X) >= 0.1)
+            if (onLand && Math.Abs(pohyb.X) > 0)
             {
                 vzhled[vzhledNo].Update();
             }

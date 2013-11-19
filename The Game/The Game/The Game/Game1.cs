@@ -18,7 +18,7 @@ namespace The_Game
         /// </summary>
 
         public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;        
+        SpriteBatch spriteBatch;
         public Background b;
         public Postavicka me;
 
@@ -33,7 +33,7 @@ namespace The_Game
 
         public bool InGame;
         public bool InMenu;
-        public int level=1;
+        public int level = 1;
         public Menu m;
 
         public Zoo zoo;
@@ -45,14 +45,14 @@ namespace The_Game
         {
             WidthNoFS = 1000;
             HeightNoFS = 600;
-            width=WidthNoFS; //rozmery okna v pixelech
-            height=HeightNoFS;
+            width = WidthNoFS; //rozmery okna v pixelech
+            height = HeightNoFS;
 
             blockNumber = 6;
             blockSize = height / blockNumber;
 
             graphics = new GraphicsDeviceManager(this);
-            
+
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
 
@@ -77,14 +77,14 @@ namespace The_Game
             }
             else
             {
-                 graphics.ToggleFullScreen();
-                 graphics.PreferredBackBufferHeight = HeightNoFS;
-                 graphics.PreferredBackBufferWidth = WidthNoFS;
-                 graphics.ApplyChanges();
-                 height = HeightNoFS;
-                 width =  WidthNoFS;
-                 blockSize = height / blockNumber;
-                 fullscreen = false;
+                graphics.ToggleFullScreen();
+                graphics.PreferredBackBufferHeight = HeightNoFS;
+                graphics.PreferredBackBufferWidth = WidthNoFS;
+                graphics.ApplyChanges();
+                height = HeightNoFS;
+                width = WidthNoFS;
+                blockSize = height / blockNumber;
+                fullscreen = false;
             }
         }
         protected override void Initialize()
@@ -149,9 +149,9 @@ namespace The_Game
                     }
                 }
                 zoo = new Zoo(this);
-                b = new Background(this,pozadi, blockNumber, 300 * (width / blockSize));
-                me = new Postavicka(this,texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , b);
-                
+                b = new Background(this, pozadi, blockNumber, 300 * (width / blockSize));
+                me = new Postavicka(this, texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , b);
+
             }
         }
 
@@ -199,7 +199,7 @@ namespace The_Game
             }
 
             //spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);
-            
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

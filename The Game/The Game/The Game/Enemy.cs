@@ -57,11 +57,11 @@ namespace The_Game
 
         }
         public override void update(GameTime gameTime)
-        {            
+        {
             /*v milisekundach*/
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff;
-                        
+
             vzhled[vzhledNo].Update();
 
             switch (typ)
@@ -83,7 +83,7 @@ namespace The_Game
                         if (this.pohyb.X < 0)
                         {
                             this.pozice.X = 0; // neprejde za levy okraj
-                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                            this.pohyb.X *= -1; // a otoci se
                         }
                     }
                     if (this.pozice.X > b.sirka * 300 - 400)
@@ -91,7 +91,7 @@ namespace The_Game
                         if (this.pohyb.X > 0)
                         {
                             this.pozice.X = b.sirka * 300 - 400; // neprejde za pravy okraj
-                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                            this.pohyb.X *= -1; // a otoci se
                         }
                     }
                     break;
@@ -104,7 +104,7 @@ namespace The_Game
                         if (this.pohyb.X < 0)
                         {
                             this.pozice.X = this.zakladniPozice.X - 300; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (LEVA STRANA)
-                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                            this.pohyb.X *= -1; // a otoci se
                         }
                     }
                     if (this.pozice.X - 300 > this.zakladniPozice.X)
@@ -112,7 +112,7 @@ namespace The_Game
                         if (this.pohyb.X > 0)
                         {
                             this.pozice.X = this.zakladniPozice.X + 300; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (PRAVA STRANA)
-                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                            this.pohyb.X *= -1; // a otoci se
                         }
                     }
                     if (this.pozice.Y + 45 < this.zakladniPozice.Y)
@@ -120,7 +120,7 @@ namespace The_Game
                         if (this.pohyb.Y < 0)
                         {
                             this.pozice.Y = this.zakladniPozice.Y - 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (LEVA STRANA)
-                            this.pohyb.Y = -this.pohyb.Y; // a otoci se
+                            this.pohyb.Y *= -1; // a otoci se
                         }
                     }
                     if (this.pozice.Y - 45 > this.zakladniPozice.Y)
@@ -128,11 +128,21 @@ namespace The_Game
                         if (this.pohyb.Y > 0)
                         {
                             this.pozice.Y = this.zakladniPozice.Y + 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (PRAVA STRANA)
-                            this.pohyb.Y = -this.pohyb.Y; // a otoci se
+                            this.pohyb.Y *= -1; // a otoci se
                         }
                     }
                     break;
             }
+            // Spolecne chovani
+            if (this.pohyb.X > 0)
+                if ((int)(this.pozice.X + this.width) / 300 + 1 <= b.sirka)
+                    if (b.level[(int)(this.pozice.X + this.width) / 300 + 1, (int)(this.pozice.Y) / 300 - 1].typ != 0)
+                        this.pohyb.X *= -1;
+            if (this.pohyb.X < 0)
+                if ((int)(this.pozice.X) / 300 - 1 > 0)
+                    if (b.level[(int)(this.pozice.X) / 300 - 1, (int)(this.pozice.Y) / 300 - 1].typ != 0)
+                        this.pohyb.X *= -1;
+
         }
         public override void draw(SpriteBatch spriteBatch)
         {
