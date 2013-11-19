@@ -109,7 +109,14 @@ namespace The_Game
             {
                 if (!isMouseOver())
                 {
-                    vzhledNo = 0;
+                    if (menu.vybranaPolozka == buttonNo||(ktereMenu == KtereMenu.highscores && menu.vybranaPolozka == 0))
+                    {
+                        vzhledNo = 1;
+                    }
+                    else
+                    {
+                        vzhledNo = 0;
+                    }
                 }
                 else
                 {
@@ -154,7 +161,7 @@ namespace The_Game
                     return a;
             }
             }
-        
+        public int vybranaPolozka; // pro ovladani klavesnici
         public int buttonSizeW = 800,buttonSizeH = 100; //1500x1000
         public int buttonsX, buttonsY;
         Button[] tlacitka;
@@ -166,7 +173,7 @@ namespace The_Game
         {
             this.game = game;            
             ktereMenu = KtereMenu.main;
-
+            vybranaPolozka = 0;
             pozadi = game.Content.Load<Texture2D>("Menu/pozadi");
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
@@ -213,11 +220,66 @@ namespace The_Game
             stitky[5] = new Label(this, 5, temp, "28.623", "Elen");
             tlacitka[18] = new Button(this, 6, temp, "Back");        
             //--------------------------------------------------------------------
-
+            pressed = false;
         }
+        bool pressed;  //pro ovladani klavesnici
         public void update()
         {
-            if (temp == KtereMenu.highscores) pozadiHS.Update();
+            if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                pressed = true;
+                vybranaPolozka++;
+                int temp=0;
+                switch (ktereMenu)
+                {
+                    case KtereMenu.main:
+                        temp = 5;
+                        break;
+                    case KtereMenu.mainInGame:
+                        temp= 5;
+                        break;
+                    case KtereMenu.settings:
+                        temp = 2;
+                        break;
+                    case KtereMenu.settingsInGame:
+                        temp = 2;
+                        break;
+                    case KtereMenu.chooseLevel:
+                        temp = 2;
+                        break;
+                    case KtereMenu.chooseLevelInGame:
+                        temp = 2;
+                        break;
+                    case KtereMenu.highscores:
+                        temp = 1;
+                        break;
+                }
+                if(vybranaPolozka >= temp)
+                    vybranaPolozka = temp-1;
+            }
+            if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                pressed = true;
+                if (vybranaPolozka>0)
+                    vybranaPolozka--;
+                
+            }
+            if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                pressed = true;
+                if (ktereMenu == KtereMenu.highscores)
+                {
+                    Clicked(6, "");
+                }
+                else
+                    Clicked(vybranaPolozka, "");
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
+            {
+                pressed = false;
+            }
+
+            if (ktereMenu == KtereMenu.highscores) pozadiHS.Update();
             foreach (Button tl in tlacitka)
             {
                 tl.Update();
@@ -238,11 +300,13 @@ namespace The_Game
         }
         public void Clicked(int buttonNo,string name)
         {
+            vybranaPolozka = 0;
             if (name == "Quit")
             {
                 game.Exit();
                 return;
             }
+            
             if (ktereMenu == KtereMenu.main)
             {
                 if (buttonNo == 0)
@@ -263,6 +327,11 @@ namespace The_Game
                 if (buttonNo == 3)
                 {
                     ktereMenu = KtereMenu.settings;
+                    return;
+                }
+                if (buttonNo == 4)
+                {
+                    game.Exit();
                     return;
                 }
             }
@@ -286,6 +355,11 @@ namespace The_Game
                 if (buttonNo == 3)
                 {
                     ktereMenu = KtereMenu.settingsInGame;
+                    return;
+                }
+                if (buttonNo == 4)
+                {
+                    game.Exit();
                     return;
                 }
             }
