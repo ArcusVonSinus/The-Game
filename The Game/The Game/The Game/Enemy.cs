@@ -21,21 +21,21 @@ namespace The_Game
             switch (typ)
             {
                 case 0:
-                    pohyb.X = 3 * standartniRychlost;
+                    pohyb.X = 0;
                     pohyb.Y = 0;
                     pohybu = 2;
                     radky = 4;
                     sloupcu = 4;
                     break;
                 case 1:
-                    pohyb.X = standartniRychlost;
+                    pohyb.X = 0;
                     pohyb.Y = 0;
                     pohybu = 1;
                     radky = 2;
                     sloupcu = 3;
                     break;
                 case 3:
-                    pohyb.X = standartniRychlost;
+                    pohyb.X = 0;
                     pohyb.Y = 0;
                     pohybu = 1;
                     radky = 1;
@@ -53,11 +53,19 @@ namespace The_Game
                 vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);
 
         }
-        public void update()
+        public override void update(GameTime gameTime)
         {
+            width = game.blockSize / 2;
+            /*v milisekundach*/
+            long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
+            elapsedTime += timediff;
+            float rychlostPriserky = standartniRychlost;
+            
             vzhled[vzhledNo].Update();
+
             if (typ == 0)
             {
+                this.pohyb.X = rychlostPriserky;
                 this.pozice += this.pohyb;
                 if (game.me.pozice.X + 75 < this.pozice.X + 150)
                 {
@@ -94,11 +102,11 @@ namespace The_Game
             zoo.Add(temp);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             foreach (Enemy e in zoo)
             {
-                e.update();
+                e.update(gameTime);
             }
         }
         public void Draw(SpriteBatch spriteBatch)

@@ -175,7 +175,7 @@ namespace The_Game
             if (InGame && !InMenu)
             {
                 me.update(gameTime);
-                zoo.Update();
+                zoo.Update(gameTime);
             }
 
             base.Update(gameTime);

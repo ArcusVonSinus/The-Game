@@ -39,7 +39,7 @@ namespace The_Game
         public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         protected bool onLand;
         Background b;
-        long elapsedTime = 0;
+        protected long elapsedTime = 0;
         bool skocil = false;
         protected Game1 game;
         /// 
@@ -91,6 +91,7 @@ namespace The_Game
                 rychlostChuze = 1.5f * standartniRychlost;
             else
                 rychlostChuze = standartniRychlost;
+
             if (!(Keyboard.GetState().IsKeyDown(Keys.Space)||Keyboard.GetState().IsKeyDown(Keys.Up)))
             {
                 skocil = false;
@@ -158,25 +159,27 @@ namespace The_Game
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                    // anatomie pohybu vpravo
+                // anatomie pohybu vpravo
                 {
                     pohyb.X += timediff * horizontalniZmenaPohybu * standartniRychlost;
                     vzhledNo = 2;
+                    if (pohyb.X >= rychlostChuze)
+                    {
+                        pohyb.X = rychlostChuze;
+                    }
                 }
-                if (pohyb.X >= rychlostChuze)
-                {
-                    pohyb.X = rychlostChuze;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                else
+                    if (Keyboard.GetState().IsKeyDown(Keys.Left))
                     // anatomie pohybu vlevo
-                {
-                    pohyb.X -= timediff * horizontalniZmenaPohybu * standartniRychlost;
-                    vzhledNo = 3;
-                }
-                if (pohyb.X <= -rychlostChuze)
-                {
-                    pohyb.X = -rychlostChuze;
-                }
+                    {
+                        pohyb.X -= timediff * horizontalniZmenaPohybu * standartniRychlost;
+                        vzhledNo = 3;
+                        if (pohyb.X <= -rychlostChuze)
+                        {
+                            pohyb.X = -rychlostChuze;
+                        }
+                    }
+                    else pohyb.X *= 0.75f;                
 
                 Vector2 temppozice = new Vector2();
                 temppozice = pozice;
@@ -192,7 +195,6 @@ namespace The_Game
                         }
                         else if (pohyb.Y >= 0   && (int)(temppozice.Y -5) % 300 < 30)
                         {
-
                             pozice += pohyb * (time - 1);
                             onLand = true;
                             vzhledNo -= 2;
