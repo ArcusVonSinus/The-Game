@@ -14,17 +14,18 @@ namespace The_Game
         protected Menu menu;
         int labelNo;
         protected KtereMenu ktereMenu;
-        Vector2 vectorPosition;
+        Vector2 vectorPositionScore, vectorPositionName;
         Texture2D vzhled;
         Rectangle texturePosition;
-        string name;
+        string score, name;
         SpriteFont font;
         public Label()
         {
 
         }
-        public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string name)
+        public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string score, string name)
         {
+            this.score = score;
             this.name = name;
             this.menu = parent;
             this.labelNo = labelNo;
@@ -34,7 +35,8 @@ namespace The_Game
         }
         public virtual void Update()
         {
-            vectorPosition = new Vector2(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
+            vectorPositionScore = new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 21), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
+            vectorPositionName = new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 3), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
             texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
         }
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -42,7 +44,8 @@ namespace The_Game
             if (ktereMenu == menu.ktereMenu)
             {
                 spriteBatch.Draw(vzhled, texturePosition, Color.White);
-                spriteBatch.DrawString(font, name, vectorPosition, Color.Black);                
+                spriteBatch.DrawString(font, score, vectorPositionScore, Color.Black);
+                spriteBatch.DrawString(font, name, vectorPositionName, Color.Black);
             }
         }        
     }
@@ -202,12 +205,12 @@ namespace The_Game
             //----------------------------------------------------------------------
             temp = KtereMenu.highscores;
             pozadiHS = new HighScoreBackground(this, temp);
-            stitky[0] = new Label(this, 0, temp, "Ja 5000");
-            stitky[1] = new Label(this, 1, temp, "Ja 5000");
-            stitky[2] = new Label(this, 2, temp, "Ja 5000");
-            stitky[3] = new Label(this, 3, temp, "Ja 5000");
-            stitky[4] = new Label(this, 4, temp, "Ja 5000");
-            stitky[5] = new Label(this, 5, temp, "Ja 5000");
+            stitky[0] = new Label(this, 0, temp, "42.468", "Francimor");
+            stitky[1] = new Label(this, 1, temp, "42.467", "Karla");
+            stitky[2] = new Label(this, 2, temp, "37.189", "Honza");
+            stitky[3] = new Label(this, 3, temp, "31.112", "Lojza");
+            stitky[4] = new Label(this, 4, temp, "29.215", "Tom");
+            stitky[5] = new Label(this, 5, temp, "28.623", "Elen");
             tlacitka[18] = new Button(this, 6, temp, "Back");        
             //--------------------------------------------------------------------
 
