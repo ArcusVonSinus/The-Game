@@ -19,33 +19,37 @@ namespace The_Game
         /// 
 
         // ZDE JSOU NA VYBER RUZNE GRAVITACE
-        const float gravitacniZrychleniNaZemi = 9.81373f;
-        const float gravitacniZrychleniNaMesici = 1.62f;
+        protected const float gravitacniZrychleniNaZemi = 9.81373f;
+        protected const float gravitacniZrychleniNaMesici = 1.62f;
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
-        const float standartniRychlost = 1.06f;
-        const float standartniVyskok = 3f;
-        const float padaciKonstanta = 0.001f;
-        const float horizontalniZmenaPohybu = 0.12f;
+        protected const float standartniRychlost = 1.06f;
+        protected const float standartniVyskok = 3f;
+        protected const float padaciKonstanta = 0.001f;
+        protected const float horizontalniZmenaPohybu = 0.12f;
 
         /// 
         /// Promenne
         /// 
 
         private AnimatedSpriteHead[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
-        private int vzhledNo;
+        protected int vzhledNo;
         public Vector2 pozice, prevpozice; //souradnice    
-        Vector2 pohyb; //smer pohybu
+        protected Vector2 pohyb; //smer pohybu
         public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
-        bool onLand;
+        protected bool onLand;
         Background b;
         long elapsedTime = 0;
         bool skocil = false;
-        Game1 game;
+        protected Game1 game;
         /// 
         /// Konstruktor
         /// 
 
+        public Postavicka()
+        {
+
+        }
         public Postavicka(Game1 game,Texture2D[][] textury, int X, int Y, Background b)
         {
             this.game = game;
@@ -67,7 +71,7 @@ namespace The_Game
         /// 
         /// Metody
         /// 
-        public void death()
+        public virtual void death()
         {
             game.InGame = false;
             game.InMenu = true;
@@ -75,7 +79,7 @@ namespace The_Game
             game.m.ktereMenu = KtereMenu.main;
             
         }
-        public void update(GameTime gameTime)
+        public virtual void update(GameTime gameTime)
         {
             width = game.blockSize / 2;
             /*v milisekundach*/
@@ -233,7 +237,6 @@ namespace The_Game
                 death();
             }
         }
-
         public int height
         {
             get
@@ -242,8 +245,7 @@ namespace The_Game
             }
             set { }
         }
-
-        public void draw(SpriteBatch spriteBatch)
+        public virtual void draw(SpriteBatch spriteBatch)
         {
             Vector2 temp = new Vector2();
             temp = pozice;

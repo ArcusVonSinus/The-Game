@@ -7,67 +7,72 @@ using Microsoft.Xna.Framework;
 
 namespace The_Game
 {
-    class Enemy
+    class Enemy : Postavicka
     {
-        Game1 game;
-        int vzhledNo = 0;
-        Vector2 poloha;
         AnimatedSprite[] vzhled;
         int typ;
-        public Enemy(Game1 game, int X, int Y, int typ) 
+        public Enemy(Game1 game, int X, int Y, int typ)
         {
             this.typ = typ;
-            poloha = new Vector2(X,Y);
+            pozice = new Vector2(X, Y);
             this.game = game;
-            int pohybu=1;
-            int radky=1,sloupcu=1;
-            switch(typ)
+            int pohybu = 1;
+            int radky = 1, sloupcu = 1;
+            switch (typ)
             {
                 case 0:
-                pohybu = 2;
-                radky = 4;
-                sloupcu = 4;
-                break;
+                    pohyb.X = 3 * standartniRychlost;
+                    pohyb.Y = 0;
+                    pohybu = 2;
+                    radky = 4;
+                    sloupcu = 4;
+                    break;
                 case 1:
-                pohybu = 1;
-                radky = 2;
-                sloupcu = 3;
-                break;
+                    pohyb.X = standartniRychlost;
+                    pohyb.Y = 0;
+                    pohybu = 1;
+                    radky = 2;
+                    sloupcu = 3;
+                    break;
                 case 3:
-                pohybu = 1;
-                radky = 1;
-                sloupcu = 2;
-                break;
-
+                    pohyb.X = standartniRychlost;
+                    pohyb.Y = 0;
+                    pohybu = 1;
+                    radky = 1;
+                    sloupcu = 2;
+                    break;
             }
-            
+            Random rnd = new Random();
+            int tatoNahodaUrciPocatecniSmer = rnd.Next(2);
+            for (int i = 0; i <= tatoNahodaUrciPocatecniSmer; i++)
+                this.pohyb.X *= -1;
             vzhled = new AnimatedSprite[pohybu];
 
             vzhled[0] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ), radky, sloupcu);
-            if(pohybu>=2)
+            if (pohybu >= 2)
                 vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);
 
-            
         }
         public void update()
         {
             vzhled[vzhledNo].Update();
             if (typ == 0)
             {
-                if (game.me.pozice.X + 75 < poloha.X + 150)
+                this.pozice += this.pohyb;
+                if (game.me.pozice.X + 75 < this.pozice.X + 150)
                 {
                     vzhledNo = 1;
                 }
-                else if (game.me.pozice.X + 75 > poloha.X + 150)
+                else if (game.me.pozice.X + 75 > this.pozice.X + 150)
                 {
                     vzhledNo = 0;
                 }
             }
         }
-        public void draw(SpriteBatch spriteBatch)
+        public override void draw(SpriteBatch spriteBatch)
         {
             Vector2 temp = new Vector2();
-            temp= poloha;
+            temp = pozice;
             temp.X -= game.b.a;
             temp.X *= (game.blockSize / 300f);
             temp.Y *= (game.blockSize / 300f);
