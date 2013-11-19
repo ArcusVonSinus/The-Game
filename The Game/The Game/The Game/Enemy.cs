@@ -88,6 +88,7 @@ namespace The_Game
             Enemy temp = new Enemy(game, x, y, typ);
             zoo.Add(temp);
         }
+
         public void Update()
         {
             foreach (Enemy e in zoo)

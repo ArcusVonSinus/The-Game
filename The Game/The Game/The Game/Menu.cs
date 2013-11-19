@@ -48,6 +48,7 @@ namespace The_Game
     }
     class HighScoreBackground : Label
     {
+        public const float okraj = 45f;
         Texture2D vzhled;
         Rectangle texturePosition;
         public HighScoreBackground(Menu parent, KtereMenu ktereMenu)
@@ -58,11 +59,12 @@ namespace The_Game
         }
         public override void Update()
         {
-            texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * 0 * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(9 * menu.buttonSizeH * menu.zmenseni));
+            texturePosition = new Rectangle(menu.buttonsX - (int)(okraj * menu.zmenseni), menu.buttonsY - (int)(okraj * menu.zmenseni), (int)((menu.buttonSizeW + 2 * okraj) * menu.zmenseni), (int)(9 * menu.buttonSizeH * menu.zmenseni + okraj * menu.zmenseni));
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(vzhled, texturePosition, Color.White);
+            if (ktereMenu == menu.ktereMenu)
+                spriteBatch.Draw(vzhled, texturePosition, Color.White);
         }
     }
     class Button
@@ -356,7 +358,7 @@ namespace The_Game
             buttonsX += (int)(zmenseni * (1000 - buttonSizeW)) / 2;
             buttonsY = 50 + (int)(game.height - zmenseni * 1500 - 100) / 2;
             buttonsY += (int)(zmenseni * 320);
-            if (ktereMenu == KtereMenu.highscores) pozadiHS.Draw(spriteBatch);
+            pozadiHS.Draw(spriteBatch);
             foreach (Button tl in tlacitka)
             {  
                 tl.Draw(spriteBatch);

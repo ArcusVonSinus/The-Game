@@ -23,9 +23,9 @@ namespace The_Game
         const float gravitacniZrychleniNaMesici = 1.62f;
 
         // ZDE SE MENI RYCHLOST POHYBU PANACKA
-        const float standartniRychlost = 1.25f;
+        const float standartniRychlost = 1.06f;
         const float standartniVyskok = 3f;
-        const float padaciKonstanta = 0.0011f;
+        const float padaciKonstanta = 0.001f;
         const float horizontalniZmenaPohybu = 0.12f;
 
         /// 
