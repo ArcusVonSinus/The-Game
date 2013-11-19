@@ -7,6 +7,32 @@ using Microsoft.Xna.Framework;
 
 namespace The_Game
 {
+    public class Score
+    {
+        float score;
+        Game1 game;
+        Texture2D pozadi;
+        SpriteFont scoreFont;
+        Vector2 size;
+        Vector2 position;
+        public Score(Game1 game)
+        {
+            this.game = game;
+            pozadi = game.Content.Load<Texture2D>("Level " + game.level + "/scoreBackground");
+            scoreFont = game.Content.Load<SpriteFont>("Level " + game.level + "/scoreFont");
+            score = 0;
+            size = new Vector2();
+            position = new Vector2();
+        }
+        public void draw(SpriteBatch spriteBatch)
+        {
+            size.Y = 0.075f * game.height;
+            size.X = 5 * size.Y;
+            position.X = game.width - size.X - 0.5f * size.Y;
+            position.Y = 0.5f * size.Y;
+            spriteBatch.Draw(pozadi,new Rectangle((int)position.X,(int)position.Y,(int)size.X,(int)size.Y),Color.White);
+        }
+    }
     public class Background
     {
         public struct Tile
@@ -24,32 +50,12 @@ namespace The_Game
         public int vyska;
         Texture2D[][] pozadi;
         Game1 game;
-
-        public void move(int okolik)
-        {
-            int tempB = b;
-            int tempA = a;
-            b += okolik;
-            a += okolik;
-            if (b >= sirka * 300 - 300)
-            {
-                b = sirka * 300 - 301;
-                a = tempA + b - tempB;
-                return;
-            }
-            if (a <= 1)
-            {
-                a = tempA;
-                b = tempB;
-            }
-        }
-
-        public void move(float okolik)
-        { move((int)okolik); return; }
+        Score score;
 
         public Background(Game1 game,Texture2D[][] pozadi, int radku, int b)
         {
             this.game = game;
+            score = new Score(game);
             a = 0;
             this.b = b;
             this.pozadi = pozadi;
@@ -117,6 +123,26 @@ namespace The_Game
             }
         }
 
+        public void move(float okolik)
+        { move((int)okolik); return; }
+        public void move(int okolik)
+        {
+            int tempB = b;
+            int tempA = a;
+            b += okolik;
+            a += okolik;
+            if (b >= sirka * 300 - 300)
+            {
+                b = sirka * 300 - 301;
+                a = tempA + b - tempB;
+                return;
+            }
+            if (a <= 1)
+            {
+                a = tempA;
+                b = tempB;
+            }
+        }
         public void draw(int w, int h, SpriteBatch spriteBatch)
         {
             int a1 = a / 300;
@@ -141,6 +167,7 @@ namespace The_Game
                     }
                 }
             }
+            score.draw(spriteBatch);
         }
     }
 }
