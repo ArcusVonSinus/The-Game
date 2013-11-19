@@ -38,7 +38,7 @@ namespace The_Game
         protected Vector2 pohyb; //smer pohybu
         public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         protected bool onLand;
-        Background b;
+        protected Background b;
         protected long elapsedTime = 0;
         bool skocil = false;
         protected Game1 game;
@@ -191,7 +191,7 @@ namespace The_Game
                         if ((b.level[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y -5) / 300].typ == 0) &&
                             (b.level[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y -5) / 300].typ == 0))
                         {
-
+                            // CO PATRI SEM???
                         }
                         else if (pohyb.Y >= 0   && (int)(temppozice.Y -5) % 300 < 30)
                         {
@@ -227,14 +227,14 @@ namespace The_Game
             /*zmena polohy*/
             pozice += pohyb * timediff;
             if (pozice.X <= 0)
-                pozice.X = 0;
+                pozice.X = 0; // neprejde za levy okraj
             if (pozice.X >= b.sirka * 300 - 451)
-                pozice.X = b.sirka * 300 - 451; //jeste sirka panacka
+                pozice.X = b.sirka * 300 - 451; // neprejde za pravy okraj
             if (((int)pozice.X > (b.b - b.a) / 4) && (pozice.X < b.sirka * 300 - 301 - 3 * (b.b - b.a) / 4))
             {
                 b.move((int)pozice.X - b.a - ((b.b - b.a) / 4));
             }
-            if ((pozice.Y - 261 > b.vyska * 300)||(pozice.Y < 0))
+            if ((pozice.Y - 261 > b.vyska * 300) || (pozice.Y < 0))
             {
                 death();
             }

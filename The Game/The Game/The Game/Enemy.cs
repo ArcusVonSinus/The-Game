@@ -11,17 +11,18 @@ namespace The_Game
     {
         AnimatedSprite[] vzhled;
         int typ;
-        public Enemy(Game1 game, int X, int Y, int typ)
+        public Enemy(Game1 game, int X, int Y, int typ, Background b)
         {
             this.typ = typ;
             pozice = new Vector2(X, Y);
             this.game = game;
             int pohybu = 1;
             int radky = 1, sloupcu = 1;
+            this.b = b;
             switch (typ)
             {
                 case 0:
-                    pohyb.X = 0;
+                    pohyb.X = standartniRychlost * 0.937465f;
                     pohyb.Y = 0;
                     pohybu = 2;
                     radky = 4;
@@ -54,26 +55,41 @@ namespace The_Game
 
         }
         public override void update(GameTime gameTime)
-        {
-            width = game.blockSize / 2;
+        {            
             /*v milisekundach*/
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff;
-            float rychlostPriserky = standartniRychlost;
-            
+                        
             vzhled[vzhledNo].Update();
 
             if (typ == 0)
-            {
-                this.pohyb.X = rychlostPriserky;
-                this.pozice += this.pohyb;
-                if (game.me.pozice.X + 75 < this.pozice.X + 150)
+            {                                
+                if (this.pohyb.X <= 0)
                 {
                     vzhledNo = 1;
                 }
-                else if (game.me.pozice.X + 75 > this.pozice.X + 150)
+                else if (this.pohyb.X > 0)
                 {
                     vzhledNo = 0;
+                }
+
+                /*zmena polohy*/
+                this.pozice += this.pohyb * timediff;
+                if (this.pozice.X < 0)
+                {
+                    if (this.pohyb.X < 0)
+                    {
+                        this.pozice.X = 10; // neprejde za levy okraj
+                        this.pohyb.X = -this.pohyb.X; // a otoci se
+                    }
+                }
+                if (this.pozice.X > b.sirka * 300 - 400)
+                {
+                    if (this.pohyb.X > 0)
+                    {
+                        this.pozice.X = b.sirka * 300 - 400; // neprejde za pravy okraj
+                        this.pohyb.X = -this.pohyb.X; // a otoci se
+                    }
                 }
             }
         }
@@ -96,9 +112,9 @@ namespace The_Game
             this.game = game;
             zoo = new List<Enemy>();
         }
-        public void add(int typ, int x, int y)
+        public void add(int typ, int x, int y, Background b)
         {
-            Enemy temp = new Enemy(game, x, y, typ);
+            Enemy temp = new Enemy(game, x, y, typ, b);
             zoo.Add(temp);
         }
 

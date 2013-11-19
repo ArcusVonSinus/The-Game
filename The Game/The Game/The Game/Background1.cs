@@ -114,7 +114,7 @@ namespace The_Game
                     }
                     if (level[i, j].typ >= '0' && level[i, j].typ <= '9')
                     {
-                        game.zoo.add(level[i, j].typ - '0', i * 300, j * 300);
+                        game.zoo.add(level[i, j].typ - '0', i * 300, j * 300, this);
                         level[i, j].typ = 0;
                     }
                     if(level[i, j].typ == '*')
