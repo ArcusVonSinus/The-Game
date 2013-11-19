@@ -11,10 +11,12 @@ namespace The_Game
     {
         AnimatedSprite[] vzhled;
         int typ;
+        Vector2 zakladniPozice;
         public Enemy(Game1 game, int X, int Y, int typ, Background b)
         {
             this.typ = typ;
             pozice = new Vector2(X, Y);
+            zakladniPozice = new Vector2(X, Y);
             this.game = game;
             int pohybu = 1;
             int radky = 1, sloupcu = 1;
@@ -29,8 +31,8 @@ namespace The_Game
                     sloupcu = 4;
                     break;
                 case 1:
-                    pohyb.X = 0;
-                    pohyb.Y = 0;
+                    pohyb.X = standartniRychlost * 0.7f;
+                    pohyb.Y = standartniRychlost * 0.3f;
                     pohybu = 1;
                     radky = 2;
                     sloupcu = 3;
@@ -62,35 +64,74 @@ namespace The_Game
                         
             vzhled[vzhledNo].Update();
 
-            if (typ == 0)
-            {                                
-                if (this.pohyb.X <= 0)
-                {
-                    vzhledNo = 1;
-                }
-                else if (this.pohyb.X > 0)
-                {
-                    vzhledNo = 0;
-                }
+            switch (typ)
+            {
+                case 0: // TRISECTOR
+                    if (this.pohyb.X <= 0)
+                    {
+                        vzhledNo = 1;
+                    }
+                    else if (this.pohyb.X > 0)
+                    {
+                        vzhledNo = 0;
+                    }
 
-                /*zmena polohy*/
-                this.pozice += this.pohyb * timediff;
-                if (this.pozice.X < 0)
-                {
-                    if (this.pohyb.X < 0)
+                    /*zmena polohy*/
+                    this.pozice += this.pohyb * timediff;
+                    if (this.pozice.X < 0)
                     {
-                        this.pozice.X = 10; // neprejde za levy okraj
-                        this.pohyb.X = -this.pohyb.X; // a otoci se
+                        if (this.pohyb.X < 0)
+                        {
+                            this.pozice.X = 0; // neprejde za levy okraj
+                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                        }
                     }
-                }
-                if (this.pozice.X > b.sirka * 300 - 400)
-                {
-                    if (this.pohyb.X > 0)
+                    if (this.pozice.X > b.sirka * 300 - 400)
                     {
-                        this.pozice.X = b.sirka * 300 - 400; // neprejde za pravy okraj
-                        this.pohyb.X = -this.pohyb.X; // a otoci se
+                        if (this.pohyb.X > 0)
+                        {
+                            this.pozice.X = b.sirka * 300 - 400; // neprejde za pravy okraj
+                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                        }
                     }
-                }
+                    break;
+
+                case 1: // IRACIONALNI ZRUDA
+                    /*zmena polohy*/
+                    this.pozice += this.pohyb * timediff;
+                    if (this.pozice.X + 300 < this.zakladniPozice.X)
+                    {
+                        if (this.pohyb.X < 0)
+                        {
+                            this.pozice.X = this.zakladniPozice.X - 300; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (LEVA STRANA)
+                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                        }
+                    }
+                    if (this.pozice.X - 300 > this.zakladniPozice.X)
+                    {
+                        if (this.pohyb.X > 0)
+                        {
+                            this.pozice.X = this.zakladniPozice.X + 300; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (PRAVA STRANA)
+                            this.pohyb.X = -this.pohyb.X; // a otoci se
+                        }
+                    }
+                    if (this.pozice.Y + 45 < this.zakladniPozice.Y)
+                    {
+                        if (this.pohyb.Y < 0)
+                        {
+                            this.pozice.Y = this.zakladniPozice.Y - 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (LEVA STRANA)
+                            this.pohyb.Y = -this.pohyb.Y; // a otoci se
+                        }
+                    }
+                    if (this.pozice.Y - 45 > this.zakladniPozice.Y)
+                    {
+                        if (this.pohyb.Y > 0)
+                        {
+                            this.pozice.Y = this.zakladniPozice.Y + 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (PRAVA STRANA)
+                            this.pohyb.Y = -this.pohyb.Y; // a otoci se
+                        }
+                    }
+                    break;
             }
         }
         public override void draw(SpriteBatch spriteBatch)
