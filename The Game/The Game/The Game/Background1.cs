@@ -9,7 +9,7 @@ namespace The_Game
 {
     public class Score
     {
-        float score;
+        public float score;
         Game1 game;
         Texture2D pozadi;
         SpriteFont scoreFont;
@@ -31,6 +31,8 @@ namespace The_Game
             position.X = game.width - size.X - 0.5f * size.Y;
             position.Y = 0.5f * size.Y;
             spriteBatch.Draw(pozadi,new Rectangle((int)position.X,(int)position.Y,(int)size.X,(int)size.Y),Color.White);
+
+            spriteBatch.DrawString(scoreFont, "" + score.ToString(), position, Color.Black);
         }
     }
     public class Background
@@ -50,7 +52,7 @@ namespace The_Game
         public int vyska;
         Texture2D[][] pozadi;
         Game1 game;
-        Score score;
+        public Score score;
 
         public Background(Game1 game,Texture2D[][] pozadi, int radku, int b)
         {
