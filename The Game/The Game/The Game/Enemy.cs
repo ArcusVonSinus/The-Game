@@ -133,6 +133,15 @@ namespace The_Game
                     }
                     break;
             }
+
+            if (this.pohyb.X < 0)
+                if ((b.level[(int)(this.pozice.X) / 300, ((int)this.pozice.Y + 20) / 300 + 1].typ == 2) ||
+                    (b.level[(int)(this.pozice.X) / 300, ((int)this.pozice.Y + 20) / 300 + 1].typ == 6))
+                    this.pohyb.X *= -1;
+            //if (this.pohyb.X > 0)                
+            //    if ((b.level[(int)(this.pozice.X + 395) / 300, ((int)this.pozice.Y + 420) / 300].typ == 2) ||                    
+            //        (b.level[(int)(this.pozice.X + 395) / 300, ((int)this.pozice.Y + 420) / 300].typ == 6))                
+            //        this.pohyb.X *= -1;                
             
         }
         public override void draw(SpriteBatch spriteBatch)

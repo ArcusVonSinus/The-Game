@@ -54,13 +54,13 @@ namespace The_Game
         {
             this.game = game;
             vzhled = new AnimatedSpriteHead[4];
-            Vector3 pozicehlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
-            vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, pozicehlavy1);
-            vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, pozicehlavy1);
+            Vector3 poziceHlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
+            vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, poziceHlavy1);
+            vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, poziceHlavy1);
 
-            pozicehlavy1.Y = 0.15f;
-            vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, pozicehlavy1);
-            vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, pozicehlavy1);
+            poziceHlavy1.Y = 0.15f;
+            vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, poziceHlavy1);
+            vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, poziceHlavy1);
             pozice.X = X;
             pozice.Y = Y;
             prevpozice = pozice;
@@ -180,8 +180,7 @@ namespace The_Game
                         }
                     }
                     else pohyb.X *= 0.75f;
-
-                // CO DELA TOHLETO??
+                                
                 Vector2 temppozice = new Vector2();
                 temppozice = pozice;
                 for (int time = 1; time <= timediff; time++)
@@ -192,7 +191,7 @@ namespace The_Game
                         if ((b.level[(int)(temppozice.X + 5) / 300, ((int)temppozice.Y - 5) / 300].typ == 0) &&
                             (b.level[(int)(temppozice.X + 145) / 300, ((int)temppozice.Y - 5) / 300].typ == 0))
                         {
-                            // CO PATRI SEM???
+
                         }
                         else if (pohyb.Y >= 0 && (int)(temppozice.Y - 5) % 300 < 30)
                         {

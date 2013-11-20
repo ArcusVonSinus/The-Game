@@ -78,7 +78,7 @@ namespace The_Game
                     levelLine = lvlReader.ReadLine();
             }
             lvlReader.Close();
-            string Dily = ".?X?L?R?l?x?r?";
+            string Dily = ".?X?R?L?l?x?r?";
             int verzi = 0;
             for (int j = 0; j < vyska; j++)
             {
