@@ -133,16 +133,7 @@ namespace The_Game
                     }
                     break;
             }
-            // Spolecne chovani
-            if (this.pohyb.X > 0)
-                if ((int)(this.pozice.X + this.width) / 300 + 1 <= b.sirka)
-                    if (b.level[(int)(this.pozice.X + this.width) / 300 + 1, (int)(this.pozice.Y) / 300 - 1].typ != 0)
-                        this.pohyb.X *= -1;
-            if (this.pohyb.X < 0)
-                if ((int)(this.pozice.X) / 300 - 1 > 0)
-                    if (b.level[(int)(this.pozice.X) / 300 - 1, (int)(this.pozice.Y) / 300 - 1].typ != 0)
-                        this.pohyb.X *= -1;
-
+            
         }
         public override void draw(SpriteBatch spriteBatch)
         {
