@@ -339,6 +339,7 @@ namespace The_Game
             {
                 if (buttonNo == 0)
                 {
+                    
                     game.InMenu = false;
                     game.IsMouseVisible = false;
                 }

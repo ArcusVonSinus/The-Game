@@ -32,15 +32,15 @@ namespace The_Game
         /// Promenne
         /// 
 
-        private AnimatedSpriteHead[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu ...
-        protected int vzhledNo;
+        private AnimatedSpriteHead[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu doleva 3 vevzduchu doprava ...
+        protected int vzhledNo; //ktery vzhled je prave zobrazen
         public Vector2 pozice, prevpozice; //souradnice    
         protected Vector2 pohyb; //smer pohybu
         public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         protected bool onLand;
         protected Background b;
         protected long elapsedTime = 0;
-        bool skocil = false;
+        bool skocil = false;   //drzim-li mezernik, tam mam skocit jen jednou, ne skakat porad
         protected Game1 game;
         /// 
         /// Konstruktor
@@ -73,18 +73,20 @@ namespace The_Game
         /// 
         public virtual void death()
         {
-            game.InGame = false;
+            game.InGame = false; 
             game.InMenu = true;
             game.IsMouseVisible = true;
-            game.m.ktereMenu = KtereMenu.main;
+            game.m.ktereMenu = KtereMenu.main; 
 
         }
         public virtual void update(GameTime gameTime)
         {
-            width = game.blockSize / 2;
-            /*v milisekundach*/
+            width = game.blockSize / 2;  //v pripade zmeny rozliseni se musi prepocitat sirka
+            
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
-            elapsedTime += timediff;
+            elapsedTime += timediff; //v millisekundach
+            if (timediff > 200)   //jsem-li v menu, tak stale bezi cas a timediff je pak nekolik tisic (nekolik sekund), takze bych se pohl o strasne velky kus. Tohle to vyresi. Pokud by fps bylo < 5, tak je to stejne nehratelne.
+                timediff = 16;    
             float rychlostChuze;
             // Pri stisknuti leveho shiftu se zvysi rychlost na 1.5 nasobek standartni rychlosti
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
@@ -120,8 +122,8 @@ namespace The_Game
                 {
                     if (b.level[(int)(pozice.X + 145) / 300, ((int)pozice.Y + 20) / 300].typ == 0)
                     {
-                        onLand = false;
-                        if (vzhledNo <= 1)
+                        onLand = false; //nemam-li nohy na zemi, zacinam litat :-)
+                        if (vzhledNo <= 1)    
                         {
                             vzhledNo += 2;
                         }
@@ -183,7 +185,7 @@ namespace The_Game
                                 
                 Vector2 temppozice = new Vector2();
                 temppozice = pozice;
-                for (int time = 1; time <= timediff; time++)
+                for (int time = 1; time <= timediff; time++)   //mam se pohnout o timediff*pohyb, a timediff je int, takze ho projedu a vzdy zkusim, zdali uz nahodou nekoliduu s prostredim
                 {
                     temppozice += pohyb;
                     if ((int)temppozice.Y + 5 < b.vyska * 300)
@@ -251,10 +253,10 @@ namespace The_Game
         {
             Vector2 temp = new Vector2();
             temp = pozice;
-            temp.X -= b.a;
-            temp.Y -= 261;
-            temp.Y += 13;
-            temp.X *= (width / 150f);
+            temp.X -= b.a; //prizpusobeni se pozadi
+            temp.Y -= 261; //prepocet z leveho dolniho rohu na pravy dolni
+            temp.Y += 13; //aby to lepe sedelo na pozadi
+            temp.X *= (width / 150f); // prepocet na skutecne pixely
             temp.Y *= (width / 150f);
             vzhled[vzhledNo].Draw(spriteBatch, temp, width);
         }
