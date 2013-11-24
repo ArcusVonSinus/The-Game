@@ -5,9 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace The_Game
+namespace The_Game // TODO COMMENTS uplne vsude v tomto souboru
 {
-    public class AnimatedSprite
+    public class AnimatedSprite // Pouziva se tato trida nekde?
     {
         public Texture2D Texture;
         public int Rows;
@@ -54,7 +54,7 @@ namespace The_Game
 
         }
     }
-    public class AnimatedSpriteHead
+    public class AnimatedSpriteHead // Tady mi chybi nejaky rectangle, jakozto zaladni parametr...mnohem jednoduseji by se pak resili kolize s priserkama
     {
         public Texture2D Texture;
         public Texture2D TextureHead;

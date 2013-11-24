@@ -67,7 +67,7 @@ namespace The_Game
             switch (typ)
             {
                 case 0: // TRISECTOR
-                    if (this.pohyb.X <= 0)
+                    if (this.pohyb.X < 0)
                     {
                         vzhledNo = 1;
                     }
@@ -86,14 +86,27 @@ namespace The_Game
                             this.pohyb.X *= -1; // a otoci se
                         }
                     }
-                    if (this.pozice.X > b.sirka * 300 - 400)
+                    if (this.pozice.X > b.sirka * 300 - 600)
                     {
                         if (this.pohyb.X > 0)
                         {
-                            this.pozice.X = b.sirka * 300 - 400; // neprejde za pravy okraj
+                            this.pozice.X = b.sirka * 300 - 600; // neprejde za pravy okraj
                             this.pohyb.X *= -1; // a otoci se
                         }
                     }
+                    if ((this.pohyb.X < 0) &&
+                        ((int)(this.pozice.X) / 300 >= 0))
+                        if ((b.level[(int)(this.pozice.X + 250) / 300, ((int)this.pozice.Y + 420) / 300].typ == 6) ||
+                            (b.level[(int)(this.pozice.X + 250) / 300, ((int)this.pozice.Y + 420) / 300].typ == 6))
+                            ///
+                            /// WHAAAAT???? Kdyz jsou tam ty sestky, tak to funguje. Kdyz je tam jedna dvojka, ktera by tam mela byt tak se to rozsype. Vyzkousej
+                            /// NECHAPU
+                            /// 
+                            this.pohyb.X *= -1;
+                    if (this.pohyb.X > 0)
+                        if ((b.level[(int)(this.pozice.X + 25) / 300, ((int)this.pozice.Y + 420) / 300].typ == 3) ||
+                            (b.level[(int)(this.pozice.X + 25) / 300, ((int)this.pozice.Y + 420) / 300].typ == 4))
+                            this.pohyb.X *= -1;
                     break;
 
                 case 1: // IRACIONALNI ZRUDA
@@ -133,16 +146,6 @@ namespace The_Game
                     }
                     break;
             }
-
-            if (this.pohyb.X < 0)
-                if ((b.level[(int)(this.pozice.X) / 300, ((int)this.pozice.Y + 20) / 300 + 1].typ == 2) ||
-                    (b.level[(int)(this.pozice.X) / 300, ((int)this.pozice.Y + 20) / 300 + 1].typ == 6))
-                    this.pohyb.X *= -1;
-            //if (this.pohyb.X > 0)                
-            //    if ((b.level[(int)(this.pozice.X + 395) / 300, ((int)this.pozice.Y + 420) / 300].typ == 2) ||                    
-            //        (b.level[(int)(this.pozice.X + 395) / 300, ((int)this.pozice.Y + 420) / 300].typ == 6))                
-            //        this.pohyb.X *= -1;                
-            
         }
         public override void draw(SpriteBatch spriteBatch)
         {

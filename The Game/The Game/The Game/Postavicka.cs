@@ -40,7 +40,7 @@ namespace The_Game
         protected bool onLand;
         protected Background b;
         protected long elapsedTime = 0;
-        bool skocil = false;   //drzim-li mezernik, tam mam skocit jen jednou, ne skakat porad
+        bool skocil = false;   //drzim-li mezernik, tak mam skocit jen jednou, ne skakat porad
         protected Game1 game;
         /// 
         /// Konstruktor

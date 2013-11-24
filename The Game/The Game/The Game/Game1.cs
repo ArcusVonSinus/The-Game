@@ -131,10 +131,10 @@ namespace The_Game
                 }
                 font = Content.Load<SpriteFont>("font");
 
-                int druhukachlicek = 14;
-                Texture2D[][] pozadi = new Texture2D[druhukachlicek][];
+                int druhuKachlicek = 14;
+                Texture2D[][] pozadi = new Texture2D[druhuKachlicek][];
                 {
-                    for (int i = 0; i < druhukachlicek; i++)
+                    for (int i = 0; i < druhuKachlicek; i++)
                     {
                         pozadi[i] = new Texture2D[1];
                     }
