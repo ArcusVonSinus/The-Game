@@ -176,6 +176,11 @@ namespace The_Game
             {
                 me.update(gameTime);
                 zoo.Update(gameTime);
+                foreach (Enemy enemy in zoo.zoo)
+                {
+                    if (me.kolizniObdelnik.Intersects(enemy.kolizniObdelnik))
+                        me.death();
+                }
             }
 
             base.Update(gameTime);

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace The_Game
 {
-    class Enemy : Postavicka
+    public class Enemy : Postavicka
     {
         AnimatedSprite[] vzhled;
         int typ;
@@ -54,7 +54,7 @@ namespace The_Game
             vzhled[0] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ), radky, sloupcu);
             if (pohybu >= 2)
                 vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);
-
+            kolizniObdelnik = new Rectangle((int)(X + this.width / 10.00), (int)(Y + this.height / 10.00), (int)(this.width * 0.8), (int)(this.height * 0.8));
         }
         public override void update(GameTime gameTime)
         {
@@ -97,15 +97,11 @@ namespace The_Game
                     if ((this.pohyb.X < 0) &&
                         ((int)(this.pozice.X) / 300 >= 0))
                         if ((b.level[(int)(this.pozice.X + 250) / 300, ((int)this.pozice.Y + 420) / 300].typ == 6) ||
-                            (b.level[(int)(this.pozice.X + 250) / 300, ((int)this.pozice.Y + 420) / 300].typ == 6))
-                            ///
-                            /// WHAAAAT???? Kdyz jsou tam ty sestky, tak to funguje. Kdyz je tam jedna dvojka, ktera by tam mela byt tak se to rozsype. Vyzkousej
-                            /// NECHAPU
-                            /// 
+                            (b.level[(int)(this.pozice.X + 250) / 300, ((int)this.pozice.Y + 420) / 300].typ == 8))
                             this.pohyb.X *= -1;
                     if (this.pohyb.X > 0)
-                        if ((b.level[(int)(this.pozice.X + 25) / 300, ((int)this.pozice.Y + 420) / 300].typ == 3) ||
-                            (b.level[(int)(this.pozice.X + 25) / 300, ((int)this.pozice.Y + 420) / 300].typ == 4))
+                        if ((b.level[(int)(this.pozice.X + 25) / 300, ((int)this.pozice.Y + 420) / 300].typ == 4) ||
+                            (b.level[(int)(this.pozice.X + 25) / 300, ((int)this.pozice.Y + 420) / 300].typ == 12))
                             this.pohyb.X *= -1;
                     break;
 
@@ -132,7 +128,7 @@ namespace The_Game
                     {
                         if (this.pohyb.Y < 0)
                         {
-                            this.pozice.Y = this.zakladniPozice.Y - 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (LEVA STRANA)
+                            this.pozice.Y = this.zakladniPozice.Y - 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (SMER DOLU)
                             this.pohyb.Y *= -1; // a otoci se
                         }
                     }
@@ -140,12 +136,15 @@ namespace The_Game
                     {
                         if (this.pohyb.Y > 0)
                         {
-                            this.pozice.Y = this.zakladniPozice.Y + 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (PRAVA STRANA)
+                            this.pozice.Y = this.zakladniPozice.Y + 45; // neodejde od sve zakldani pozice dal nez na zadanou vzdalenost (SMER NAHORU)
                             this.pohyb.Y *= -1; // a otoci se
                         }
                     }
                     break;
             }
+            this.kolizniObdelnik.X += (int)(this.pohyb.X * timediff);
+            this.kolizniObdelnik.Y += (int)(this.pohyb.Y * timediff);
+            
         }
         public override void draw(SpriteBatch spriteBatch)
         {
@@ -160,7 +159,7 @@ namespace The_Game
     public class Zoo
     {
         Game1 game;
-        List<Enemy> zoo;
+        public List<Enemy> zoo;
         public Zoo(Game1 game)
         {
             this.game = game;
@@ -171,7 +170,6 @@ namespace The_Game
             Enemy temp = new Enemy(game, x, y, typ, b);
             zoo.Add(temp);
         }
-
         public void Update(GameTime gameTime)
         {
             foreach (Enemy e in zoo)
