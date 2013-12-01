@@ -211,11 +211,8 @@ namespace The_Game
                             pohyb.X = 0;
                             break;
                         }
-
                     }
-
                 }
-
             }
 
             if (onLand && Math.Abs(pohyb.X) > 0)

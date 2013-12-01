@@ -166,7 +166,7 @@ namespace The_Game
             {
                 m.ktereMenu = KtereMenu.mainInGame;
                 InMenu = true;
-                IsMouseVisible = true;
+                IsMouseVisible = true;                
             }
             if (InMenu)
             {

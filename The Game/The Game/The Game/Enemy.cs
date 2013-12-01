@@ -54,7 +54,7 @@ namespace The_Game
             vzhled[0] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ), radky, sloupcu);
             if (pohybu >= 2)
                 vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);
-            kolizniObdelnik = new Rectangle((int)(X + this.width / 10.00), (int)(Y + this.height / 10.00), (int)(this.width * 0.8), (int)(this.height * 0.8));
+            kolizniObdelnik = new Rectangle((int)(X + 300.00 / 10.00), (int)(Y + 300.00 / 10.00), (int)(300.00 * 0.8), (int)(300.00 * 0.8));
         }
         public override void update(GameTime gameTime)
         {
