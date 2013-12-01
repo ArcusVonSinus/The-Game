@@ -42,8 +42,7 @@ namespace The_Game
         protected Background b;
         protected long elapsedTime = 0;
         bool skocil = false;   //drzim-li mezernik, tak mam skocit jen jednou, ne skakat porad
-        protected Game1 game;
-        public Rectangle kolizniObdelnik;
+        protected Game1 game;       
 
 
         /// 
@@ -68,8 +67,7 @@ namespace The_Game
             pozice.X = X;
             pozice.Y = Y;
             prevpozice = pozice;
-            onLand = true;
-            kolizniObdelnik = new Rectangle((int)(X + this.width / 10.00), (int)(Y + this.height / 10.00), (int)(this.width * 0.8), (int)(this.height * 0.8));
+            onLand = true;            
             this.b = b;
         }
 
@@ -203,8 +201,6 @@ namespace The_Game
                         else if (pohyb.Y >= 0 && (int)(temppozice.Y - 5) % 300 < 30)
                         {
                             pozice += pohyb * (time - 1);
-                            kolizniObdelnik.X += (int)pohyb.X * (time - 1);
-                            kolizniObdelnik.Y += (int)pohyb.Y * (time - 1);
                             onLand = true;
                             vzhledNo -= 2;
                             pohyb.Y = 0;
@@ -232,8 +228,6 @@ namespace The_Game
 
             /*zmena polohy*/
             pozice += pohyb * timediff;
-            kolizniObdelnik.X += (int)(pohyb.X * timediff);
-            kolizniObdelnik.Y += (int)(pohyb.Y * timediff);
             if (pozice.X <= 0)
                 pozice.X = 0; // neprejde za levy okraj
             if (pozice.X >= b.sirka * 300 - 451)

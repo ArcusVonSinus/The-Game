@@ -53,8 +53,7 @@ namespace The_Game
 
             vzhled[0] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ), radky, sloupcu);
             if (pohybu >= 2)
-                vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);
-            kolizniObdelnik = new Rectangle((int)(X + 300.00 / 10.00), (int)(Y + 300.00 / 10.00), (int)(300.00 * 0.8), (int)(300.00 * 0.8));
+                vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);            
         }
         public override void update(GameTime gameTime)
         {
@@ -142,8 +141,6 @@ namespace The_Game
                     }
                     break;
             }
-            this.kolizniObdelnik.X += (int)(this.pohyb.X * timediff);
-            this.kolizniObdelnik.Y += (int)(this.pohyb.Y * timediff);
             
         }
         public override void draw(SpriteBatch spriteBatch)

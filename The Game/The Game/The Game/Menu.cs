@@ -103,7 +103,11 @@ namespace The_Game
         }        
         public void Update()
         {
-            position = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f*buttonNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
+            position = new Rectangle(
+                menu.buttonsX, 
+                menu.buttonsY + (int)(1.5f*buttonNo * menu.buttonSizeH * menu.zmenseni), 
+                (int)(menu.buttonSizeW * menu.zmenseni), 
+                (int)(menu.buttonSizeH * menu.zmenseni));
             mouseState = Mouse.GetState();
             if(menu.ktereMenu == ktereMenu)
             {
@@ -274,7 +278,9 @@ namespace The_Game
                 else
                     Clicked(vybranaPolozka, "");
             }
-            if (Keyboard.GetState().IsKeyUp(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Up))
+            if (Keyboard.GetState().IsKeyUp(Keys.Enter) && 
+                Keyboard.GetState().IsKeyUp(Keys.Down) && 
+                Keyboard.GetState().IsKeyUp(Keys.Up))
             {
                 pressed = false;
             }
@@ -431,7 +437,13 @@ namespace The_Game
         {
 
             spriteBatch.Draw(pozadi, new Rectangle(0,0,game.width,game.height), Color.White);
-            spriteBatch.Draw(pozadiMenu,new Rectangle(50+(int)(game.width-zmenseni*1000-100)/2, 50+(int)(game.height-zmenseni*1500-100)/2, (int)(zmenseni*1000),  (int)(zmenseni*1500) ),Color.White);
+            spriteBatch.Draw(
+                pozadiMenu,
+                new Rectangle(
+                    50 + (int)(game.width - zmenseni * 1000 - 100) / 2,
+                    50 + (int)(game.height - zmenseni * 1500 - 100) / 2,
+                    (int)(zmenseni * 1000), (int)(zmenseni * 1500)),
+                Color.White);
             buttonsX = 50 + (int)(game.width - zmenseni * 1000 - 100) / 2;
             buttonsX += (int)(zmenseni * (1000 - buttonSizeW)) / 2;
             buttonsY = 50 + (int)(game.height - zmenseni * 1500 - 100) / 2;

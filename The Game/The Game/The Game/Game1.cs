@@ -176,11 +176,6 @@ namespace The_Game
             {
                 me.update(gameTime);
                 zoo.Update(gameTime);
-                foreach (Enemy enemy in zoo.zoo)
-                {
-                    if (me.kolizniObdelnik.Intersects(enemy.kolizniObdelnik))
-                        me.death();
-                }
             }
 
             base.Update(gameTime);
@@ -200,7 +195,6 @@ namespace The_Game
                 b.draw(width, height, spriteBatch);
                 zoo.Draw(spriteBatch);
                 me.draw(spriteBatch);
-
             }
 
             //spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);
