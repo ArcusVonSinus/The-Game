@@ -38,7 +38,7 @@ namespace The_Game // TODO COMMENTS uplne vsude v tomto souboru
         public void Update()
         {
             currentFrame++;
-            currentFrame %= totalFrames;
+            currentFrame %= totalFrames;            
         }
         public void Draw(SpriteBatch spriteBatch, Vector2 location, int width)
         {

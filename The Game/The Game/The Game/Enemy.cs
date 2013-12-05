@@ -53,14 +53,16 @@ namespace The_Game
 
             vzhled[0] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ), radky, sloupcu);
             if (pohybu >= 2)
-                vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);            
+                vzhled[1] = new AnimatedSprite(game.Content.Load<Texture2D>("Level " + game.level + "/Enemy/E" + typ + "1"), radky, sloupcu);                        
         }
         public override void update(GameTime gameTime)
         {
+            height = width = game.blockSize;
             /*v milisekundach*/
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff;
-
+            if (timediff > 200)   //jsem-li v menu, tak stale bezi cas a timediff je pak nekolik tisic (nekolik sekund), takze bych se pohl o strasne velky kus. Tohle to vyresi. Pokud by fps bylo < 5, tak je to stejne nehratelne.
+                timediff = 16;  
             vzhled[vzhledNo].Update();
 
             switch (typ)
@@ -141,7 +143,19 @@ namespace The_Game
                     }
                     break;
             }
+            if (this.kolizniObdelnik.Intersects(game.me.kolizniObdelnik))
+            {
+                game.me.death();
+            }
             
+        }
+        public override Rectangle kolizniObdelnik
+        {
+            get
+            {
+                return new Rectangle((int)pozice.X, (int)pozice.Y , 300, 300);
+            }
+            set { }
         }
         public override void draw(SpriteBatch spriteBatch)
         {

@@ -56,9 +56,9 @@ namespace The_Game
         Rectangle texturePosition;
         public HighScoreBackground(Menu parent, KtereMenu ktereMenu)
         {            
-            this.menu = parent;            
-            this.ktereMenu = ktereMenu;            
-            vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/HighScoreBackground");
+            this.menu = parent;
+            this.ktereMenu = ktereMenu;
+            vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/HighScoreBackground");            
         }
         public override void Update()
         {
@@ -69,6 +69,11 @@ namespace The_Game
             if (ktereMenu == menu.ktereMenu)
                 spriteBatch.Draw(vzhled, texturePosition, Color.White);
         }
+
+        
+            
+
+
     }
     class Button
     {

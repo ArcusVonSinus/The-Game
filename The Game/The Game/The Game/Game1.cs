@@ -193,8 +193,8 @@ namespace The_Game
             if (!InMenu && InGame)
             {
                 b.draw(width, height, spriteBatch);
-                zoo.Draw(spriteBatch);
                 me.draw(spriteBatch);
+                zoo.Draw(spriteBatch);
             }
 
             //spriteBatch.DrawString(font, "GAME TIME = " + gameTime.TotalGameTime.Seconds + ":" + (gameTime.TotalGameTime.Milliseconds / 10), new Vector2(b.a/300 +25, 50), Color.Black);

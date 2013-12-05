@@ -37,12 +37,20 @@ namespace The_Game
         protected int vzhledNo; //ktery vzhled je prave zobrazen
         public Vector2 pozice, prevpozice; //souradnice    
         protected Vector2 pohyb; //smer pohybu
-        public int width;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
+        public int width,height;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         protected bool onLand;
         protected Background b;
         protected long elapsedTime = 0;
         bool skocil = false;   //drzim-li mezernik, tak mam skocit jen jednou, ne skakat porad
-        protected Game1 game;       
+        protected Game1 game;
+        public virtual Rectangle kolizniObdelnik
+        {
+            get
+            {
+                return new Rectangle((int) pozice.X,(int) pozice.Y-261,150,261);
+            }
+            set { }
+        }
 
 
         /// 
@@ -85,7 +93,7 @@ namespace The_Game
         public virtual void update(GameTime gameTime)
         {
             width = game.blockSize / 2;  //v pripade zmeny rozliseni se musi prepocitat sirka
-            
+            height = (width * this.vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
             long timediff = gameTime.TotalGameTime.Milliseconds + gameTime.TotalGameTime.Seconds * 1000 + gameTime.TotalGameTime.Minutes * 60 * 1000 + gameTime.TotalGameTime.Hours * 24 * 60 * 1000 - elapsedTime;
             elapsedTime += timediff; //v millisekundach
             if (timediff > 200)   //jsem-li v menu, tak stale bezi cas a timediff je pak nekolik tisic (nekolik sekund), takze bych se pohl o strasne velky kus. Tohle to vyresi. Pokud by fps bylo < 5, tak je to stejne nehratelne.
@@ -241,14 +249,10 @@ namespace The_Game
                 death();
             }
         }
-        public int height
+        public void gain(int kolik)
         {
-            get
-            {
-                return (width * vzhled[0].Texture.Height) / vzhled[0].Texture.Width;
-            }
-            set { }
-        }
+
+        }       
         public virtual void draw(SpriteBatch spriteBatch)
         {
             Vector2 temp = new Vector2();
