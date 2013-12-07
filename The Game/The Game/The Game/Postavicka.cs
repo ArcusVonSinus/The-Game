@@ -52,6 +52,7 @@ namespace The_Game
             set { }
         }
         public bool odrazOdPriserky = false;
+        public SoundEffect[] zvuky;
 
         /// 
         /// Konstruktor
@@ -77,6 +78,11 @@ namespace The_Game
             prevpozice = pozice;
             onLand = true;            
             this.b = b;
+
+            zvuky = new SoundEffect[3];
+            zvuky[0] = game.Content.Load<SoundEffect>("SoundEffects/jump1");
+            zvuky[1] = game.Content.Load<SoundEffect>("SoundEffects/jump2");
+            zvuky[2] = game.Content.Load<SoundEffect>("SoundEffects/death");
         }
 
         /// 
@@ -87,8 +93,8 @@ namespace The_Game
             game.InGame = false; 
             game.InMenu = true;
             game.IsMouseVisible = true;
-            game.m.ktereMenu = KtereMenu.main; 
-
+            game.m.ktereMenu = KtereMenu.main;
+            this.zvuky[2].Play();
         }
         public virtual void update(GameTime gameTime)
         {
@@ -145,6 +151,7 @@ namespace The_Game
                 {
                     skocil = true;
                     onLand = false;
+                    this.zvuky[0].Play();
                     pozice.Y -= 5 * standartniVyskok / 3;
                     pohyb.Y = -standartniVyskok;
                     if (pohyb.X < 0) vzhledNo = 2;

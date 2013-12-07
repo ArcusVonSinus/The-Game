@@ -154,6 +154,7 @@ namespace The_Game
                     this.zije = false;                    
                     game.me.pohyb.Y *= -1.3f;
                     game.me.odrazOdPriserky = true;
+                    game.me.zvuky[1].Play();
                 }
                 else
                     game.me.death();

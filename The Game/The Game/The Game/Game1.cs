@@ -37,6 +37,7 @@ namespace The_Game
         public Menu m;
 
         public Zoo zoo;
+
         /// <summary>
         /// Konstruktory
         /// </summary>
@@ -102,6 +103,17 @@ namespace The_Game
         public void newgame()
         {
             LoadContent();
+
+            int pocetPisnicek = 10;
+                        
+            Song[] pisnicka = new Song[pocetPisnicek];
+            pisnicka[0] = Content.Load<Song>("SoundEffects/Pizzicato");
+            pisnicka[1] = Content.Load<Song>("SoundEffects/Heroic1");
+            pisnicka[2] = Content.Load<Song>("SoundEffects/Heroic2");
+            pisnicka[3] = Content.Load<Song>("SoundEffects/Heroic3");
+            pisnicka[4] = Content.Load<Song>("SoundEffects/Cantina");
+                        
+            MediaPlayer.Play(pisnicka[2]);
         }
         protected override void LoadContent()
         {
@@ -148,11 +160,11 @@ namespace The_Game
                         }
                     }
                 }
+
                 zoo = new Zoo(this);
                 b = new Background(this, pozadi, blockNumber, 300 * (width / blockSize));
                 me = new Postavicka(this, texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , b);
-                                
-            }
+            }            
         }
 
         protected override void UnloadContent()
