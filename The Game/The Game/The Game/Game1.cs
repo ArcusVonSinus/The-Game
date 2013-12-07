@@ -151,7 +151,7 @@ namespace The_Game
                 zoo = new Zoo(this);
                 b = new Background(this, pozadi, blockNumber, 300 * (width / blockSize));
                 me = new Postavicka(this, texturyMe, 150 /*x*/ , 300 * (blockNumber - 1) /*y*/ , b);
-
+                                
             }
         }
 

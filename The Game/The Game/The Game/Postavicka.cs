@@ -47,7 +47,7 @@ namespace The_Game
         {
             get
             {
-                return new Rectangle((int) pozice.X,(int) pozice.Y-261,150,261);
+                return new Rectangle((int)pozice.X + 15, (int)pozice.Y - 261 + 26, 150 - 2 * 15, 261 - 2 * 26);
             }
             set { }
         }

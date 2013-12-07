@@ -9,6 +9,7 @@ namespace The_Game
 {
     public class Enemy : Postavicka
     {
+        public bool zije = true;
         AnimatedSprite[] vzhled;
         int typ;
         Vector2 zakladniPozice;
@@ -143,9 +144,17 @@ namespace The_Game
                     }
                     break;
             }
-            if (this.kolizniObdelnik.Intersects(game.me.kolizniObdelnik))
+
+            /* Zde se resi kolize priserek s panackem*/
+            if (this.kolizniObdelnik.Intersects(game.me.kolizniObdelnik)) 
             {
-                game.me.death();
+                if (this.pozice.Y > game.me.pozice.Y - 200)
+                {
+                    this.pozice.X = -1000;
+                    this.zije = false;
+                }
+                else
+                    game.me.death();
             }
             
         }
@@ -153,7 +162,7 @@ namespace The_Game
         {
             get
             {
-                return new Rectangle((int)pozice.X, (int)pozice.Y , 300, 300);
+                return new Rectangle((int)pozice.X + 30, (int)pozice.Y + 30, 240, 240);
             }
             set { }
         }
@@ -185,7 +194,8 @@ namespace The_Game
         {
             foreach (Enemy e in zoo)
             {
-                e.update(gameTime);
+                if (e.zije)
+                    e.update(gameTime);
             }
         }
         public void Draw(SpriteBatch spriteBatch)
