@@ -36,7 +36,7 @@ namespace The_Game
         private AnimatedSpriteHead[] vzhled; //"gif"    //0 doleva 1 doprava 2 vevzduchu doleva 3 vevzduchu doprava ...
         protected int vzhledNo; //ktery vzhled je prave zobrazen
         public Vector2 pozice, prevpozice; //souradnice    
-        protected Vector2 pohyb; //smer pohybu
+        public Vector2 pohyb; //smer pohybu
         public int width,height;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         protected bool onLand;
         protected Background b;
@@ -51,7 +51,7 @@ namespace The_Game
             }
             set { }
         }
-
+        public bool odrazOdPriserky = false;
 
         /// 
         /// Konstruktor
@@ -161,15 +161,23 @@ namespace The_Game
                 // anatomie skoku
                 if ((Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Up)))
                 {
-                    pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
+                      pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
                 }
                 else
                 {
-                    if (pohyb.Y < 0)
-                        pohyb.Y = 0;
+                    if (!odrazOdPriserky)
+                    {
+                        if (pohyb.Y < 0)
+                            pohyb.Y = 0;
+                        pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
+                    }
                     else
                         pohyb.Y += timediff * gravitacniZrychleniNaZemi * padaciKonstanta;
                 }
+                if (pohyb.Y > 0)
+                    odrazOdPriserky = false;
+                if (pohyb.Y < -4f)
+                    pohyb.Y = -4f;
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 // anatomie pohybu vpravo

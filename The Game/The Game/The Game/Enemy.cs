@@ -151,7 +151,9 @@ namespace The_Game
                 if (this.pozice.Y > game.me.pozice.Y - 200)
                 {
                     this.pozice.X = -1000;
-                    this.zije = false;
+                    this.zije = false;                    
+                    game.me.pohyb.Y *= -1.3f;
+                    game.me.odrazOdPriserky = true;
                 }
                 else
                     game.me.death();
