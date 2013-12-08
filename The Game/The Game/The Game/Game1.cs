@@ -104,7 +104,7 @@ namespace The_Game
         {
             LoadContent();
 
-            int pocetPisnicek = 10;
+            int pocetPisnicek = 5;
                         
             Song[] pisnicka = new Song[pocetPisnicek];
             pisnicka[0] = Content.Load<Song>("SoundEffects/Pizzicato");
@@ -112,8 +112,10 @@ namespace The_Game
             pisnicka[2] = Content.Load<Song>("SoundEffects/Heroic2");
             pisnicka[3] = Content.Load<Song>("SoundEffects/Heroic3");
             pisnicka[4] = Content.Load<Song>("SoundEffects/Cantina");
+
+            Random rnd = new Random();
                         
-            MediaPlayer.Play(pisnicka[2]);
+            MediaPlayer.Play(pisnicka[rnd.Next(pocetPisnicek)]);
         }
         protected override void LoadContent()
         {
