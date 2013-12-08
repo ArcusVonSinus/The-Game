@@ -104,14 +104,15 @@ namespace The_Game
         {
             LoadContent();
 
-            int pocetPisnicek = 5;
+            int pocetPisnicek = 6;
                         
             Song[] pisnicka = new Song[pocetPisnicek];
             pisnicka[0] = Content.Load<Song>("SoundEffects/Pizzicato");
             pisnicka[1] = Content.Load<Song>("SoundEffects/Heroic1");
             pisnicka[2] = Content.Load<Song>("SoundEffects/Heroic2");
             pisnicka[3] = Content.Load<Song>("SoundEffects/Heroic3");
-            pisnicka[4] = Content.Load<Song>("SoundEffects/Cantina");
+            pisnicka[4] = Content.Load<Song>("SoundEffects/Heroic4");
+            pisnicka[5] = Content.Load<Song>("SoundEffects/Cantina");
 
             Random rnd = new Random();
                         

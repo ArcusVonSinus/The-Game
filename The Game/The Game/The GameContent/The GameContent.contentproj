@@ -395,6 +395,11 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
+    <Compile Include="SoundEffects\Heroic4.mp3">
+      <Name>Heroic4</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
     <None Include="Save.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Name>Save</Name>
