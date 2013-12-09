@@ -340,26 +340,6 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
-    <Compile Include="SoundEffects\Pizzicato.mp3">
-      <Name>Pizzicato</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="SoundEffects\Heroic1.mp3">
-      <Name>Heroic1</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="SoundEffects\Heroic2.mp3">
-      <Name>Heroic2</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="SoundEffects\Heroic3.mp3">
-      <Name>Heroic3</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
     <Compile Include="SoundEffects\Jab.wav">
       <Name>Jab</Name>
       <Importer>WavImporter</Importer>
@@ -390,13 +370,33 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="SoundEffects\Cantina.mp3">
-      <Name>Cantina</Name>
+    <Compile Include="SoundEffects\Pizzicato.mp3">
+      <Name>Pizzicato</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="SoundEffects\Heroic1.mp3">
+      <Name>Heroic1</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="SoundEffects\Heroic2.mp3">
+      <Name>Heroic2</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="SoundEffects\Heroic3.mp3">
+      <Name>Heroic3</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
     <Compile Include="SoundEffects\Heroic4.mp3">
       <Name>Heroic4</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="SoundEffects\Cantina.mp3">
+      <Name>Cantina</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
