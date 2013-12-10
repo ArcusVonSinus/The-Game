@@ -424,6 +424,15 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Level 1\Bck1\0-3.jpg">
+      <Name>0-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Content Include="HS.txt">
+      <Name>HS</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Level 1\l1.txt">
       <Name>l1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

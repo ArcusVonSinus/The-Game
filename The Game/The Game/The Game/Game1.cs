@@ -153,7 +153,7 @@ namespace The_Game
                     {
                         pozadi[i] = new Texture2D[1];
                     }
-                    pozadi[0] = new Texture2D[3];
+                    pozadi[0] = new Texture2D[4];
                     pozadi[2] = new Texture2D[2];
                     for (int i = 0; i < pozadi.Length; i++)
                     {

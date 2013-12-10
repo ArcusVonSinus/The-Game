@@ -39,6 +39,7 @@ namespace The_Game
         public Vector2 pohyb; //smer pohybu
         public int width,height;//sirka v pixelech, prepocitana (velikost vykresleneho obrazku)
         protected bool onLand;
+        public int score;
         protected Background b;
         protected long elapsedTime = 0;
         bool skocil = false;   //drzim-li mezernik, tak mam skocit jen jednou, ne skakat porad
@@ -83,6 +84,8 @@ namespace The_Game
             zvuky[0] = game.Content.Load<SoundEffect>("SoundEffects/jump1");
             zvuky[1] = game.Content.Load<SoundEffect>("SoundEffects/jump2");
             zvuky[2] = game.Content.Load<SoundEffect>("SoundEffects/death");
+            score = 0;
+
         }
 
         /// 
@@ -90,6 +93,46 @@ namespace The_Game
         /// 
         public virtual void death()
         {
+            int polozekHS = game.m.polozekHS;
+            int[] scorre = new int[polozekHS];
+            string[] names = new string[polozekHS];
+            System.IO.StreamReader HSReader = new System.IO.StreamReader(@"Content/HS.txt");
+            for (int i = 0; i < game.m.polozekHS; i++)
+            {
+                scorre[i] = Int32.Parse(HSReader.ReadLine());
+                names[i] = HSReader.ReadLine();                
+            }            
+            HSReader.Close();
+            if(score>scorre[polozekHS-1])
+            {
+                string name = "Name";//GETNAME
+                scorre[polozekHS-1] = score;
+                names[polozekHS-1] = name;
+                for (int i = game.m.polozekHS - 1; i >= 1; i--)
+                {
+                    if (scorre[i] >= scorre[i - 1])
+                    {
+                        int temp = scorre[i];
+                        scorre[i] = scorre[i - 1];
+                        scorre[i - 1] = temp;
+                        //------
+                        string tem = names[i];
+                        names[i] = names[i - 1];
+                        names[i - 1] = tem;
+                    }
+                }
+                System.IO.StreamWriter HSWriter = new System.IO.StreamWriter(@"Content/HS.txt");
+                for (int i = 0; i < polozekHS; i++)
+                {
+                    HSWriter.WriteLine(scorre[i]);
+                    HSWriter.WriteLine(names[i]);
+                }
+                HSWriter.Close();
+
+              
+
+
+            }
             game.InGame = false; 
             game.InMenu = true;
             game.IsMouseVisible = true;
@@ -266,7 +309,8 @@ namespace The_Game
         }
         public void gain(int kolik)
         {
-
+            score += kolik;
+            game.b.score.score = score;
         }       
         public virtual void draw(SpriteBatch spriteBatch)
         {

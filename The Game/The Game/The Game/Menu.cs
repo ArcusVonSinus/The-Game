@@ -173,6 +173,7 @@ namespace The_Game
         public int vybranaPolozka; // pro ovladani klavesnici
         public int buttonSizeW = 800,buttonSizeH = 100; //1500x1000
         public int buttonsX, buttonsY;
+        public int polozekHS = 6;
         Button[] tlacitka;
         Label[] stitky;
         HighScoreBackground pozadiHS;
@@ -187,7 +188,8 @@ namespace The_Game
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
             tlacitka = new Button[19];
-            stitky = new Label[6];            
+            stitky = new Label[polozekHS];
+            createLabels();
             //-----------------------------------------------------------------
             temp = KtereMenu.main;
             tlacitka[0] = new Button(this, 0, temp, "NewGame");
@@ -219,19 +221,29 @@ namespace The_Game
             tlacitka[16] = new Button(this, 0, temp, "Level1");
             tlacitka[17] = new Button(this, 1, temp, "Back");
             //----------------------------------------------------------------------
-            temp = KtereMenu.highscores;
-            pozadiHS = new HighScoreBackground(this, temp);
-            stitky[0] = new Label(this, 0, temp, "42.468", "Francimor");
-            stitky[1] = new Label(this, 1, temp, "42.467", "Karla");
-            stitky[2] = new Label(this, 2, temp, "37.189", "Honza");
-            stitky[3] = new Label(this, 3, temp, "31.112", "Lojza");
-            stitky[4] = new Label(this, 4, temp, "29.215", "Tom");
-            stitky[5] = new Label(this, 5, temp, "28.623", "Elen");
+            temp = KtereMenu.highscores;            
+            pozadiHS = new HighScoreBackground(this, temp);            
             tlacitka[18] = new Button(this, 6, temp, "Back");        
             //--------------------------------------------------------------------
             pressed = false;
         }
         bool pressed;  //pro ovladani klavesnici
+        void createLabels()
+        {
+            System.IO.StreamReader HSReader = new System.IO.StreamReader(@"Content/HS.txt");
+            for (int i = 0; i < polozekHS; i++)
+            {
+
+                stitky[i] = new Label(this, i, KtereMenu.highscores, HSReader.ReadLine(), HSReader.ReadLine());
+            }
+            HSReader.Close();
+            /*stitky[1] = new Label(this, 1, KtereMenu.highscores, "42.467", "Karla");
+            stitky[2] = new Label(this, 2, KtereMenu.highscores, "37.189", "Honza");
+            stitky[3] = new Label(this, 3, KtereMenu.highscores, "31.112", "Lojza");
+            stitky[4] = new Label(this, 4, KtereMenu.highscores, "29.215", "Tom");
+            stitky[5] = new Label(this, 5, KtereMenu.highscores, "28.623", "Elen");*/
+
+        }
         public void update()
         {
             if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Down))
@@ -260,6 +272,7 @@ namespace The_Game
                         temp = 2;
                         break;
                     case KtereMenu.highscores:
+
                         temp = 1;
                         break;
                 }
@@ -332,6 +345,7 @@ namespace The_Game
                 }
                 if (buttonNo == 2)
                 {
+                    createLabels();
                     ktereMenu = KtereMenu.highscores;
                     return;
                 }

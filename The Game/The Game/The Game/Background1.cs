@@ -9,7 +9,7 @@ namespace The_Game
 {
     public class Score
     {
-        public float score;
+        public int score;
         Game1 game;
         Texture2D pozadi;
         SpriteFont scoreFont;
