@@ -33,8 +33,13 @@ namespace The_Game
                 
             }
         }
-        public Text(Game1 game,int x, int y, int height, string text)
+        public Text(Game1 game, int x, int y, int height, string text)
         {
+            this.game = game; this.x = x; this.y = y; this.height = height; this.text = text; this.font = "font";
+        }
+        public Text(Game1 game, int x, int y, int height, string text, bool zarovnatdoprava)
+        {
+            this.zarovnatdoprava = zarovnatdoprava;
             this.game = game; this.x = x; this.y = y; this.height = height; this.text = text; this.font = "font";
         }
         public Text(Game1 game, int x, int y, int height,string text, string font)
@@ -72,7 +77,6 @@ namespace The_Game
         protected Menu menu;
         int labelNo;
         protected KtereMenu ktereMenu;
-        Vector2 vectorPositionScore, vectorPositionName;
         Texture2D vzhled;
         Rectangle texturePosition;
         Text textscore;
@@ -86,13 +90,13 @@ namespace The_Game
             this.menu = parent;
             this.labelNo = labelNo;
             this.ktereMenu = ktereMenu;
-            textscore = new Text(parent.game, 0, 0, (int) (1f*parent.buttonSizeH*parent.zmenseni), score);
+            textscore = new Text(parent.game, 0, 0, (int) (1f*parent.buttonSizeH*parent.zmenseni), score,true);
             textname = new Text(parent.game, 0, 0, (int)(1f * parent.buttonSizeH * parent.zmenseni), name);
             vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/label");
         }
         public virtual void Update()
         {
-            textscore.ChangeLoc(new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 21), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni)),(int) (1f*menu.buttonSizeH*menu.zmenseni));
+            textscore.ChangeLoc(new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 4), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni)),(int) (1f*menu.buttonSizeH*menu.zmenseni));
             textname.ChangeLoc(new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 3), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni)), (int)(1f * menu.buttonSizeH * menu.zmenseni));
             texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));           
         }
