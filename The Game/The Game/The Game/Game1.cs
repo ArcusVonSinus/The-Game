@@ -144,7 +144,7 @@ namespace The_Game
                 {
                     texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
                 }
-                font = Content.Load<SpriteFont>("font");
+                font = Content.Load<SpriteFont>("font15");
 
                 int druhuKachlicek = 14;
                 Texture2D[][] pozadi = new Texture2D[druhuKachlicek][];

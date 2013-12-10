@@ -30,7 +30,7 @@ namespace The_Game
             this.menu = parent;
             this.labelNo = labelNo;
             this.ktereMenu = ktereMenu;
-            font = menu.game.Content.Load<SpriteFont>("font");
+            font = menu.game.Content.Load<SpriteFont>("font15");
             vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/label");
         }
         public virtual void Update()
@@ -43,6 +43,11 @@ namespace The_Game
         {
             if (ktereMenu == menu.ktereMenu)
             {
+                int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                if (menu.game.height > 1050) 
+                    font = menu.game.Content.Load<SpriteFont>("font29");
+                else
+                    font = menu.game.Content.Load<SpriteFont>("font15");
                 spriteBatch.Draw(vzhled, texturePosition, Color.White);
                 spriteBatch.DrawString(font, score, vectorPositionScore, Color.Black);
                 spriteBatch.DrawString(font, name, vectorPositionName, Color.Black);
@@ -62,18 +67,18 @@ namespace The_Game
         }
         public override void Update()
         {
-            texturePosition = new Rectangle(menu.buttonsX - (int)(okraj * menu.zmenseni), menu.buttonsY - (int)(okraj * menu.zmenseni), (int)((menu.buttonSizeW + 2 * okraj) * menu.zmenseni), (int)(9 * menu.buttonSizeH * menu.zmenseni + okraj * menu.zmenseni));
+            texturePosition = new Rectangle(
+                menu.buttonsX - (int)(okraj * menu.zmenseni), 
+                menu.buttonsY - (int)(okraj * menu.zmenseni), 
+                (int)((menu.buttonSizeW + 2 * okraj) * menu.zmenseni), 
+                (int)(9 * menu.buttonSizeH * menu.zmenseni + okraj * menu.zmenseni)
+                );
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (ktereMenu == menu.ktereMenu)
                 spriteBatch.Draw(vzhled, texturePosition, Color.White);
         }
-
-        
-            
-
-
     }
     class Button
     {
