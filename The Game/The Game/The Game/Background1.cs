@@ -12,17 +12,17 @@ namespace The_Game
         public int score;
         Game1 game;
         Texture2D pozadi;
-        SpriteFont scoreFont;
+        Text sc;
         Vector2 size;
         Vector2 position;
         public Score(Game1 game)
         {
             this.game = game;
             pozadi = game.Content.Load<Texture2D>("Level " + game.level + "/scoreBackground");
-            scoreFont = game.Content.Load<SpriteFont>("Level " + game.level + "/scoreFont");
             score = 0;
             size = new Vector2();
             position = new Vector2();
+            sc = new Text(game, (int)(game.width - size.X - 0.5f * size.Y), (int)(0.5f * size.Y), (int)(0.075f * game.height),"0", "Score" + game.level,true);
         }
         public void draw(SpriteBatch spriteBatch)
         {
@@ -31,8 +31,13 @@ namespace The_Game
             position.X = game.width - size.X - 0.5f * size.Y;
             position.Y = 0.5f * size.Y;
             spriteBatch.Draw(pozadi, new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y), Color.White);
+            Vector2 textpos = new Vector2(position.X,position.Y);
 
-            spriteBatch.DrawString(scoreFont, "" + score.ToString(), position, Color.Black);
+            textpos.X+=size.X - game.m.zmenseni * 20;
+            textpos.Y += game.m.zmenseni * 7;
+            sc.ChangeLoc(textpos, (int)(size.Y));
+            sc.ChangeText(score.ToString());
+            sc.Draw(spriteBatch);            
         }
     }
     public class Background

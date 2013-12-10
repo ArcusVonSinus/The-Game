@@ -8,6 +8,64 @@ using Microsoft.Xna.Framework.Input;
 
 namespace The_Game
 {
+    public class Text
+    {
+        string text, font;
+        int height,x,y;
+        SpriteFont pismo;
+        float size = 0f;
+        Game1 game;
+        bool zarovnatdoprava = false;
+        void LoadFont()
+        {
+            float sizetemp = 0.435f * height;
+            if (sizetemp != size)
+            {
+                size = sizetemp;
+                if (size < 21.7)
+                {
+                    pismo = game.Content.Load<SpriteFont>(@"Fonts/" + font + "15");
+                }
+                else
+                {
+                    pismo = game.Content.Load<SpriteFont>(@"Fonts/" + font + "29");
+                }
+                
+            }
+        }
+        public Text(Game1 game,int x, int y, int height, string text)
+        {
+            this.game = game; this.x = x; this.y = y; this.height = height; this.text = text; this.font = "font";
+        }
+        public Text(Game1 game, int x, int y, int height,string text, string font)
+        {
+            this.game = game; this.x = x; this.y = y; this.height = height; this.text = text; this.font = font;
+        }
+        public Text(Game1 game, int x, int y, int height, string text, string font,bool zarovnatdoprava)
+        {
+            this.zarovnatdoprava = zarovnatdoprava;
+            this.game = game; this.x = x; this.y = y; this.height = height; this.text = text; this.font = font;
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            LoadFont();
+            if(zarovnatdoprava)
+                spriteBatch.DrawString(pismo, text, new Vector2(x - pismo.MeasureString(text).X,y), Color.Black);
+            else
+                spriteBatch.DrawString(pismo, text, new Vector2(x, y), Color.Black);
+        }
+        public void ChangeLoc(Vector2 v,int height)
+        {
+            this.height = height;
+            x = (int) v.X;
+            y = (int) v.Y;
+        }
+        public void ChangeText(string text)
+        {
+            this.text = text;
+        }
+    }
+
     public enum KtereMenu { main, mainInGame, chooseLevel, chooseLevelInGame, settings,settingsInGame, highscores }
     class Label
     {
@@ -17,40 +75,35 @@ namespace The_Game
         Vector2 vectorPositionScore, vectorPositionName;
         Texture2D vzhled;
         Rectangle texturePosition;
-        string score, name;
-        SpriteFont font;
+        Text textscore;
+        Text textname;
         public Label()
         {
 
         }
         public Label(Menu parent, int labelNo, KtereMenu ktereMenu, string score, string name)
         {
-            this.score = score;
-            this.name = name;
             this.menu = parent;
             this.labelNo = labelNo;
             this.ktereMenu = ktereMenu;
-            font = menu.game.Content.Load<SpriteFont>("font15");
+            textscore = new Text(parent.game, 0, 0, (int) (1f*parent.buttonSizeH*parent.zmenseni), score);
+            textname = new Text(parent.game, 0, 0, (int)(1f * parent.buttonSizeH * parent.zmenseni), name);
             vzhled = menu.game.Content.Load<Texture2D>("Menu/Labels/label");
         }
         public virtual void Update()
         {
-            vectorPositionScore = new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 21), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
-            vectorPositionName = new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 3), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni));
-            texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));
+            textscore.ChangeLoc(new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 21), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni)),(int) (1f*menu.buttonSizeH*menu.zmenseni));
+            textname.ChangeLoc(new Vector2(menu.buttonsX + (int)(menu.buttonSizeW * menu.zmenseni / 3), menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni)), (int)(1f * menu.buttonSizeH * menu.zmenseni));
+            texturePosition = new Rectangle(menu.buttonsX, menu.buttonsY + (int)(1.5f * labelNo * menu.buttonSizeH * menu.zmenseni), (int)(menu.buttonSizeW * menu.zmenseni), (int)(menu.buttonSizeH * menu.zmenseni));           
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (ktereMenu == menu.ktereMenu)
             {
-                int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                if (menu.game.height > 1050) 
-                    font = menu.game.Content.Load<SpriteFont>("font29");
-                else
-                    font = menu.game.Content.Load<SpriteFont>("font15");
+                int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;                
                 spriteBatch.Draw(vzhled, texturePosition, Color.White);
-                spriteBatch.DrawString(font, score, vectorPositionScore, Color.Black);
-                spriteBatch.DrawString(font, name, vectorPositionName, Color.Black);
+                textname.Draw(spriteBatch);
+                textscore.Draw(spriteBatch);
             }
         }        
     }
