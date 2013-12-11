@@ -17,7 +17,7 @@ namespace The_Game
         /// Promenne
         /// </summary>
 
-        public const int poceteLevelu = 2;
+        public int poceteLevelu = 2;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public Background b;

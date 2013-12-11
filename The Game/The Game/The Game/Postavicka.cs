@@ -304,7 +304,10 @@ namespace The_Game
             }
             else if (pozice.X >= b.sirka * 300 - 650)
             {
-                game.nextlevel();
+                if (game.level != game.poceteLevelu)
+                {
+                    game.nextlevel();
+                }
             }
             if ((pozice.Y - 261 > b.vyska * 300) || (pozice.Y < 0))
             {
