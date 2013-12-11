@@ -107,12 +107,26 @@ namespace The_Game
                         if (level[i, j].typ == Dily[k])
                         {
                             level[i, j].typ = k;
-                            if (k == 0)
-                                verzi = 3;
-                            else if (k == 2)
-                                verzi = 2;
-                            else
-                                verzi = 1;
+                            switch (game.level)
+                            {
+                                case 1:
+                                    if (k == 0)
+                                        verzi = 3;
+                                    else if (k == 2)
+                                        verzi = 2;
+                                    else
+                                        verzi = 1;
+                                    break;
+                                case 2:
+                                    if (k == 0)
+                                        verzi = 1;
+                                    else if (k == 2)
+                                        verzi = 2;
+                                    else
+                                        verzi = 1;
+                                    break;
+
+                            }
                         }
                     }
                     if (level[i, j].typ >= '0' && level[i, j].typ <= '9')

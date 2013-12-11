@@ -546,31 +546,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Level 2\Bck1\0-0.jpg">
-      <Name>0-0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Level 2\Bck1\0-1.jpg">
-      <Name>0-1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Level 2\Bck1\0-2.jpg">
-      <Name>0-2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Level 2\Bck1\0-3.jpg">
-      <Name>0-3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Level 2\Bck1\1-0.png">
-      <Name>1-0</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Level 2\Bck1\10-0.png">
       <Name>10-0</Name>
       <Importer>TextureImporter</Importer>
@@ -668,6 +643,16 @@
     </Compile>
     <Compile Include="ctvereckokolecko.png">
       <Name>ctvereckokolecko</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\0-0.png">
+      <Name>0-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\1-0.png">
+      <Name>1-0</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

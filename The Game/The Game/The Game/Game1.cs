@@ -164,8 +164,17 @@ namespace The_Game
                     {
                         pozadi[i] = new Texture2D[1];
                     }
-                    pozadi[0] = new Texture2D[4];
-                    pozadi[2] = new Texture2D[2];
+                    switch (level)
+                    {
+                        case 1:
+                            pozadi[0] = new Texture2D[4];
+                            pozadi[2] = new Texture2D[2];
+                        break;
+                        case 2:
+
+                        break;
+                    }
+                    
                     for (int i = 0; i < pozadi.Length; i++)
                     {
                         for (int j = 0; j < pozadi[i].Length; j++)
