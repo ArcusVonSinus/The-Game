@@ -66,7 +66,7 @@ namespace The_Game
             a = 0;
             this.b = b;
             this.pozadi = pozadi;
-            System.IO.StreamReader lvlReader = new System.IO.StreamReader(@"Content/Level 1/l1.txt");
+            System.IO.StreamReader lvlReader = new System.IO.StreamReader(@"Content/Level " + game.level + "/l" + game.level + ".txt");
             string levelLine = lvlReader.ReadLine();
             sirka = levelLine.Length;
             vyska = radku;

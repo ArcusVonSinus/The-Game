@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace The_Game
 {
@@ -250,7 +251,7 @@ namespace The_Game
             pozadi = game.Content.Load<Texture2D>("Menu/pozadi");
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
-            tlacitka = new Button[19];
+            tlacitka = new Button[25];
             stitky = new Label[polozekHS];
             createLabels();
             //-----------------------------------------------------------------
@@ -270,7 +271,9 @@ namespace The_Game
             //----------------------------------------------------------------------
             temp = KtereMenu.settings;
             tlacitka[10] = new Button(this, 0, temp, "ToggleFullscreen");
-            tlacitka[11] = new Button(this, 1, temp, "Back");
+            tlacitka[21] = new Button(this, 1, temp, "Music");
+            tlacitka[22] = new Button(this, 2, temp, "SoundEffects");
+            tlacitka[11] = new Button(this, 3, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.settingsInGame;
             tlacitka[12] = new Button(this, 0, temp, "ToggleFullscreen");
@@ -280,11 +283,13 @@ namespace The_Game
             //----------------------------------------------------------------------
             temp = KtereMenu.chooseLevel;
             tlacitka[14] = new Button(this, 0, temp, "Level1");
-            tlacitka[15] = new Button(this, 1, temp, "Back");
+            tlacitka[23] = new Button(this, 1, temp, "Level2");
+            tlacitka[15] = new Button(this, 2, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.chooseLevelInGame;
             tlacitka[16] = new Button(this, 0, temp, "Level1");
-            tlacitka[17] = new Button(this, 1, temp, "Back");
+            tlacitka[24] = new Button(this, 1, temp, "Level2");
+            tlacitka[17] = new Button(this, 2, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.highscores;            
             pozadiHS = new HighScoreBackground(this, temp);            
@@ -292,7 +297,7 @@ namespace The_Game
             //--------------------------------------------------------------------
             pressed = false;
         }
-        bool pressed;  //pro ovladani klavesnici
+        bool pressed = true;  //pro ovladani klavesnici
         void createLabels()
         {
             System.IO.StreamReader HSReader = new System.IO.StreamReader(@"Content/HS.txt");
@@ -325,16 +330,16 @@ namespace The_Game
                         temp= 5;
                         break;
                     case KtereMenu.settings:
-                        temp = 2;
+                        temp = 4;
                         break;
                     case KtereMenu.settingsInGame:
-                        temp = 2;
+                        temp = 4;
                         break;
                     case KtereMenu.chooseLevel:
-                        temp = 2;
+                        temp = 3;
                         break;
                     case KtereMenu.chooseLevelInGame:
-                        temp = 2;
+                        temp = 3;
                         break;
                     case KtereMenu.highscores:
 
@@ -465,6 +470,22 @@ namespace The_Game
                 }
                 if (buttonNo == 1)
                 {
+                    if (MediaPlayer.Volume == 1)
+                        MediaPlayer.Volume = 0;
+                    else
+                        MediaPlayer.Volume = 1;
+                    return;
+                }
+                if (buttonNo == 2)
+                {
+                    if (SoundEffect.MasterVolume == 1)
+                        SoundEffect.MasterVolume = 0;
+                    else
+                        SoundEffect.MasterVolume = 1;
+                    return;
+                }
+                if (buttonNo == 3)
+                {
                     ktereMenu = KtereMenu.main;
                     return;
                 }
@@ -477,6 +498,22 @@ namespace The_Game
                     return;
                 }
                 if (buttonNo == 1)
+                {
+                    if (MediaPlayer.Volume == 1)
+                        MediaPlayer.Volume = 0;
+                    else
+                        MediaPlayer.Volume = 1;
+                    return;
+                }
+                if (buttonNo == 2)
+                {
+                    if (SoundEffect.MasterVolume == 1)
+                        SoundEffect.MasterVolume = 0;
+                    else
+                        SoundEffect.MasterVolume = 1;
+                    return;
+                }
+                if (buttonNo == 3)
                 {
                     ktereMenu = KtereMenu.mainInGame;
                     return;
@@ -500,6 +537,11 @@ namespace The_Game
                 }
                 if (buttonNo == 1)
                 {
+                    NewGame(2);
+                    return;
+                }
+                if (buttonNo == 2)
+                {
                     ktereMenu = KtereMenu.main;
                     return;
                 }
@@ -512,6 +554,11 @@ namespace The_Game
                     return;
                 }
                 if (buttonNo == 1)
+                {
+                    NewGame(2);
+                    return;
+                }
+                if (buttonNo == 2)
                 {
                     ktereMenu = KtereMenu.mainInGame;
                     return;

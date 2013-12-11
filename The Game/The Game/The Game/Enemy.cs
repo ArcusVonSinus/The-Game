@@ -38,7 +38,7 @@ namespace The_Game
                     radky = 2;
                     sloupcu = 3;
                     break;
-                case 3:
+                case 2:
                     pohyb.X = 0;
                     pohyb.Y = 0;
                     pohybu = 1;
@@ -151,8 +151,9 @@ namespace The_Game
                 if (this.pozice.Y > game.me.pozice.Y - 200)
                 {
                     this.pozice.X = -1000;
-                    this.zije = false;                    
-                    game.me.pohyb.Y *= -1.3f;
+                    this.zije = false;
+                    if (game.me.pohyb.Y > 0)
+                        game.me.pohyb.Y *= -1.3f;
                     game.me.odrazOdPriserky = true;
                     game.me.zvuky[1].Play();
                     game.me.gain(10);

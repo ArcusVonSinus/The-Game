@@ -302,6 +302,10 @@ namespace The_Game
             {
                 b.move((int)pozice.X - b.a - ((b.b - b.a) / 4));
             }
+            else if (pozice.X >= b.sirka * 300 - 650)
+            {
+                game.nextlevel();
+            }
             if ((pozice.Y - 261 > b.vyska * 300) || (pozice.Y < 0))
             {
                 death();

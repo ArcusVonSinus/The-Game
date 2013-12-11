@@ -430,6 +430,68 @@
       <Processor>FontDescriptionProcessor</Processor>
       <SubType>Designer</SubType>
     </Compile>
+    <Compile Include="Menu\Buttons\buttMusic0.png">
+      <Name>buttMusic0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttMusic1.png">
+      <Name>buttMusic1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttMusic2.png">
+      <Name>buttMusic2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttSoundEffects0.png">
+      <Name>buttSoundEffects0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttSoundEffects1.png">
+      <Name>buttSoundEffects1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttSoundEffects2.png">
+      <Name>buttSoundEffects2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\scoreFont.spritefont">
+      <Name>scoreFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttLevel20.png">
+      <Name>buttLevel20</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttLevel21.png">
+      <Name>buttLevel21</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Menu\Buttons\buttLevel22.png">
+      <Name>buttLevel22</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\Score215.spritefont">
+      <SubType>Designer</SubType>
+      <Name>Score215</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\Score229.spritefont">
+      <SubType>Designer</SubType>
+      <Name>Score229</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Save.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Name>Save</Name>
@@ -456,6 +518,160 @@
     </Compile>
     <Compile Include="Level 1\Bck1\0-3.jpg">
       <Name>0-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\AirBack.png">
+      <Name>AirBack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\AirBackHand.png">
+      <Name>AirBackHand</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\AirFor.png">
+      <Name>AirFor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\AirForHand.png">
+      <Name>AirForHand</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\backward1.png">
+      <Name>backward1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\0-0.jpg">
+      <Name>0-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\0-1.jpg">
+      <Name>0-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\0-2.jpg">
+      <Name>0-2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\0-3.jpg">
+      <Name>0-3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\1-0.png">
+      <Name>1-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\10-0.png">
+      <Name>10-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\11-0.png">
+      <Name>11-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\12-0.png">
+      <Name>12-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\13-0.png">
+      <Name>13-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\2-0.png">
+      <Name>2-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\2-1.png">
+      <Name>2-1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\3-0.png">
+      <Name>3-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\4-0.png">
+      <Name>4-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\5-0.png">
+      <Name>5-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\6-0.png">
+      <Name>6-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\7-0.png">
+      <Name>7-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\8-0.png">
+      <Name>8-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Bck1\9-0.png">
+      <Name>9-0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Enemy\E0.png">
+      <Name>E0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Enemy\E01.png">
+      <Name>E01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Enemy\E1.png">
+      <Name>E1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Enemy\E2.png">
+      <Name>E2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\forward1.png">
+      <Name>forward1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 2\Head1.png">
+      <Name>Head1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Content Include="Level 2\l2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Name>l2</Name>
+    </Content>
+    <Compile Include="Level 2\scoreBackground.png">
+      <Name>scoreBackground</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
