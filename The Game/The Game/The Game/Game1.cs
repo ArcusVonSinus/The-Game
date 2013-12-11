@@ -39,6 +39,9 @@ namespace The_Game
 
         public Zoo zoo;
 
+        public int[][] texturVlevelu;
+        public const int druhuKachlicek = 14;
+
         /// <summary>
         /// Konstruktory
         /// </summary>
@@ -98,6 +101,8 @@ namespace The_Game
             IsMouseVisible = true;
             InMenu = true;
             InGame = false;
+            
+
 
         }
 
@@ -131,6 +136,10 @@ namespace The_Game
         }
         protected override void LoadContent()
         {
+            texturVlevelu = new int[poceteLevelu][];
+            texturVlevelu[0] = new int[druhuKachlicek] { 4, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+            texturVlevelu[1] = new int[druhuKachlicek] { 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
 
             m = new Menu(this);
 
@@ -155,24 +164,12 @@ namespace The_Game
                 {
                     texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
                 }
-                font = Content.Load<SpriteFont>("font15");
-
-                int druhuKachlicek = 14;
+                
                 Texture2D[][] pozadi = new Texture2D[druhuKachlicek][];
                 {
                     for (int i = 0; i < druhuKachlicek; i++)
                     {
-                        pozadi[i] = new Texture2D[1];
-                    }
-                    switch (level)
-                    {
-                        case 1:
-                            pozadi[0] = new Texture2D[4];
-                            pozadi[2] = new Texture2D[2];
-                        break;
-                        case 2:
-
-                        break;
+                        pozadi[i] = new Texture2D[texturVlevelu[level-1][i]];
                     }
                     
                     for (int i = 0; i < pozadi.Length; i++)

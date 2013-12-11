@@ -84,29 +84,30 @@ namespace The_Game
             }
             lvlReader.Close();
             string Dily = ".?X?R?L?l?x?r?";
-            int verzi = 0;
             for (int j = 0; j < vyska; j++)
             {
                 for (int i = 0; i < sirka; i++)
-                {
+                {                    
+                    if (j == vyska - 1)
+                    {
+                        obloha1[i, j].typ = 1;
+                        obloha1[i, j].verze = rnd.Next(0, game.texturVlevelu[game.level-1][1]);
+                    }
+                    else
+                    {
+                        obloha1[i, j].typ = 0;
+                        obloha1[i, j].verze = rnd.Next(0, game.texturVlevelu[game.level-1][0]);
+                    }
                     for (int k = 0; k < Dily.Length; k++)
                     {
 
-                        level[i, j].verze = rnd.Next(0, verzi);
-                        if (j == vyska - 1)
-                        {
-                            obloha1[i, j].typ = 1;
-                            obloha1[i, j].verze = rnd.Next(0, 1);
-                        }
-                        else
-                        {
-                            obloha1[i, j].typ = 0;
-                            obloha1[i, j].verze = rnd.Next(0, 3);
-                        }
+                        
 
                         if (level[i, j].typ == Dily[k])
                         {
                             level[i, j].typ = k;
+                            level[i, j].verze = rnd.Next(0,game.texturVlevelu[game.level-1][k]);
+                            /*
                             switch (game.level)
                             {
                                 case 1:
@@ -126,7 +127,8 @@ namespace The_Game
                                         verzi = 1;
                                     break;
 
-                            }
+                            }*/
+                            break;
                         }
                     }
                     if (level[i, j].typ >= '0' && level[i, j].typ <= '9')
