@@ -666,6 +666,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="ctvereckokolecko.png">
+      <Name>ctvereckokolecko</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Level 2\l2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Name>l2</Name>
