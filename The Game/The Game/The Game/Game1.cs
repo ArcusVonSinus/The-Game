@@ -127,6 +127,7 @@ namespace The_Game
                 level = poceteLevelu;
             newgame();
             b.score.score = temp;
+            me.score = temp;
         }
         protected override void LoadContent()
         {
