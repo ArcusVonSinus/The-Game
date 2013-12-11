@@ -123,6 +123,8 @@ namespace The_Game
         {
             int temp = b.score.score;
             level++;
+            if (level > poceteLevelu)
+                level = poceteLevelu;
             newgame();
             b.score.score = temp;
         }
