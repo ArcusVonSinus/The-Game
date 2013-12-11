@@ -308,6 +308,11 @@ namespace The_Game
                 {
                     game.nextlevel();
                 }
+                else
+                {
+                    death();
+                    game.m.ktereMenu = KtereMenu.main;
+                }
             }
             if ((pozice.Y - 261 > b.vyska * 300) || (pozice.Y < 0))
             {
