@@ -156,7 +156,20 @@ namespace The_Game
                         game.me.pohyb.Y *= -1.3f;
                     game.me.odrazOdPriserky = true;
                     game.me.zvuky[1].Play();
-                    game.me.gain(10);
+                    switch (typ)
+                    {
+                        case 0:
+                            game.me.gain(15);
+                            break;
+                        case 1:
+                            game.me.gain(25);
+                            break;
+                        case 2:
+                            game.me.gain(5);
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 else
                     game.me.death();
