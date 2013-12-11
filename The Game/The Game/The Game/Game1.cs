@@ -17,6 +17,7 @@ namespace The_Game
         /// Promenne
         /// </summary>
 
+        public const int poceteLevelu = 2;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public Background b;
@@ -117,6 +118,13 @@ namespace The_Game
             Random rnd = new Random();
                         
             MediaPlayer.Play(pisnicka[rnd.Next(pocetPisnicek)]);
+        }
+        public void nextlevel()
+        {
+            int temp = b.score.score;
+            level++;
+            newgame();
+            b.score.score = temp;
         }
         protected override void LoadContent()
         {
