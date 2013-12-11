@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace The_Game
 {
@@ -273,7 +274,9 @@ namespace The_Game
             //----------------------------------------------------------------------
             temp = KtereMenu.settingsInGame;
             tlacitka[12] = new Button(this, 0, temp, "ToggleFullscreen");
-            tlacitka[13] = new Button(this, 1, temp, "Back");
+            tlacitka[19] = new Button(this, 1, temp, "Music");
+            tlacitka[20] = new Button(this, 2, temp, "SoundEffects");
+            tlacitka[13] = new Button(this, 3, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.chooseLevel;
             tlacitka[14] = new Button(this, 0, temp, "Level1");
@@ -389,6 +392,7 @@ namespace The_Game
             vybranaPolozka = 0;
             if (name == "Quit")
             {
+                MediaPlayer.Stop();
                 game.Exit();
                 return;
             }
@@ -418,6 +422,7 @@ namespace The_Game
                 }
                 if (buttonNo == 4)
                 {
+                    MediaPlayer.Stop();
                     game.Exit();
                     return;
                 }
@@ -425,8 +430,7 @@ namespace The_Game
             if (ktereMenu == KtereMenu.mainInGame)
             {
                 if (buttonNo == 0)
-                {
-                    
+                {                    
                     game.InMenu = false;
                     game.IsMouseVisible = false;
                 }
@@ -447,6 +451,7 @@ namespace The_Game
                 }
                 if (buttonNo == 4)
                 {
+                    MediaPlayer.Stop();
                     game.Exit();
                     return;
                 }
@@ -512,7 +517,6 @@ namespace The_Game
                     return;
                 }
             }
-
         }
         public void Draw(SpriteBatch spriteBatch)
         {
