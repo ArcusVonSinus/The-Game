@@ -1,0 +1,12 @@
+\subsection{Game1}
+\t{Game1} je základní třídou celého programu. Jejím základem je pár tříd, které volá samotné XNA, a sice \t{Update} a \t{Draw}.\\
+Tato třída má vcelku dost veřejných proměnných, které jsou společné pro celou hru, jako například ve kterém levelu jsem, jaké je současné rozlišení a podobně.\\
+\subsubsection{LoadContent}
+Na začátku hry (a pak manuálně při začátku nového levelu) se spustí funkce \t{LoadContent}. V té se vytvořím "já" (to jest načtou se všechny textury), vytvoří se pozadí (vytvoří se instance třídy a načtou se textury), a konečně se vytvoří třída \t{zoo}, do které přibudou všechny příšery daného levelu.
+\subsubsection{Update}
+Tuhle třídu volá samotné XNA, a je to posun o jeden krok dopředu. Tato funkce se volá (velmi zhruba) 50 krát za sekundu (v závislosti na výkonu a vytíženosti počítače). Jako parametr dostanu \t{gameTime}, ze kterého vyčtu, kolik milisekund uběhlo (a tedy o kolik se mám pohnout).\\
+Tato třída (pokud nejsem v menu) pohlídá, zdali nebyla zmáčknuta klávesa \t{Esc} (jinak by se přešlo do menu), pokud ne tak zavolá funkce \t{Update} postavičce, všem příšerkám (prostřednictvím třídy \t{zoo}). Pokud jsem v menu, pak zavolá funkci třídy \t{Menu}, a sice \t{Update}.
+\subsubsection{Draw}
+Tuto třídu opět volá XNA, a slouží k překreslení obrazovky. Buď zavolá \t{Draw} třídy \t{Menu} (pokud jsem v menu), a nebo třídy \t{Draw} třídy pro postavičku, třídy s pozadím a třídy \t{zoo}. 
+\subsubsection{newgame}
+Tahle třída slouží pro start daného levelu od začátku, a náhodnou volbu písničky.
