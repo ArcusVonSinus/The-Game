@@ -1,0 +1,18 @@
+\subsection{menu}
+Základem menu je třída \t{Menu}. Nejdůležitějším prvkem je výčtový typ \t{KtereMenu}, a veřejná proměnná tohoto typu (ve třídě \t{Menu}) \t{ktereMenu}. Ta říká, ve které části menu se právě uživatel nachází a tedy která tlačítka se mají zobrazit.\\
+Třída \t{Menu} je vytvořená ve výchozí třídě \t{Game1}, a sama využívá tříd \t{Button} a \t{label}. \\
+\subsubsection{Menu}
+Konstruktor \t{Menu} bere za parametr pointer na svého předchůdce (to jest třídu \t{Game1}. To je hlavně pro to, že informace o rozlišení jsou uloženy právě v této třídě, a mohou se v průběhu běhu programu změnit. Dále konstruktor vytvoří spousty tlačítek (instancí třídy \t{Button}). Každé dostane pointer na menu (aby mohlo například zavolat funkci po zmáčknutí tlačítka), ID (které jim řekne které v pořadí je (a tedy kde se má vykreslit), dále dostane informaci kdy se má vykreslit (pomocí \t{KtereMenu}) a konečně string s tím, co má na něm být napsané (přesněji název souboru s obrázkem s texturou, která obsahuje ten text). \\
+Třída \t{Menu} má, stejně jako skoro všechny naše třídy, funkci \t{update}. Ta se volá z výchozí třídy (pokud se menu má zobrazit). Ona funkce dělá několik věcí. Zkontroluje, zdali uživatel náhodou nezmáčkl šipku nebo enter, v kterémžto případě by změnila vybrané tlačítko (popřípadě by ho stiskla). A konečně zavolá funkci \t{Update} všech tlačítek a popisků.  \\
+Dále má třída \t{Menu} funkci \t{clicked}. Tu zavolá tlačítko, když bylo stisknuto. Na základě toho, která obrazovka menu je zobrazena a které tlačítko bylo stisknuta se vykoná daná akce. \\
+A konečně je tam funkce \t{Draw}. Ta vykreslí pozadí menu a zavolá funkci \t{Draw} všech tlačítek.
+\subsubsection{Button}
+Třída pro tlačítko je veskrze jednoduchá. Ve funkci update se zkontroluje, zdali není myš nad tímto tlačítkem (pak by se změnila textura), popřípadě jestli ono tlačítko nebylo stisknuto. A ve funkci \t{Draw} se vykreslí (pro pozici a velikost si šáhne do třídy menu a navíc ví, které v pořadí v daném menu je)
+\subsubsection{Label}
+Třída \t{Label} slouží pro zobrazení highscore. Na rozdíl od třídy \t{Button} není třeba ověřovat polohu myši. Ale jména hráčů nejsou natvrdo napsaná v texturách, takže je na ně použita ještě třída \t{Text}.
+\subsubsection{Text}
+Tato třída slouží pro uložení a zobrazení textu na obrazovku. Jejím hlavním důvodem je, aby se text mohl zobrazit v různých rozlišeních fontem různé velikosti. Konstruktor dostane kromě pozice, velikosti a chtěného textu také pointer na hlavní třídu hry, aby mohl načítat obrázky (pozadí pod text).
+
+
+
+
