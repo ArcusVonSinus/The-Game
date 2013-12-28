@@ -111,18 +111,25 @@ namespace The_Game
             LoadContent();
 
             int pocetPisnicek = 6;
-                        
-            Song[] pisnicka = new Song[pocetPisnicek];
-            pisnicka[0] = Content.Load<Song>("SoundEffects/Pizzicato");
-            pisnicka[1] = Content.Load<Song>("SoundEffects/Heroic1");
-            pisnicka[2] = Content.Load<Song>("SoundEffects/Heroic2");
-            pisnicka[3] = Content.Load<Song>("SoundEffects/Heroic3");
-            pisnicka[4] = Content.Load<Song>("SoundEffects/Heroic4");
-            pisnicka[5] = Content.Load<Song>("SoundEffects/Cantina");
-
             Random rnd = new Random();
+            int temp = rnd.Next(pocetPisnicek);
+            Song pisnicka = new Song;
+            if(temp == 0)
+                pisnicka = Content.Load<Song>("SoundEffects/Pizzicato");
+            else if (temp==1)
+                pisnicka = Content.Load<Song>("SoundEffects/Heroic1");
+            else if (temp==2)
+                pisnicka = Content.Load<Song>("SoundEffects/Heroic2");
+            else if(temp==3)
+                pisnicka = Content.Load<Song>("SoundEffects/Heroic3");
+            else if(temp==4)
+                pisnicka = Content.Load<Song>("SoundEffects/Heroic4");
+            else if(temp==5)
+                pisnicka = Content.Load<Song>("SoundEffects/Heroic4");
+            
+
                         
-            MediaPlayer.Play(pisnicka[rnd.Next(pocetPisnicek)]);
+            MediaPlayer.Play(pisnicka);
         }
         public void nextlevel()
         {
