@@ -113,7 +113,7 @@ namespace The_Game
             int pocetPisnicek = 6;
             Random rnd = new Random();
             int temp = rnd.Next(pocetPisnicek);
-            Song pisnicka = new Song;
+            Song pisnicka = new Song();
             if(temp == 0)
                 pisnicka = Content.Load<Song>("SoundEffects/Pizzicato");
             else if (temp==1)
