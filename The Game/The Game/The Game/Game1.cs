@@ -146,7 +146,7 @@ namespace The_Game
         {
             texturVlevelu = new int[poceteLevelu][];
             texturVlevelu[0] = new int[druhuKachlicek] { 4, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-            texturVlevelu[1] = new int[druhuKachlicek] { 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+            texturVlevelu[1] = new int[druhuKachlicek] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 
             m = new Menu(this);
