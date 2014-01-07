@@ -54,7 +54,9 @@
 \usepackage{titlesec}
 %\titleformat*{\subsection}{\Large\center}
 
+
 \renewcommand{\t}{\texttt}
+\newcommand{\CS}{C\texttt{\large\#}\ }
 
 
 
@@ -85,7 +87,7 @@
 
 \vskip 1 cm
 
-\textsc{\Huge === MathBOY ===}
+\textsc{\Huge =\!=\!=\!= MathBOY =\!=\!=\!=}
 
 \vskip 1 cm
 

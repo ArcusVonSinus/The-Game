@@ -4,7 +4,7 @@
 %----------------------------------------------------------------------------------------
 \section{Specifikace} % Major section
 
-V jazyce C\# naprogramovat poèítaèovou 2D plošinovku pro jednoho hráèe obsahující:
+V jazyce \CS  naprogramovat poèítaèovou 2D plošinovku pro jednoho hráèe obsahující:
 \begin{itemize}
 	\item úvodní menu (nová hra, nastavení, highscore tabulka, exit) 
 	\item animovaná postavièka ovládaná pomocí klávesnice
@@ -21,7 +21,7 @@ V jazyce C\# naprogramovat poèítaèovou 2D plošinovku pro jednoho hráèe obsahujíc
 
 \section{Popis hry} % Major section
 
-Hráè ovládá postavièku jménem "MathBOY". Cílem každé úrovnì je dostat se na její pravý okraj. Po cestì je tøeba se vypoøádat s rùznými nástrahami, mezi které patøí "Apolloniovy kruhy", zákeøní "Triscktoøi" nebo "Iracionální zrùdy", ale také "nepøeskoèitelné dálky" nebo "pøíliš vysoké plošiny". Za každou zabitou pøíšeru je hráè patøiènì odmìnìn. Stiskem escape se hráè dostane do menu, kde je možné pøepnou fullscreen, vypnout/zapnout hudbu nebo se podívat na highscore.
+Hráè ovládá postavièku jménem "MathBOY". Cílem každé úrovnì je dostat se na její pravý okraj. Po cestì je tøeba se vypoøádat s rùznými nástrahami, mezi které patøí "Apolloniovy kruhy", zákeøní "Trisecktoøi" nebo "Iracionální zrùdy", ale také "nepøeskoèitelné dálky" nebo "pøíliš vysoké plošiny". Za každou zabitou pøíšeru je hráè patøiènì odmìnìn. Stiskem escape se hráè dostane do menu, kde je možné pøepnou fullscreen, vypnout/zapnout hudbu nebo se podívat na highscore.
 
 %------------------------------------------------
 
