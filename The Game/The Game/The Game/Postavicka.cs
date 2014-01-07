@@ -333,8 +333,7 @@ namespace The_Game
                 }
                 else
                 {
-                    death();
-                    game.m.ktereMenu = KtereMenu.main;
+                    death();                    
                 }
             }
             if ((pozice.Y - 261 > b.vyska * 300) || (pozice.Y < 0))
