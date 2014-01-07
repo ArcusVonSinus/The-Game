@@ -103,8 +103,16 @@ namespace The_Game
                 names[i] = HSReader.ReadLine();                
             }            
             HSReader.Close();
-            if(score>scorre[polozekHS-1])
+            if (score > scorre[polozekHS - 1])
             {
+                game.m.ktereMenu = KtereMenu.zadaniJmena;
+                game.m.scorekzapsani = score;
+            }
+            else
+            {
+                game.m.ktereMenu = KtereMenu.highscores;
+            }
+            /*
                 string name = "Name";//GETNAME
                 scorre[polozekHS-1] = score;
                 names[polozekHS-1] = name;
@@ -128,15 +136,11 @@ namespace The_Game
                     HSWriter.WriteLine(names[i]);
                 }
                 HSWriter.Close();
-
-              
-
-
-            }
+           
+            }*/
             game.InGame = false; 
             game.InMenu = true;
             game.IsMouseVisible = true;
-            game.m.ktereMenu = KtereMenu.main;
             this.zvuky[2].Play();
         }
         public virtual void update(GameTime gameTime)

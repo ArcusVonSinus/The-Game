@@ -12,7 +12,8 @@ namespace The_Game
 {
     public class Text
     {
-        string text, font;
+        public string text;
+        string font;
         int height,x,y;
         SpriteFont pismo;
         float size = 0f;
@@ -72,8 +73,7 @@ namespace The_Game
             this.text = text;
         }
     }
-
-    public enum KtereMenu { main, mainInGame, chooseLevel, chooseLevelInGame, settings,settingsInGame, highscores }
+    public enum KtereMenu { main, mainInGame, chooseLevel, chooseLevelInGame, settings,settingsInGame, highscores, zadaniJmena}
     class Label
     {
         protected Menu menu;
@@ -81,8 +81,8 @@ namespace The_Game
         protected KtereMenu ktereMenu;
         Texture2D vzhled;
         Rectangle texturePosition;
-        Text textscore;
-        Text textname;
+        public Text textscore;
+        public Text textname;
         public Label()
         {
 
@@ -240,20 +240,25 @@ namespace The_Game
         public int polozekHS = 6;
         Button[] tlacitka;
         Label[] stitky;
+        Label textovePole;
+        public  int scorekzapsani = 0;
         HighScoreBackground pozadiHS;
         public Game1 game;
         Texture2D pozadi,pozadiMenu;
         public Menu(Game1 game)
         {
+
             this.game = game;            
             ktereMenu = KtereMenu.main;
             vybranaPolozka = 0;
             pozadi = game.Content.Load<Texture2D>("Menu/pozadi");
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
-            tlacitka = new Button[25];
-            stitky = new Label[polozekHS];
+            tlacitka = new Button[26];
+            stitky = new Label[polozekHS];            
             createLabels();
+
+            textovePole =   new Label(this, 0, KtereMenu.zadaniJmena, "0", "a"); 
             //-----------------------------------------------------------------
             temp = KtereMenu.main;
             tlacitka[0] = new Button(this, 0, temp, "NewGame");
@@ -291,13 +296,19 @@ namespace The_Game
             tlacitka[24] = new Button(this, 1, temp, "Level2");
             tlacitka[17] = new Button(this, 2, temp, "Back");
             //----------------------------------------------------------------------
-            temp = KtereMenu.highscores;            
-            pozadiHS = new HighScoreBackground(this, temp);            
-            tlacitka[18] = new Button(this, 6, temp, "Back");        
+            temp = KtereMenu.highscores;
+            pozadiHS = new HighScoreBackground(this, temp);
+            tlacitka[18] = new Button(this, 6, temp, "Back");
             //--------------------------------------------------------------------
+            temp = KtereMenu.zadaniJmena;            
+            tlacitka[25] = new Button(this, 6, temp, "OK");
+            //--------------------------------------------------------------------
+
+
             pressed = false;
         }
         bool pressed = true;  //pro ovladani klavesnici
+        bool pressAbc = true;
         void createLabels()
         {
             System.IO.StreamReader HSReader = new System.IO.StreamReader(@"Content/HS.txt");
@@ -314,8 +325,181 @@ namespace The_Game
             stitky[5] = new Label(this, 5, KtereMenu.highscores, "28.623", "Elen");*/
 
         }
+
+        bool readingname;
+        StringBuilder namereader;
+        void ReadName()
+        {
+            if (!readingname)
+            {
+                readingname = true;
+                namereader = new StringBuilder();
+                textovePole.textscore.text = scorekzapsani.ToString();              
+            }
+            if (pressAbc)
+            {
+                Keys[] temp = Keyboard.GetState().GetPressedKeys();
+                if (temp.Length == 0)
+                {
+                    pressAbc = false;
+                }
+            }
+            else if (!pressAbc)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    namereader.Append("a");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.B))
+                {
+                    namereader.Append("b");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.C))
+                {
+                    namereader.Append("c");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    namereader.Append("d");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.E))
+                {
+                    namereader.Append("e");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.F))
+                {
+                    namereader.Append("f");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.G))
+                {
+                    namereader.Append("g");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.H))
+                {
+                    namereader.Append("h");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.I))
+                {
+                    namereader.Append("i");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.J))
+                {
+                    namereader.Append("j");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.K))
+                {
+                    namereader.Append("k");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.L))
+                {
+                    namereader.Append("l");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.M))
+                {
+                    namereader.Append("m");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.N))
+                {
+                    namereader.Append("n");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.O))
+                {
+                    namereader.Append("o");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.P))
+                {
+                    namereader.Append("p");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
+                    namereader.Append("q");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                {
+                    namereader.Append("r");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+                    namereader.Append("s");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.T))
+                {
+                    namereader.Append("t");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.U))
+                {
+                    namereader.Append("u");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.V))
+                {
+                    namereader.Append("v");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.W))
+                {
+                    namereader.Append("w");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.X))
+                {
+                    namereader.Append("x");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Y))
+                {
+                    namereader.Append("y");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Z))
+                {
+                    namereader.Append("z");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    namereader.Append(" ");
+                    pressAbc = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Back))
+                {
+                    namereader.Remove(namereader.Length - 1, 1);
+                    pressAbc = true;
+                }
+            }
+
+            if(namereader.Length == 1 && namereader[0]>='a')
+            {
+                namereader[0]^=' ';
+            }
+            textovePole.textname.text = namereader.ToString();
+        }
         public void update()
         {
+            if (ktereMenu == KtereMenu.zadaniJmena)
+            {
+                ReadName();
+            }
             if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 pressed = true;
@@ -345,6 +529,10 @@ namespace The_Game
 
                         temp = 1;
                         break;
+                    case KtereMenu.zadaniJmena:
+
+                        temp = 1;
+                        break;
                 }
                 if(vybranaPolozka >= temp)
                     vybranaPolozka = temp-1;
@@ -360,6 +548,10 @@ namespace The_Game
             {
                 pressed = true;
                 if (ktereMenu == KtereMenu.highscores)
+                {
+                    Clicked(6, "");
+                }
+                else if (ktereMenu == KtereMenu.zadaniJmena)
                 {
                     Clicked(6, "");
                 }
@@ -382,6 +574,7 @@ namespace The_Game
             {
                 st.Update();
             }
+            textovePole.Update();
         }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         void NewGame(int level)
@@ -391,6 +584,45 @@ namespace The_Game
             game.level = level;
             game.InGame = true;
             game.newgame();
+        }
+        void zapisscore()
+        {
+            int polozekHS = game.m.polozekHS;
+            int[] scorre = new int[polozekHS];
+            string[] names = new string[polozekHS];
+            System.IO.StreamReader HSReader = new System.IO.StreamReader(@"Content/HS.txt");
+            for (int i = 0; i < game.m.polozekHS; i++)
+            {
+                scorre[i] = Int32.Parse(HSReader.ReadLine());
+                names[i] = HSReader.ReadLine();
+            }
+            HSReader.Close();
+
+
+
+            string name = namereader.ToString();
+            scorre[polozekHS - 1] = scorekzapsani;
+            names[polozekHS - 1] = name;
+            for (int i = game.m.polozekHS - 1; i >= 1; i--)
+            {
+                if (scorre[i] >= scorre[i - 1])
+                {
+                    int temp = scorre[i];
+                    scorre[i] = scorre[i - 1];
+                    scorre[i - 1] = temp;
+                    //------
+                    string tem = names[i];
+                    names[i] = names[i - 1];
+                    names[i - 1] = tem;
+                }
+            }
+            System.IO.StreamWriter HSWriter = new System.IO.StreamWriter(@"Content/HS.txt");
+            for (int i = 0; i < polozekHS; i++)
+            {
+                HSWriter.WriteLine(scorre[i]);
+                HSWriter.WriteLine(names[i]);
+            }
+            HSWriter.Close();
         }
         public void Clicked(int buttonNo,string name)
         {
@@ -564,6 +796,16 @@ namespace The_Game
                     return;
                 }
             }
+            if (ktereMenu == KtereMenu.zadaniJmena)
+            {
+                if (buttonNo == 6&&namereader.Length>0)
+                {
+                    zapisscore();
+                    createLabels();
+                    ktereMenu = KtereMenu.highscores;
+                    return;
+                }
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -589,6 +831,7 @@ namespace The_Game
             {
                 st.Draw(spriteBatch);
             }
+            textovePole.Draw(spriteBatch);
         }
     }
 }
