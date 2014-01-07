@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{Specifikace}{}% 1
+\BOOKMARK [1][-]{section.2}{Popis hry}{}% 2
+\BOOKMARK [1][-]{section.3}{Program \(popis tr\355d a objektu\)}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Game1}{section.3}% 4
+\BOOKMARK [3][-]{subsubsection.3.1.1}{LoadContent}{subsection.3.1}% 5
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Update}{subsection.3.1}% 6
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Draw}{subsection.3.1}% 7
+\BOOKMARK [3][-]{subsubsection.3.1.4}{newgame}{subsection.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Menu}{section.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Menu}{subsection.3.2}% 10
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Button}{subsection.3.2}% 11
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Label}{subsection.3.2}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.4}{Text}{subsection.3.2}% 13
+\BOOKMARK [2][-]{subsection.3.3}{Textury postavicek}{section.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.3.1}{AnimatedSprite}{subsection.3.3}% 15
+\BOOKMARK [2][-]{subsection.3.4}{Postavicka}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.5}{Enemy}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.6}{Kolize}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Testov\341n\355}{}% 19
+\BOOKMARK [1][-]{section.5}{Z\341ver}{}% 20

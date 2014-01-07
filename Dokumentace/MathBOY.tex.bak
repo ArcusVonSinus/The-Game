@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt,final]{article}
+
+\pagestyle{empty} 	
+\setlength{\parindent}{0pt}	
+
+%required packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[czech]{babel} 
+\usepackage{czech}
+\usepackage[cp1250]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[IL2]{fontenc}
+\usepackage[top=1.2cm,left=2cm,right=2cm,bottom=1.2cm]{geometry}
+\usepackage{multicol}
+	\setlength{\multicolsep}{0pt}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{paralist}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width/height of the page to the window
+    pdftitle={Dokumentace OOP},    % title
+    pdfauthor={Bouchala, Petrla},     % author
+    pdfsubject={Dokumentace OOP},   % subject of the document
+    pdfnewwindow=true,      % links in new window
+    colorlinks=false,       % false: boxed links; true: colored links
+    urlcolor=black           % color of external links
+}
+
+
+
+
+
+
+
+
+
+\usepackage{color}
+\definecolor{MSBlue}{rgb}{0.204,0.353,0.541}
+\definecolor{MSLightBlue}{rgb}{0.31,0.506,0.741}
+\usepackage[unicode=true,colorlinks,colorlinks,%
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=black]{hyperref}
+   
+\usepackage{titlesec}
+%\titleformat*{\subsection}{\Large\center}
+
+\renewcommand{\t}{\texttt}
+
+
+
+
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=0.70\textwidth]{mfflogo.jpg}
+	\label{fig:mfflogo}
+\end{figure}
+
+\center % Center everything on the page
+
+\textsc{\LARGE Univerzita Karlova} % Name of your university/college
+\vskip 0.4 cm
+\textsc{\LARGE Matematicko-fyzikální fakulta}
+\vskip 1.8 cm
+\textsc{\Large Objektovì orientované programování - ZS 2013/2014}
+
+\vskip 1 cm
+
+\textsc{\Huge === MathBOY ===}
+
+\vskip 1 cm
+
+{ \LARGE \bfseries Dokumentace k zápoètovému programu}\\ % Title of your document
+
+\vskip 1.8 cm
+
+\begin{flushleft} \large Vypracovali: Ondøej \textsc{Bouchala} \hfill \large{\today}\\
+\hskip 2.88 cm Martin \textsc{Petrla} % Your name
+
+\vskip 1.8 cm
+
+ % Date, change the \today to a set date if you want to be precise
+\end{flushleft}
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+\noindent
+
+
+
+\input{Martin.tex}
+
+
+
+
+
+
+
+
+
+\end{document} 

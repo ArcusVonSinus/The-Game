@@ -1,0 +1,67 @@
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+\section{Specifikace} % Major section
+
+V jazyce C\# naprogramovat poèítaèovou 2D plošinovku pro jednoho hráèe obsahující:
+\begin{itemize}
+	\item úvodní menu (nová hra, nastavení, highscore tabulka, exit) 
+	\item animovaná postavièka ovládaná pomocí klávesnice
+	\item animované nepøátelské postavièky se ZÁKLADNÍ umìlou inteligencí 
+	\item dlaždicovì navrhované levely naèítané ze souboru
+	\item základní fyzikální prostøedí, ve kterém se hra odehrává (pøedmìty tìžší než vzduch budou padat k zemi), øešení kolizí 
+	\item poèítání score
+	\item zvukové efekty
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	MAJOR SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Popis hry} % Major section
+
+Hráè ovládá postavièku jménem "MathBOY". Cílem každé úrovnì je dostat se na její pravý okraj. Po cestì je tøeba se vypoøádat s rùznými nástrahami, mezi které patøí "Apolloniovy kruhy", zákeøní "Trisecktoøi" nebo "Iracionální zrùdy", ale také "nepøeskoèitelné dálky" nebo "pøíliš vysoké plošiny". Za každou zabitou pøíšeru je hráè patøiènì odmìnìn. Stiskem escape se hráè dostane do menu, kde je možné pøepnou fullscreen, vypnout/zapnout hudbu nebo se podívat na highscore.
+
+%------------------------------------------------
+
+\section{Program (popis tøíd a objektù)} % Major section
+\input{Game.tex}
+\input{Menu.tex}
+\input{TexturaPostavicek.tex}
+
+\subsection{Postavièka}
+Objekt "ME" reprezentuje MathBOYe, v jeho funkci Update jsou implementovány instrukce pro chùzi vpravo, vlevo a výskok.
+
+\subsection{Enemy}
+
+Tato tøída je odvozena od tøídy \t{"Postavicka"}. Má jinou funkci Update, která rozlišuje mezi jednotlivými typy nepøátel a obsahuje instrukce pro jejich chování. Souèasnì všechny objekty na tuto tøídu vidí a mohou se skrz ni dívat na ostatní objekty ve høe.
+
+
+\subsection{Kolize}
+
+Rozlišujeme mezi dvìma typy kolizí
+\begin{itemize}
+	\item kolize MathBOYe s prostøedím,
+	\item kolize MathBOYe s nepøáteli.\\
+\end{itemize}
+
+První zmínìné obstarává sám MathBOY. MathBOY vidí na objekt \t{Background}, tedy pozadí. Pøi každém volání své funkce "Update" se podívá na dlaždice, které se nachází pod ním. Rozlišuje mezi dlaždicemi, na kterých mùže a nemùže stát. Pokud se nachází nad dlaždicí, na které nemùže stát, potom je ve skoku a øídí se instrukcemi pro skok (ty zahrnují i pád).\\
+
+Druhé zmínìné kolize obstarávají nepøátelské postavièky. Ty vidí na objekt MathBOYe a porovnávají jeho polohu s polohou svou. Pokud se obdélníky reprezentující tyto objekty pøekrývají, vykonají se instrukce pro kolizi MathBOY - nepøítel. Obecnì se dá øíci, že pokud MathBOY skoèí na nepøítele shora, pak umírá nepøítel, ve všech ostatních pøípadech umírá MathBOY. To platí pro všechny nepøátelské jednotky.
+
+\section{Testování}
+
+Hra byla øádnì testována jejími tvùrci a jejich kamarády na systému Windows 7 Ultimate 64, na kterém projevila plynulý chod a slušné vychování, tedy ovládání se ukázalo jako intuitivní a hra za žádných okolností nepadala.
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSION
+%----------------------------------------------------------------------------------------
+
+\section{Závìr} % Major section
+
+Ondøej \texttt{Bouchala}: Tuto hru považuji za vcelku vydaøený projekt, bylo fajn nauèit se o úlohách a nástrahách 2D her myslet objektovì, což se ukázalo jako úèinné. \\
+Bylo také zajímavé zkusit si programování ve více lidech.
+\\[0.5cm]
+Martin \texttt{Petrla}: Na programování MathBOYe jsem se nauèil pracovat s platformou XNA Game Studio a shledávám ji jako perfektní vývojový nástroj 2D her, se kterým si ve volném èase užiji ještì hodnì zábavy.
+

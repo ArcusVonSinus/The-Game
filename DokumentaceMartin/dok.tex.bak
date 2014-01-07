@@ -1,0 +1,216 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document properties and packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,12pt,final]{article}
+
+\pagestyle{empty} 	
+\setlength{\parindent}{0pt}	
+
+%required packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[czech]{babel} 
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[IL2]{fontenc}
+\usepackage[top=1.2cm,left=2cm,right=2cm,bottom=1.2cm]{geometry}
+\usepackage{multicol}
+	\setlength{\multicolsep}{0pt}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{paralist}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width/height of the page to the window
+    pdftitle={Dokumentace OOP},    % title
+    pdfauthor={Bouchala, Petrla},     % author
+    pdfsubject={Dokumentace OOP},   % subject of the document
+    pdfnewwindow=true,      % links in new window
+    colorlinks=false,       % false: boxed links; true: colored links
+    urlcolor=black           % color of external links
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Headder
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=0.70\textwidth]{mfflogo.jpg}
+	\label{fig:mfflogo}
+\end{figure}
+
+\center % Center everything on the page
+
+\textsc{\LARGE Univerzita Karlova} % Name of your university/college
+\vskip 0.4 cm
+\textsc{\LARGE Matematicko-fyzikální fakulta}
+\vskip 1.8 cm
+\textsc{\Large Objektově orientované programování - ZS 2013/2014}
+
+\vskip 1 cm
+
+\textsc{\Huge === MathBOY ===}
+
+\vskip 1 cm
+
+{ \LARGE \bfseries Dokumentace k zápočtovému programu}\\ % Title of your document
+
+\vskip 1.8 cm
+
+\begin{flushleft} \large Vypracovali: Ondřej \textsc{Bouchala}\\
+\hskip 2.88 cm Martin \textsc{Petrla} % Your name
+
+\vskip 1.8 cm
+
+\large \today\\ % Date, change the \today to a set date if you want to be precise
+\end{flushleft}
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Include a table of contents
+
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents 
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+\section{Specifikace} % Major section
+
+V jazyce C\# naprogramovat počítačovou 2D plošinovku pro jednoho hráče obsahující:
+\begin{compactitem}
+	\item úvodní menu (nová hra, nastavení, highscore tabulka, exit) 
+	\item animovaná postavička ovládaná pomocí klávesnice
+	\item animované nepřátelské postavičky se ZÁKLADNÍ umělou inteligencí 
+	\item dlaždicově navrhované levely načítané ze souboru
+	\item základní fyzikální prostředí, ve kterém se hra odehrává (předměty těžší než vzduch budou padat k zemi), řešení kolizí 
+	\item počítání score
+	\item zvukové efekty
+\end{compactitem}
+
+%----------------------------------------------------------------------------------------
+%	MAJOR SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Popis hry} % Major section
+
+Hráč ovládá postavičku jménem "MathBOY". Cílem každé úrovně je dostat se na její pravý okraj. Po cestě je třeba se vypořádat s různými nástrahami, mezi které patří "Apollonovi kruhy", zákeřní "Trisektoři" nebo "Iracionální zrúdy", ale také "nepřeskočitelné dálky" nebo "příliš vysoké plošiny".
+
+%------------------------------------------------
+
+\section{Program} % Major section
+
+\subsection{Popis tříd a objektů}
+
+\subsubsection{Game1}
+
+Tato třída je odvozena od třídy \textit{"Microsoft.Xna.Framework.Game"}. Nese v sobě všechny objekty, které se ve hře objevují.
+
+\subsubsection{Background}
+\subsubsection{Score}
+\subsubsection{Postavicka}
+
+Třída pro všechny postavičky, které se ve hře nacházejí.\\
+
+Objekt "ME" reprezentuje MathBOYe, v jeho funkci Update jsou implementovány instrukce pro chůzi vpravo, vlevo a výskok.
+
+\subsubsection{ZOO}
+
+Třída ZOO má jako jediný atribut \texttt{List<Enemy>} nepřátel.
+
+\subsubsection{Enemy}
+
+Tato třída je odvozena od třídy \textit{"Postavicka"}. Má jinou funkci Update, která rozlišuje mezi jednotlivými typi nepřátel a obsahuje instrukce pro jejich chování. Současně všechny objekty na tuto třídu vidí a mohou se skrz ni dívat na ostatní objekty ve hře.
+
+\subsubsection{Menu}
+
+\subsection{Procedury a funkce}
+
+\subsubsection{Initialize}
+
+Inicializuje hru. Zabezpčuje, aby se při spuštění startovalo v Menu.
+
+\subsubsection{ToggleFS}
+
+Slouží pouze k přepínání mezi zobrazením "v okně" a zobrazením "na celou obrazovku".
+
+\subsubsection{NewGame}
+
+Spouští novou úroveň. Kterou úroveň má spustit pozná z argumentu. Současně náhodně vybere písničku, která bude hrát v pozadí.
+
+\subsubsection{NextLevel}
+
+Zavolá funkci NewGame s argumentem další úrovně.
+
+\subsubsection{LoadContent}
+
+Načítá do hry veškerý její obsah, tj. textury dlaždic, animace MathBOYe a nepřátel, hudbu. Navíc inicializuje některé prvky, se kterými se do budoucna pracuje (např. \texttt{List<>} nepřátel).
+
+\subsubsection{Update}
+
+Aktualizuje celou hru. Volá další funkce "Update" jednotlivých dílčích objektů. Rozlišuje mezi dvěma stavy:
+\begin{compactitem} 
+	\item v menu - aktualizuje se menu, plynulé přecházení mezi jednotlivými sekcemi a podsekcemi
+	\item ve hře - aktualizuje MathBOYe a všechny živé nepřátele v úrovni, posouvá s obrazovkou
+\end{compactitem}
+
+\subsubsection{Draw}
+
+Stará se o vykreslení objektů na obrazovku. Pro většinu objektů volá jejich vlastní proceduru Draw.
+
+\subsection{Kolize}
+
+Rozlišujeme mezi dvěma typy kolizí
+\begin{compactitem}
+	\item kolize MathBOYe s prostředím,
+	\item kolize MathBOYe s nepřáteli.\\
+\end{compactitem}
+
+První zmíněné obstarává sám MathBOY. MathBOY vidí na objekt "Background", tedy pozadí. Při každém volání svě funkce "Update" se podívá na dlaždice, které se nachází pod ním. Rozlišuje mezi dlaždicemi, na kterých může a nemůže stát. Pokud se nachází nad dlaždicí, na které nemůže stát, potom je ve skoku a řídí se instrukcemi pro skok (ty zahrnují i pád).\\
+
+Druhé zmíněné kolize obstarávají nepřátelské postavičky. Ty vidí na objekt MathBOYe a porovnávají jeho polohu s polohou svou. Pokud se obelníky reprezentující tyto objekty překrývají, vykonají se instrukce pro kolizi MathBOY - nepřítel. Obecně se dá říci, že pokud MathBOY skočí na nepřítele shora, pak umírá nepřítel, ve všech ostatních případech umírá MathBOY. To platí pro všechny nepřátelské jednotky.
+
+\section{Testování}
+
+Hra byla řádně testována jejími tvůrci a jejich kamarády na systému Windows 7 Ultimate 64, na kterém projevila plynulý chod a slušné vychování, tedy ovládání se ukázalo jako intuitivní a hra za žádných okolností nepadala.
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSION
+%----------------------------------------------------------------------------------------
+
+\section{Závěr} % Major section
+
+Ondřej \texttt{Bouchala}: \\
+
+
+Martin \texttt{Petrla}: Na programování MathBOYe jsem se naučil pracovat s platformou XNA Game Studio a shledávám ji jako perfektní vývojový nástroj 2D her, se kterým si ve volném čase užiji ještě hodně zábavy.
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

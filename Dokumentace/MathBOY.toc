@@ -1,0 +1,21 @@
+\select@language {czech}
+\contentsline {section}{\numberline {1}Specifikace}{2}{section.1}
+\contentsline {section}{\numberline {2}Popis hry}{2}{section.2}
+\contentsline {section}{\numberline {3}Program (popis t\v r\IeC {\'\i }d a objekt\r u)}{2}{section.3}
+\contentsline {subsection}{\numberline {3.1}Game1}{2}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}LoadContent}{2}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Update}{2}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Draw}{3}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}newgame}{3}{subsubsection.3.1.4}
+\contentsline {subsection}{\numberline {3.2}Menu}{3}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Menu}{3}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Button}{3}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Label}{3}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}Text}{3}{subsubsection.3.2.4}
+\contentsline {subsection}{\numberline {3.3}Textury postavi\v cek}{4}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}AnimatedSprite}{4}{subsubsection.3.3.1}
+\contentsline {subsection}{\numberline {3.4}Postavi\v cka}{4}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Enemy}{4}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Kolize}{4}{subsection.3.6}
+\contentsline {section}{\numberline {4}Testov\'an\IeC {\'\i }}{5}{section.4}
+\contentsline {section}{\numberline {5}Z\'av\v er}{5}{section.5}

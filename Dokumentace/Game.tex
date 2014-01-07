@@ -1,12 +1,12 @@
 \subsection{Game1}
-\t{Game1} je zÃ¡kladnÃ­ tÅ™Ã­dou celÃ©ho programu. JejÃ­m zÃ¡kladem je pÃ¡r tÅ™Ã­d, kterÃ© volÃ¡ samotnÃ© XNA, a sice \t{Update} a \t{Draw}.\\
-Tato tÅ™Ã­da mÃ¡ vcelku dost veÅ™ejnÃ½ch promÄ›nnÃ½ch, kterÃ© jsou spoleÄnÃ© pro celou hru, jako napÅ™Ã­klad ve kterÃ©m levelu jsem, jakÃ© je souÄasnÃ© rozliÅ¡enÃ­ a podobnÄ›.\\
+\t{Game1} je základní tøídou celého programu. Jejím základem je pár tøíd, které volá samotné XNA, a sice \t{Update} a \t{Draw}.\\
+Tato tøída má vcelku dost veøejnıch promìnnıch, které jsou spoleèné pro celou hru, jako napøíklad ve kterém levelu jsem, jaké je souèasné rozlišení a podobnì.\\
 \subsubsection{LoadContent}
-Na zaÄÃ¡tku hry (a pak manuÃ¡lnÄ› pÅ™i zaÄÃ¡tku novÃ©ho levelu) se spustÃ­ funkce \t{LoadContent}. V tÃ© se vytvoÅ™Ã­m "jÃ¡" (to jest naÄtou se vÅ¡echny textury), vytvoÅ™Ã­ se pozadÃ­ (vytvoÅ™Ã­ se instance tÅ™Ã­dy a naÄtou se textury), a koneÄnÄ› se vytvoÅ™Ã­ tÅ™Ã­da \t{zoo}, do kterÃ© pÅ™ibudou vÅ¡echny pÅ™Ã­Å¡ery danÃ©ho levelu.
+Na zaèátku hry (a pak manuálnì pøi zaèátku nového levelu) se spustí funkce \t{LoadContent}. V té se vytvoøím "já" (to jest naètou se všechny textury), vytvoøí se pozadí (vytvoøí se instance tøídy a naètou se textury), a koneènì se vytvoøí tøída \t{zoo}, do které pøibudou všechny pøíšery daného levelu.
 \subsubsection{Update}
-Tuhle tÅ™Ã­du volÃ¡ samotnÃ© XNA, a je to posun o jeden krok dopÅ™edu. Tato funkce se volÃ¡ (velmi zhruba) 50 krÃ¡t za sekundu (v zÃ¡vislosti na vÃ½konu a vytÃ­Å¾enosti poÄÃ­taÄe). Jako parametr dostanu \t{gameTime}, ze kterÃ©ho vyÄtu, kolik milisekund ubÄ›hlo (a tedy o kolik se mÃ¡m pohnout).\\
-Tato tÅ™Ã­da (pokud nejsem v menu) pohlÃ­dÃ¡, zdali nebyla zmÃ¡Äknuta klÃ¡vesa \t{Esc} (jinak by se pÅ™eÅ¡lo do menu), pokud ne tak zavolÃ¡ funkce \t{Update} postaviÄce, vÅ¡em pÅ™Ã­Å¡erkÃ¡m (prostÅ™ednictvÃ­m tÅ™Ã­dy \t{zoo}). Pokud jsem v menu, pak zavolÃ¡ funkci tÅ™Ã­dy \t{Menu}, a sice \t{Update}.
+Tuhle tøídu volá samotné XNA, a je to posun o jeden krok dopøedu. Tato funkce se volá (velmi zhruba) 50 krát za sekundu (v závislosti na vıkonu a vytíenosti poèítaèe). Jako parametr dostanu \t{gameTime}, ze kterého vyètu, kolik milisekund ubìhlo (a tedy o kolik se mám pohnout).\\
+Tato tøída (pokud nejsem v menu) pohlídá, zdali nebyla zmáèknuta klávesa \t{Esc} (jinak by se pøešlo do menu), pokud ne tak zavolá funkce \t{Update} postavièce, všem pøíšerkám (prostøednictvím tøídy \t{zoo}). Pokud jsem v menu, pak zavolá funkci tøídy \t{Menu}, a sice \t{Update}.
 \subsubsection{Draw}
-Tuto tÅ™Ã­du opÄ›t volÃ¡ XNA, a slouÅ¾Ã­ k pÅ™ekreslenÃ­ obrazovky. BuÄ zavolÃ¡ \t{Draw} tÅ™Ã­dy \t{Menu} (pokud jsem v menu), a nebo tÅ™Ã­dy \t{Draw} tÅ™Ã­dy pro postaviÄku, tÅ™Ã­dy s pozadÃ­m a tÅ™Ã­dy \t{zoo}. 
+Tuto tøídu opìt volá XNA, a slouí k pøekreslení obrazovky. Buï zavolá \t{Draw} tøídy \t{Menu} (pokud jsem v menu), a nebo tøídy \t{Draw} tøídy pro postavièku, tøídy s pozadím a tøídy \t{zoo}. 
 \subsubsection{newgame}
-Tahle tÅ™Ã­da slouÅ¾Ã­ pro start danÃ©ho levelu od zaÄÃ¡tku, a nÃ¡hodnou volbu pÃ­sniÄky.
+Tahle tøída slouí pro start daného levelu od zaèátku, a náhodnou volbu písnièky.
