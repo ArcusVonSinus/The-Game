@@ -254,7 +254,7 @@ namespace The_Game
             pozadi = game.Content.Load<Texture2D>("Menu/pozadi");
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
-            tlacitka = new Button[27];
+            tlacitka = new Button[28];
             stitky = new Label[polozekHS];            
             createLabels();
 
@@ -295,7 +295,8 @@ namespace The_Game
             temp = KtereMenu.chooseLevelInGame;
             tlacitka[16] = new Button(this, 0, temp, "Level1");
             tlacitka[24] = new Button(this, 1, temp, "Level2");
-            tlacitka[17] = new Button(this, 2, temp, "Back");
+            tlacitka[27] = new Button(this, 2, temp, "Level3");
+            tlacitka[17] = new Button(this, 3, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.highscores;
             pozadiHS = new HighScoreBackground(this, temp);

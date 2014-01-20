@@ -91,6 +91,17 @@ namespace The_Game
                         vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 3, 5, poziceHlavy1);
                         break;
                     }
+                case 3:
+                    {
+                        Vector3 poziceHlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
+                        vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, poziceHlavy1);
+                        vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, poziceHlavy1);
+
+                        poziceHlavy1.Y = 0.15f;
+                        vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, poziceHlavy1);
+                        vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, poziceHlavy1);
+                        break;
+                    }
             }
             
             pozice.X = X;

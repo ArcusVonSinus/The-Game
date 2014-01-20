@@ -686,6 +686,18 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Fonts\Score315.spritefont">
+      <SubType>Designer</SubType>
+      <Name>Score315</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\Score329.spritefont">
+      <SubType>Designer</SubType>
+      <Name>Score329</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Save.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <Name>Save</Name>
