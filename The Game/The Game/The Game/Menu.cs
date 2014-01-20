@@ -170,7 +170,7 @@ namespace The_Game
             }
             vzhledNo = 0;
         }        
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             position = new Rectangle(
                 menu.buttonsX, 
@@ -201,7 +201,7 @@ namespace The_Game
                     {
                         if (vzhledNo == 2)
                         {
-                            menu.Clicked(buttonNo,name);
+                            menu.Clicked(buttonNo,name,gameTime);
                             vzhledNo = 1;
                         }
                         else
@@ -494,7 +494,7 @@ namespace The_Game
             }
             textovePole.textname.text = namereader.ToString();
         }
-        public void update()
+        public void update(GameTime gameTime)
         {
             if (ktereMenu == KtereMenu.zadaniJmena)
             {
@@ -549,14 +549,14 @@ namespace The_Game
                 pressed = true;
                 if (ktereMenu == KtereMenu.highscores)
                 {
-                    Clicked(6, "");
+                    Clicked(6, "", gameTime);
                 }
                 else if (ktereMenu == KtereMenu.zadaniJmena)
                 {
-                    Clicked(6, "");
+                    Clicked(6, "", gameTime);
                 }
                 else
-                    Clicked(vybranaPolozka, "");
+                    Clicked(vybranaPolozka, "", gameTime);
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Enter) && 
                 Keyboard.GetState().IsKeyUp(Keys.Down) && 
@@ -568,7 +568,7 @@ namespace The_Game
             if (ktereMenu == KtereMenu.highscores) pozadiHS.Update();
             foreach (Button tl in tlacitka)
             {
-                tl.Update();
+                tl.Update(gameTime);
             }
             foreach (Label st in stitky)
             {
@@ -624,7 +624,7 @@ namespace The_Game
             }
             HSWriter.Close();
         }
-        public void Clicked(int buttonNo,string name)
+        public void Clicked(int buttonNo,string name,GameTime gameTime)
         {
             vybranaPolozka = 0;
             if (name == "Quit")
@@ -636,7 +636,7 @@ namespace The_Game
             
             if (ktereMenu == KtereMenu.main)
             {
-                if (buttonNo == 0)
+                if (buttonNo == 0 && gameTime.TotalGameTime.TotalSeconds > 1)
                 {
                     NewGame(1);
                     return;

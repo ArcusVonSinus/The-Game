@@ -210,7 +210,7 @@ namespace The_Game
             }
             if (InMenu)
             {
-                m.update();
+                m.update(gameTime);
             }
             if (InGame && !InMenu)
             {
