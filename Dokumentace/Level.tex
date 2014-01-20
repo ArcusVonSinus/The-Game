@@ -1,0 +1,25 @@
+\subsection{Soubory}
+V souborovém systému jsou dvì hlavní složky,  \t{The Game} a \t{The GameContent}. V~první jsou soubory s kódem, který je do tìchto souborù rozdìlen víceménì dle tøíd.\\
+A ve složce \t{The GameContent} se nachází pøevážnì textury a jiné mediální soubory. Ty jsou opìt rozdìleny do podsložek, podle toho kdy se mají zobrazit, jestli napøíklad v menu nebo v~nìkterém z levelù.\\
+Z tìchto souborù si zaslouží komentáø soubor \t{l1.txt}, popøípadì \t{l?.txt}, kde \t{?} je èíslo levelu. V tomto souboru je uložena informace o tom, jak bude daný level vypadat, to jest kde budou rùzné plošiny a rùzní nepøátelé.  Tento soubor se pøi kompilaci zkopíruje do adresáøe kde je pøíslušný binární soubor, a není tedy nutné po zmìnì tohoto souboru kompilovat hru znovu.\\
+K jeho struktuøe:\\
+Pøedpokládá se, že každý øádek bude mít stejnì symbolù, na základì tohoto poètu se urèí šíøka dané úrovnì. V kódu je napevno zadané, že tento soubor má mít šest øádlù, a tedy že i level bude mít šest \uv{øádkù}. Pro urèení významu symbolù slouží tato tabulka:\\
+\begin{tabular}{|c|l|}
+\hline 
+. & prázdné pole\\
+\hline
+X & Dolní cesta, nepø. most\\
+\hline
+L & Levý konec dolní cesty (mostu)\\
+\hline
+R & Pravý konec dolní cesty (mostu)\\
+\hline
+x & plošina\\
+\hline
+l & levý konec plošiny\\
+\hline
+r & pravý konec plošiny\\
+\hline
+1, 2, \ldots & pøíšera typu 1, 2, \ldots \\
+\hline
+\end{tabular}

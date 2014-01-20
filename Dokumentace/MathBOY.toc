@@ -17,5 +17,6 @@
 \contentsline {subsection}{\numberline {3.4}Postavi\v cka}{4}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}Enemy}{4}{subsection.3.5}
 \contentsline {subsection}{\numberline {3.6}Kolize}{4}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Soubory}{5}{subsection.3.7}
 \contentsline {section}{\numberline {4}Testov\'an\IeC {\'\i }}{5}{section.4}
 \contentsline {section}{\numberline {5}Z\'av\v er}{5}{section.5}
