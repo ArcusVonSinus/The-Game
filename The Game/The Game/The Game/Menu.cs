@@ -254,7 +254,7 @@ namespace The_Game
             pozadi = game.Content.Load<Texture2D>("Menu/pozadi");
             pozadiMenu = game.Content.Load<Texture2D>("Menu/pozadiMenu");
 
-            tlacitka = new Button[26];
+            tlacitka = new Button[27];
             stitky = new Label[polozekHS];            
             createLabels();
 
@@ -289,7 +289,8 @@ namespace The_Game
             temp = KtereMenu.chooseLevel;
             tlacitka[14] = new Button(this, 0, temp, "Level1");
             tlacitka[23] = new Button(this, 1, temp, "Level2");
-            tlacitka[15] = new Button(this, 2, temp, "Back");
+            tlacitka[26] = new Button(this, 2, temp, "Level3");
+            tlacitka[15] = new Button(this, 3, temp, "Back");
             //----------------------------------------------------------------------
             temp = KtereMenu.chooseLevelInGame;
             tlacitka[16] = new Button(this, 0, temp, "Level1");
@@ -325,7 +326,6 @@ namespace The_Game
             stitky[5] = new Label(this, 5, KtereMenu.highscores, "28.623", "Elen");*/
 
         }
-
         bool readingname;
         StringBuilder namereader;
         void ReadName()
@@ -499,12 +499,12 @@ namespace The_Game
             if (ktereMenu == KtereMenu.zadaniJmena)
             {
                 ReadName();
-            }
+            }            
             if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 pressed = true;
                 vybranaPolozka++;
-                int temp=0;
+                int temp = 0;
                 switch (ktereMenu)
                 {
                     case KtereMenu.main:
@@ -520,10 +520,10 @@ namespace The_Game
                         temp = 4;
                         break;
                     case KtereMenu.chooseLevel:
-                        temp = 3;
+                        temp = 4;
                         break;
                     case KtereMenu.chooseLevelInGame:
-                        temp = 3;
+                        temp = 4;
                         break;
                     case KtereMenu.highscores:
 
@@ -535,12 +535,12 @@ namespace The_Game
                         break;
                 }
                 if(vybranaPolozka >= temp)
-                    vybranaPolozka = temp-1;
+                    vybranaPolozka = temp - 1;
             }
             if (!pressed && Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 pressed = true;
-                if (vybranaPolozka>0)
+                if (vybranaPolozka > 0)
                     vybranaPolozka--;
                 
             }
@@ -774,6 +774,11 @@ namespace The_Game
                 }
                 if (buttonNo == 2)
                 {
+                    NewGame(3);
+                    return;
+                }
+                if (buttonNo == 3)
+                {
                     ktereMenu = KtereMenu.main;
                     return;
                 }
@@ -791,6 +796,11 @@ namespace The_Game
                     return;
                 }
                 if (buttonNo == 2)
+                {
+                    NewGame(3);
+                    return;
+                }
+                if (buttonNo == 3)
                 {
                     ktereMenu = KtereMenu.mainInGame;
                     return;

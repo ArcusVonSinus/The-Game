@@ -17,7 +17,7 @@ namespace The_Game
         /// Promenne
         /// </summary>
 
-        public int poceteLevelu = 2;
+        public int poceteLevelu = 3;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public Background b;
@@ -147,7 +147,7 @@ namespace The_Game
             texturVlevelu = new int[poceteLevelu][];
             texturVlevelu[0] = new int[druhuKachlicek] { 4, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
             texturVlevelu[1] = new int[druhuKachlicek] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-
+            texturVlevelu[2] = new int[druhuKachlicek] { 4, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
             m = new Menu(this);
 
