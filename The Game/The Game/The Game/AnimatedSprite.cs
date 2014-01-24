@@ -80,6 +80,11 @@ namespace The_Game // TODO COMMENTS uplne vsude v tomto souboru
         {
             get { return TextureHead.Height / Rows; }
         }
+        public void stopHead()
+        {
+            currentFrameHead = 0;
+            return;
+        }
         public void stop()
         {
             currentFrame = 0;

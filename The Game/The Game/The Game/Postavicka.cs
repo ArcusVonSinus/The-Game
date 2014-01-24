@@ -93,13 +93,13 @@ namespace The_Game
                     }
                 case 3:
                     {
-                        Vector3 poziceHlavy1 = new Vector3(0.7f, 0.11f, 0.06f);
-                        vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 6, 10, poziceHlavy1);
-                        vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 6, 10, poziceHlavy1);
+                        Vector3 poziceHlavy1 = new Vector3(1.2f, -0.06f, -0.12f);
+                        vzhled[0] = new AnimatedSpriteHead(textury[0], 2, 7, 2, 7, poziceHlavy1);
+                        vzhled[2] = new AnimatedSpriteHead(textury[2], 2, 7, 2, 7, poziceHlavy1);
 
-                        poziceHlavy1.Y = 0.15f;
-                        vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 6, 10, poziceHlavy1);
-                        vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 6, 10, poziceHlavy1);
+                        poziceHlavy1.Y = -0.1f;
+                        vzhled[1] = new AnimatedSpriteHead(textury[1], 2, 7, 2, 7, poziceHlavy1);
+                        vzhled[3] = new AnimatedSpriteHead(textury[3], 2, 7, 2, 7, poziceHlavy1);
                         break;
                     }
             }
@@ -314,19 +314,32 @@ namespace The_Game
             if (onLand && Math.Abs(pohyb.X) > 0)
             {
                 vzhled[vzhledNo].Update();
+                vzhled[vzhledNo].UpdateHead();
+
             }
             else if (onLand)
             {
                 vzhled[vzhledNo].stop();
+                if (game.level == 3)
+                {
+                    vzhled[vzhledNo].stopHead();
+                }
             }
 
             if (!onLand)
             {
                 vzhled[vzhledNo].Update();
+                if (game.level == 3)
+                {
+                    vzhled[vzhledNo].UpdateHead();
+                }
             }
-            vzhled[vzhledNo].UpdateHead();
+            if (game.level != 3)
+            {
+                vzhled[vzhledNo].UpdateHead();
+            }
 
-            /*zmena polohy*/
+            /*zmena polohy pozadi*/
             pozice += pohyb * timediff;
             if (pozice.X <= 0)
                 pozice.X = 0; // neprejde za levy okraj

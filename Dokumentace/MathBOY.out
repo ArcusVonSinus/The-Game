@@ -17,5 +17,7 @@
 \BOOKMARK [2][-]{subsection.3.5}{Enemy}{section.3}% 17
 \BOOKMARK [2][-]{subsection.3.6}{Kolize}{section.3}% 18
 \BOOKMARK [2][-]{subsection.3.7}{Soubory}{section.3}% 19
-\BOOKMARK [1][-]{section.4}{Testov\341n\355}{}% 20
-\BOOKMARK [1][-]{section.5}{Z\341ver}{}% 21
+\BOOKMARK [3][-]{subsubsection.3.7.1}{Struktura souboru s tvarem levelu}{subsection.3.7}% 20
+\BOOKMARK [3][-]{subsubsection.3.7.2}{Struktura adres\341ru s obr\341zky \(vlo\236en\375ch do Visual Studia\)}{subsection.3.7}% 21
+\BOOKMARK [1][-]{section.4}{Testov\341n\355}{}% 22
+\BOOKMARK [1][-]{section.5}{Z\341ver}{}% 23

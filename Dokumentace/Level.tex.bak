@@ -35,10 +35,7 @@ r & pravý konec plošiny\\
 		\end{itemize}
 	\item \t{Level ?} 
 	\begin{itemize}
-	\item \t{Bck1} -- zde jsou obrázky pro pozadí daného levelu \t{?}. Názvy jsou ve formátu \t{x-y.jpg}, kde \t{x} je druh kachlièky a \t{y} je verze (pøi spuštìní hry se pro každé pole náhodnì vybere jedna z verzí).
-	\item \t{Enemy} -- zde jsou obrázky s animacemi nepøátel.
-	
+	\item \t{Bck1} -- Zde jsou obrázky pro pozadí daného levelu \t{?}. Názvy jsou ve formátu \t{x-y.jpg}, kde \t{x} je druh kachlièky a \t{y} je verze (pøi spuštìní hry se pro každé 
 	\end{itemize}
-	V této složce jsou animace MathBoye, rozdìlené na tìlo, ruku a hlavu. (Protože v nìkterých levelech je tøeba animovat hlavu nezávisle na tìle.
 	\end{itemize}
 }

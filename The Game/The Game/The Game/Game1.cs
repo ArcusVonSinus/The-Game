@@ -168,9 +168,21 @@ namespace The_Game
                 texturyMe[2][2] = Content.Load<Texture2D>("Level " + level + "/AirForHand");
                 texturyMe[3][0] = Content.Load<Texture2D>("Level " + level + "/AirBack");
                 texturyMe[3][2] = Content.Load<Texture2D>("Level " + level + "/AirBackHand");
-                for (int i = 0; i < 4; i++)
+                if (level == 1 || level == 2)
                 {
-                    texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
+                    for (int i = 0; i < 4; i++)
+                    {
+                        texturyMe[i][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
+                    }
+                }
+                else if (level == 3)
+                {
+                    texturyMe[0][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
+                    texturyMe[2][1] = Content.Load<Texture2D>("Level " + level + "/Head1");
+
+                    texturyMe[1][1] = Content.Load<Texture2D>("Level " + level + "/Head2");
+                    texturyMe[3][1] = Content.Load<Texture2D>("Level " + level + "/Head2");
+
                 }
                 
                 Texture2D[][] pozadi = new Texture2D[druhuKachlicek][];

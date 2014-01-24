@@ -18,7 +18,7 @@ namespace The_Game
         SpriteFont pismo;
         float size = 0f;
         Game1 game;
-        bool zarovnatdoprava = false;
+        public bool zarovnatdoprava = false;
         void LoadFont()
         {
             float sizetemp = 0.435f * height;
@@ -241,6 +241,7 @@ namespace The_Game
         Button[] tlacitka;
         Label[] stitky;
         Label textovePole;
+        Label nadpisTextPole;
         public  int scorekzapsani = 0;
         HighScoreBackground pozadiHS;
         public Game1 game;
@@ -258,7 +259,9 @@ namespace The_Game
             stitky = new Label[polozekHS];            
             createLabels();
 
-            textovePole =   new Label(this, 0, KtereMenu.zadaniJmena, "0", "a"); 
+            nadpisTextPole = new Label(this, 0, KtereMenu.zadaniJmena, "Write your name:", "");
+            textovePole =   new Label(this,1, KtereMenu.zadaniJmena, "0", "a");
+            nadpisTextPole.textscore.zarovnatdoprava = false;
             //-----------------------------------------------------------------
             temp = KtereMenu.main;
             tlacitka[0] = new Button(this, 0, temp, "NewGame");
@@ -576,6 +579,8 @@ namespace The_Game
                 st.Update();
             }
             textovePole.Update();
+            nadpisTextPole.Update();
+            
         }
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         void NewGame(int level)
@@ -843,6 +848,7 @@ namespace The_Game
                 st.Draw(spriteBatch);
             }
             textovePole.Draw(spriteBatch);
+            nadpisTextPole.Draw(spriteBatch);
         }
     }
 }

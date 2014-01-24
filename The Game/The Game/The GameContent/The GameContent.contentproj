@@ -464,6 +464,7 @@
       <Name>scoreFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
     <Compile Include="Menu\Buttons\buttLevel20.png">
       <Name>buttLevel20</Name>
@@ -654,6 +655,11 @@
     </Compile>
     <Compile Include="Level 3\Head1.png">
       <Name>Head1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Level 3\Head2.png">
+      <Name>Head2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

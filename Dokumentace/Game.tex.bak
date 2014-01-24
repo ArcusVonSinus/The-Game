@@ -1,0 +1,12 @@
+\subsection{Game1}
+\t{Game1} je základní tøídou celého programu. Jejím základem je pár tøíd, které volá samotné XNA, a sice \t{Update} a \t{Draw}.\\
+Tato tøída má vcelku dost veøejnıch promìnnıch, které jsou spoleèné pro celou hru, jako napøíklad ve kterém levelu jsem, jaké je souèasné rozlišení a podobnì.\\
+\subsubsection{LoadContent}
+Na zaèátku hry (a pak manuálnì pøi zaèátku nového levelu) se spustí funkce \t{LoadContent}. V~té se vytvoøím \uv{já} (to jest naètou se všechny textury), vytvoøí se pozadí (vytvoøí se instance tøídy a naètou se textury), a koneènì se vytvoøí tøída \t{zoo}, do které pøibudou všechny pøíšery daného levelu.
+\subsubsection{Update}
+Tuhle tøídu volá samotné XNA, a je to posun o jeden krok dopøedu. Tato funkce se volá (velmi zhruba) 50 krát za sekundu (v závislosti na vıkonu a vytíenosti poèítaèe). Jako parametr dostanu \t{gameTime}, ze kterého vyètu, kolik milisekund ubìhlo (a tedy o kolik se mám pohnout).\\
+Tato tøída (pokud nejsem v menu) pohlídá, zdali nebyla zmáèknuta klávesa \t{Esc} (jinak by se pøešlo do menu), pokud ne tak zavolá funkce \t{Update} postavièce, všem pøíšerkám (prostøednictvím tøídy \t{zoo}). Pokud jsem v menu, pak zavolá funkci tøídy \t{Menu}, a sice \t{Update}.
+\subsubsection{Draw}
+Tuto tøídu opìt volá XNA, a slouí k pøekreslení obrazovky. Buï zavolá \t{Draw} tøídy \t{Menu} (pokud jsem v menu), a nebo tøídy \t{Draw} tøídy pro postavièku, tøídy s pozadím a tøídy \t{zoo}. 
+\subsubsection{newgame}
+Tahle tøída slouí pro start daného levelu od zaèátku, a náhodnou volbu písnièky.

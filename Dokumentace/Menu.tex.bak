@@ -7,7 +7,7 @@ Tøída \t{Menu} má, stejnì jako skoro všechny naše tøídy, funkci \t{update}. Ta s
 Dále má tøída \t{Menu} funkci \t{clicked}. Tu zavolá tlaèítko, kdy bylo stisknuto. Na základì toho, která obrazovka menu je zobrazena a které tlaèítko bylo stisknuta se vykoná daná akce. \\
 A koneènì je tam funkce \t{Draw}. Ta vykreslí pozadí menu a zavolá funkci \t{Draw} všech tlaèítek.
 \subsubsection{Button}
-Tøída pro tlaèítko je veskrze jednoduchá. Ve funkci update se zkontroluje, zdali není myš nad tímto tlaèítkem (pak by se zmìnila textura), popøípadì jestli ono tlaèítko nebylo stisknuto. A ve funkci \t{Draw} se vykreslí (pro pozici a velikost si šáhne do tøídy menu a navíc ví, které v poøadí v daném menu je)
+Tøída pro tlaèítko je veskrze jednoduchá. Ve funkci update se zkontroluje, zdali není myš nad tímto tlaèítkem (pak by se zmìnila textura), popøípadì jestli ono tlaèítko nebylo stisknuto. A~ve funkci \t{Draw} se vykreslí (pro pozici a velikost si šáhne do tøídy menu a navíc ví, které v poøadí v daném menu je)
 \subsubsection{Label}
 Tøída \t{Label} slouí pro zobrazení highscore. Na rozdíl od tøídy \t{Button} není tøeba ovìøovat polohu myši. Ale jména hráèù nejsou natvrdo napsaná v texturách, take je na nì pouita ještì tøída \t{Text}.
 \subsubsection{Text}
